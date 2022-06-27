@@ -1,5 +1,9 @@
 package root.dao;
 
-public interface UserDao {
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import root.model.User;
+
+public interface UserDao extends JpaRepository<User, Integer> {
 
 }
