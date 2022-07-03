@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table (name = "user_table")
-//JsonIgnoreProperties *** in case
+
 public class User {
 	
 	@Id
@@ -20,23 +20,29 @@ public class User {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int userId;
 	
-	@Column(name = "username", unique = true, nullable = false, length = 20)
+	@Column(name = "username", unique = true, nullable = false, length = 20, table = "user_table")
 	private String username;
 	
-	@Column(name = "password", unique = false, nullable = false)
+	@Column(name = "user_password", unique = false, nullable = false, table = "user_table")
 	private String password;
 	
-	@Column(name = "firt_name", unique = false, nullable = false, length = 20)
+	@Column(name = "first_name", unique = false, nullable = false, length = 20, table = "user_table")
 	private String firstName;
 	
-	@Column(name = "last_name", unique = false, nullable = false, length = 20)
+	@Column(name = "last_name", unique = false, nullable = false, length = 20, table = "user_table")
 	private String lastName;
 	
-	@Column(name = "email", unique = true, nullable = false)
-	private String email;
+	@Column(name = "email", unique = true, nullable = false, table = "user_table")
+	private String email;	
 	
-	@Column(name = "user_role", nullable = false)
-	private int userRole;
+	@Column(name = "user_role_number", table = "user_table")
+	private int userRoleNumber;
 	
-
+	
+	
 }
+
+
+
+
+
