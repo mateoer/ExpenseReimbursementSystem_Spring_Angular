@@ -10,6 +10,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import root.dao.UserDao;
 import root.model.User;
+import root.model.User.UserRole;
 
 @DataJpaTest
 //@Sql(scripts = "/user-schema.sql")
@@ -20,15 +21,26 @@ class UserRepositoryH2Test {
 	@Autowired
 	private UserDao userRepository;
 	
-//	@AfterAll
-//	void tearDown() throws Exception{
-//		userRepository.deleteAll();
-//	}
+	
+	@Test
+	void setUserRoleTest () {
+		
+		User user = userRepository.findByUsername("mateoer");
+		
+		assertEquals(user.getUserRole(), UserRole.EMPLOYEE);
+		System.out.println(user.getUsername()+" "+user.getUserRole());
+		System.out.println();
+		
+		user.setUserRole(UserRole.MANAGER);
+		assertEquals(user.getUserRole(), UserRole.MANAGER);
+		System.out.println(user.getUsername()+" "+user.getUserRole());
+	}
 
 	@Test
 	void findByUsernameTest() {
 		
 		User user = userRepository.findByUsername("mateoer");
+		
 		assertNotNull(user.getUsername(), "username must be [mateoer]");
 		assertEquals("mateoer", user.getUsername());
 		
@@ -36,10 +48,12 @@ class UserRepositoryH2Test {
 							+" "+user.getEmail()+" "+user.getPassword()+" "+user.getUserRole());
 		
 	}
+	
 	@Test
 	void findByEmailTest() {
 		
 		User user = userRepository.findByEmail("mateoer@kean.edu");
+		
 		assertNotNull(user.getEmail(), "email must be [mateoer@kean.edu]");
 		assertEquals("mateoer@kean.edu", user.getEmail());
 		

@@ -2,6 +2,7 @@ package root.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,27 +21,35 @@ public class User {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int userId;
 	
-	@Column(name = "username", unique = true, nullable = false, length = 20, table = "user_table")
+	@Column(name = "username", unique = true, nullable = false, length = 20)
 	private String username;
 	
-	@Column(name = "user_password", unique = false, nullable = false, table = "user_table")
+	@Column(name = "user_password", unique = false, nullable = false)
 	private String password;
 	
-	@Column(name = "first_name", unique = false, nullable = false, length = 20, table = "user_table")
+	@Column(name = "first_name", unique = false, nullable = false, length = 20)
 	private String firstName;
 	
-	@Column(name = "last_name", unique = false, nullable = false, length = 20, table = "user_table")
+	@Column(name = "last_name", unique = false, nullable = false, length = 20)
 	private String lastName;
 	
-	@Column(name = "email", unique = true, nullable = false, table = "user_table")
+	@Column(name = "email", unique = true, nullable = false)
 	private String email;	
 	
-	@Column(name = "user_role_number", table = "user_table")
-	private int userRoleNumber;
 	
+	public enum UserRole {	
+		MANAGER ,
+		EMPLOYEE 	
+	}
+	
+	
+	
+	@Enumerated
+	private UserRole userRole;	
 	
 	
 }
+
 
 
 

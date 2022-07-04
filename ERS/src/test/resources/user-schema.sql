@@ -1,8 +1,8 @@
-CREATE TABLE user_role (
+/* CREATE TABLE user_role (
 		user_role_id INTEGER --PK
 		,user_role TEXT
 		,PRIMARY KEY (user_role_id)
-);
+ );  */ 
 
 CREATE TABLE user_table (
 user_id SERIAL 	   	    			
