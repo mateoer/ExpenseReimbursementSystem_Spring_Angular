@@ -47,7 +47,6 @@ public class User {
 	@Enumerated
 	private UserRole userRole;	
 	
-	
 }
 
 
