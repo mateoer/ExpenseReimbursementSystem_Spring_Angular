@@ -1,5 +1,6 @@
 package root.daotest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -8,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
-import root.dao.UserDao;
+import root.dao.UserRepository;
 import root.model.User;
-import root.model.User.UserRole;
+import root.model.enumscontainer.UserRole;
+
 
 @DataJpaTest
 //@Sql(scripts = "/user-schema.sql")
@@ -19,46 +21,41 @@ import root.model.User.UserRole;
 class UserRepositoryH2Test {
 
 	@Autowired
-	private UserDao userRepository;
-	
+	private UserRepository userRepository;
 	
 	@Test
-	void setUserRoleTest () {
+//	@Modifying
+//	@Query(value = "INSERT INTO user_table (first_name, last_name, user_password, username, email, type) VALUES ('Eric', 'Mateo', 'helloWorld', 'mateoer','eric234@revature.net', 'E');")
+	void saveEntitiesToRepository () {
+		User myUser = userRepository.findByUsername("mateoer");
 		
-		User user = userRepository.findByUsername("mateoer");
-		
-		assertEquals(user.getUserRole(), UserRole.EMPLOYEE);
-		System.out.println(user.getUsername()+" "+user.getUserRole());
-		System.out.println();
-		
-		user.setUserRole(UserRole.MANAGER);
-		assertEquals(user.getUserRole(), UserRole.MANAGER);
-		System.out.println(user.getUsername()+" "+user.getUserRole());
-	}
-
-	@Test
-	void findByUsernameTest() {
-		
-		User user = userRepository.findByUsername("mateoer");
-		
-		assertNotNull(user.getUsername(), "username must be [mateoer]");
-		assertEquals("mateoer", user.getUsername());
-		
-		System.out.println(user.getUserId()+" "+user.getUsername()+" "+user.getFirstName()+" "+user.getLastName()
-							+" "+user.getEmail()+" "+user.getPassword()+" "+user.getUserRole());
-		
+		assertNotNull(myUser.getUsername());
+		System.out.println("Username: "+ myUser.getUsername());
 	}
 	
 	@Test
-	void findByEmailTest() {
+	void setManagerEmployeeTest() {		
 		
-		User user = userRepository.findByEmail("mateoer@kean.edu");
+//		User myUser = userRepository.findByUsername("mateoer");		
 		
-		assertNotNull(user.getEmail(), "email must be [mateoer@kean.edu]");
-		assertEquals("mateoer@kean.edu", user.getEmail());
+		User myUser = new User();
+		myUser.setUsername("sue731");
 		
-		System.out.println(user.getUserId()+" "+user.getUsername()+" "+user.getFirstName()+" "+user.getLastName()
-		+" "+user.getEmail()+" "+user.getPassword()+" "+user.getUserRole());
+		userRepository.save(myUser);
+		
+		
+		assertThat(userRepository.findById(myUser.getUserId())).isNotNull();
+		System.out.println("User ID: "+myUser.getUserId());
+		
+		myUser.setUserRole(UserRole.MANAGER);
+		assertEquals(UserRole.MANAGER, myUser.getUserRole());
+		System.out.println("User role: "+myUser.getUserRole());
+		
+		myUser.setUserRole(UserRole.EMPLOYEE);
+		assertEquals(UserRole.EMPLOYEE, myUser.getUserRole());
+		System.out.println("User role: "+myUser.getUserRole());
+		
+		
 		
 	}
 
