@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -48,17 +49,30 @@ public class Reimbursement {
 	
 	
 	
-	@Enumerated 
+	@Enumerated (EnumType.STRING)
 	private ReiStatus reiStatus;
 	
 		
-	@Enumerated
+	@Enumerated (EnumType.STRING)
 	private ReiType reiType;
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "rei_author", referencedColumnName = "user_id")
 	private User reiAuthor;
+
+	public Reimbursement() {
+		
+	}
+	
+	public Reimbursement(int rei_amount, String rei_description, ReiStatus reiStatus,
+			ReiType reiType) {
+		super();
+		this.rei_amount = rei_amount;
+		this.rei_description = rei_description;
+		this.reiStatus = reiStatus;
+		this.reiType = reiType;
+	}
 	
 	
 	
