@@ -1,5 +1,6 @@
-package root.servicetest;
+package root.controllertest;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.times;
@@ -17,27 +18,27 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import root.dao.ReimbursementRepository;
+import root.controller.ManagerController;
 import root.model.Reimbursement;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
 import root.service.ManagerService;
-import root.service.ManagerServiceInterface;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-class ManagerServiceTest {
+class ManagerControllerTest {
+
+	ManagerController mangController;
 
 	@Mock
-	private ReimbursementRepository reiRepo;
-
-	private ManagerServiceInterface mangService;
+	ManagerService mangService;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		mangService = new ManagerService(reiRepo);
+		mangController = new ManagerController(mangService);
 	}
 
+	
 	@Test
 	void viewReimbursementsTest() {
 		// ARRANGE
@@ -51,53 +52,65 @@ class ManagerServiceTest {
 		List<Reimbursement> expectedReiList = new ArrayList<>();
 		expectedReiList.addAll(initialReiList);
 
-		when(reiRepo.findAll()).thenReturn(initialReiList);
+		when(mangService.viewReimbursements()).thenReturn(initialReiList);
 
 		// ACT
-		List<Reimbursement> actualReiList = mangService.viewReimbursements();
+		List<Reimbursement> actualReiList = mangController.viewReimbursements();
 
 		// ASSERT
-		verify(reiRepo, times(1)).findAll();
+		verify(mangService, times(1)).viewReimbursements();
 		assertEquals(expectedReiList, actualReiList);
 	}
 
+	
 	@Test
 	void approveReimbursementTest() {
-
 		// ARRANGE
 		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.APPROVED, ReiType.FOOD);
 
-		when(reiRepo.save(initialRei)).thenReturn(initialRei);
-
+		when(mangService.approveReimbursement(initialRei)).thenReturn(expectedRei);
+		
+		System.out.println("ReiStatus(initialRei): "+initialRei.getReiStatus());
 		// ACT
-		Reimbursement actualRei = mangService.approveReimbursement(initialRei);
+		Reimbursement actualRei = mangController.approveReimbursement(initialRei);
+		System.out.println("ReiStatus(actualRei): "+actualRei.getReiStatus());
 
 		// ASSERT
-		verify(reiRepo, times(1)).save(initialRei);
-		assertEquals(ReiStatus.APPROVED, actualRei.getReiStatus());
-		assertEquals(expectedRei, actualRei);
+		verify(mangService, times(1)).approveReimbursement(initialRei);
+		
+		assertAll(
+			()->	assertEquals(ReiStatus.APPROVED, actualRei.getReiStatus()),
+			()->	assertEquals(expectedRei, actualRei)				
+				);
+		
+		System.out.println("expectedRei: "+expectedRei.getReiStatus()+"  actualRei: "+actualRei.getReiStatus());
 	}
 
+	
 	@Test
 	void denyReimbursementTest() {
+
 		// ARRANGE
 		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.DENIED, ReiType.FOOD);
 
-		when(reiRepo.save(initialRei)).thenReturn(initialRei);
+		when(mangService.denyReimbursement(initialRei)).thenReturn(expectedRei);
 
 		// ACT
-		Reimbursement actualRei = mangService.denyReimbursement(initialRei);
+		Reimbursement actualRei = mangController.denyReimbursement(initialRei);
 
 		// ASSERT
-		verify(reiRepo, times(1)).save(initialRei);
-		assertEquals(ReiStatus.DENIED, actualRei.getReiStatus());
-		assertEquals(expectedRei, actualRei);
+		verify(mangService, times(1)).denyReimbursement(initialRei);
+		assertAll(
+				()->	assertEquals(ReiStatus.DENIED, actualRei.getReiStatus()),
+				()->	assertEquals(expectedRei, actualRei)				
+					);
 	}
 
+	
 	@Test
-	void filterReimbursementByStatusTest() {
+	void filterByStatusTest() {
 		// ARRANGE
 		List<Reimbursement> initialReiList = new ArrayList<>();
 		initialReiList.add(new Reimbursement(20, "ice cream", ReiStatus.APPROVED, ReiType.FOOD));
@@ -107,21 +120,21 @@ class ManagerServiceTest {
 		initialReiList.add(new Reimbursement(60, "hostel", ReiStatus.PENDING, ReiType.LODGING));
 		initialReiList.add(new Reimbursement(20, "ppv fee", ReiStatus.PENDING, ReiType.LODGING));
 
-		
-		//NOTE: TO use stream on an collection the stream must be specified at the declaration,
-		//otherwise it will not work
-		//ie List<Reimbursement> expectedReiList = new ArrayList<>();
-		//    expectedReiList = initialReilist.stream()....     //this doesn't work
+		// NOTE: TO use stream on an collection the stream must be specified at the
+		// declaration,
+		// otherwise it will not work
+		// ie List<Reimbursement> expectedReiList = new ArrayList<>();
+		// expectedReiList = initialReilist.stream().... //this doesn't work
 		List<Reimbursement> expectedReiList = initialReiList.stream()
 				.filter(e -> e.getReiStatus().equals(ReiStatus.PENDING)).collect(Collectors.toList());
 
-		when(reiRepo.findByReiStatus(ReiStatus.PENDING)).thenReturn(expectedReiList);
+		when(mangService.filterReimbursementsByStatus(ReiStatus.PENDING)).thenReturn(expectedReiList);
 
 		// ACT
-		List<Reimbursement> actualReiList = mangService.filterReimbursementsByStatus(ReiStatus.PENDING);
+		List<Reimbursement> actualReiList = mangController.filterByStatus(ReiStatus.PENDING);
 
 		// ASSERT
-		verify(reiRepo, times(1)).findByReiStatus(ReiStatus.PENDING);
+		verify(mangService, times(1)).filterReimbursementsByStatus(ReiStatus.PENDING);
 		assertNotEquals(initialReiList, actualReiList);
 		assertEquals(expectedReiList, actualReiList);
 
@@ -139,9 +152,9 @@ class ManagerServiceTest {
 		}
 	}
 
+	
 	@Test
-	void filterReimbursementByTypeTest() {
-		
+	void filterByTypeTest() {
 		// ARRANGE
 		List<Reimbursement> initialReiList = new ArrayList<>();
 		initialReiList.add(new Reimbursement(20, "ice cream", ReiStatus.APPROVED, ReiType.FOOD));
@@ -154,13 +167,13 @@ class ManagerServiceTest {
 		List<Reimbursement> expectedReiList = initialReiList.stream()
 				.filter(e -> e.getReiType().equals(ReiType.LODGING)).collect(Collectors.toList());
 
-		when(reiRepo.findByReiType(ReiType.LODGING)).thenReturn(expectedReiList);
+		when(mangService.filterReimbursementsByType(ReiType.LODGING)).thenReturn(expectedReiList);
 
 		// ACT
-		List<Reimbursement> actualReiList = mangService.filterReimbursementsByType(ReiType.LODGING);
+		List<Reimbursement> actualReiList = mangController.filterByType(ReiType.LODGING);
 
 		// ASSERT
-		verify(reiRepo, times(1)).findByReiType(ReiType.LODGING);
+		verify(mangService, times(1)).filterReimbursementsByType(ReiType.LODGING);
 		assertNotEquals(initialReiList, actualReiList);
 		assertEquals(expectedReiList, actualReiList);
 

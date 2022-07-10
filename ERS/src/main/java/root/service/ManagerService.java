@@ -2,11 +2,14 @@ package root.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import root.dao.ReimbursementRepository;
 import root.model.Reimbursement;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
 
+@Service
 public class ManagerService implements ManagerServiceInterface {
 	
 	private ReimbursementRepository reiRepo;

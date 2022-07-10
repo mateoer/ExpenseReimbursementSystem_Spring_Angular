@@ -1,4 +1,4 @@
-package root.servicetest;
+package root.controllertest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
@@ -15,66 +15,72 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import root.dao.ReimbursementRepository;
+import root.controller.EmployeeController;
 import root.model.Reimbursement;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
 import root.service.EmployeeService;
-import root.service.EmployeeServiceInterface;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-class EmployeeServiceTest {
+class EmployeeControllerTest {
+
+	EmployeeController empController;
 
 	@Mock
-	private ReimbursementRepository reiRepo;
-	
-	private EmployeeServiceInterface empService;
-	
+	// EmployeeServiceInterface works as well bc EmployeeService implements it
+	// but need to change the parameter type in the controller contructor to
+	// interface type as well
+	// so that Spring can do the autowiring through the interface instead of its
+	// implementation
+	EmployeeService empService;
+
 	@BeforeEach
 	void setUp() throws Exception {
-		empService = new EmployeeService(reiRepo);
+		empController = new EmployeeController(empService);
 	}
-	
-	
+
+	@Test
+	void addReimbursementTest() {
+
+		// ARRANGE
+		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
+		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
+
+		when(empService.addReimbursement(initialRei)).thenReturn(initialRei);
+
+		// ACT
+		Reimbursement actualRei = empController.addReimbursement(initialRei);
+
+		// ASSERT
+		verify(empService, times(1)).addReimbursement(initialRei);
+		assertEquals(expectedRei, actualRei);
+
+	}
+
 	@Test
 	void getAllReimbursementsTest() {
-		//ARRANGE
+
+		// ARRANGE
 		List<Reimbursement> initialReiList = new ArrayList<>();
 		initialReiList.add(new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD));
 		initialReiList.add(new Reimbursement(30, "gas", ReiStatus.PENDING, ReiType.GAS));
 		initialReiList.add(new Reimbursement(12, "ticket", ReiStatus.PENDING, ReiType.OTHER));
 		initialReiList.add(new Reimbursement(60, "hostel", ReiStatus.PENDING, ReiType.LODGING));
 		initialReiList.add(new Reimbursement(20, "ppv fee", ReiStatus.PENDING, ReiType.LODGING));
-		
+
 		List<Reimbursement> expectedReiList = new ArrayList<>();
 		expectedReiList.addAll(initialReiList);
-		
-		when(reiRepo.findAll()).thenReturn(initialReiList);
-		
-		//ACT
-		List<Reimbursement> actualReiList = empService.getAllReimbursements();
-		
-		//ASSERT
-		verify(reiRepo, times(1)).findAll();
+
+		when(empService.getAllReimbursements()).thenReturn(initialReiList);
+
+		// ACT
+		List<Reimbursement> actualReiList = empController.getAllReimbursements();
+
+		// ASSERT
+		verify(empService, times(1)).getAllReimbursements();
 		assertEquals(expectedReiList, actualReiList);
-	}
-	
-	@Test
-	void addReimbursementTest() {
-		
-		//ARRANGE
-		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
-		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
-		
-		when(reiRepo.save(initialRei)).thenReturn(initialRei);
-		
-		//ACT
-		Reimbursement actualRei = empService.addReimbursement(initialRei);
-		
-		//ASSERT
-		verify(reiRepo, times(1)).save(initialRei);
-		assertEquals(expectedRei, actualRei);
+
 	}
 
 }

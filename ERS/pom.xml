@@ -13,7 +13,7 @@
 	<artifactId>ERS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ERS</name>
-	<description>Redo of Project 1 with Angular &amp; Spring Boot</description>
+	<description>Redo of Project 1 with Angular and Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -49,13 +49,10 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<!-- <scope>runtime</scope> -->
 		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>test</scope>
-		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
