@@ -1,16 +1,23 @@
 server:
-  port: 9001
+  port: 9050
  
 spring:
+
   datasource:
     url: jdbc:postgresql://${ERS_DB_ENDPOINT}/${ERS_DB_DBNAME}
     
     username: ${ERS_DB_USERNAME}
     password: ${ERS_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
+    
+  
+    
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
 #      ddl-auto: none
-      ddl-auto: create-drop
+#      ddl-auto: create-drop
+       ddl-auto: create
+  
+      

@@ -1,4 +1,4 @@
-package root.model.enumscontainer;
+package root.model;
 
 public enum UserRole {
 	MANAGER (Values.MANAGER),

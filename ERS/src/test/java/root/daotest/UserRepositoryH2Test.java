@@ -11,7 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import root.dao.UserRepository;
 import root.model.User;
-import root.model.enumscontainer.UserRole;
+import root.model.UserRole;
 
 
 @DataJpaTest
@@ -31,6 +31,7 @@ class UserRepositoryH2Test {
 		
 		assertNotNull(myUser.getUsername());
 		System.out.println("Username: "+ myUser.getUsername());
+		System.out.println("Username: "+ myUser.getUserRole());
 	}
 	
 	@Test

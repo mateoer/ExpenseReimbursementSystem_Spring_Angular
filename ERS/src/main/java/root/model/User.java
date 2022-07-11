@@ -3,25 +3,23 @@ package root.model;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
-import root.model.enumscontainer.UserRole;
 
 @Data
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TYPE")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorValue("user_role")
+//@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
 @Table(name = "user_table")
 public class User {
 	
@@ -46,8 +44,8 @@ public class User {
 	private String email;	
 	
 	
-	
-	@Enumerated
+	@Column(name = "user_role")
+	@Enumerated (EnumType.STRING)
 	private UserRole userRole;	
 	
 	@OneToMany(mappedBy = "rei_author", fetch = FetchType.EAGER)
