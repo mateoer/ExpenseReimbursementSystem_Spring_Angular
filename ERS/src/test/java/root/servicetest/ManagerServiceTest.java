@@ -19,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import root.dao.ReimbursementRepository;
 import root.model.Reimbursement;
+import root.model.User;
+import root.model.UserRole;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
 import root.service.ManagerService;
@@ -67,12 +69,15 @@ class ManagerServiceTest {
 		// ARRANGE
 		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.APPROVED, ReiType.FOOD);
-
+		User myUser = new User("suechan", "abc123", "Sue", "Liz", "suechan123@revature.net", UserRole.MANAGER);
+		
 		when(reiRepo.save(initialRei)).thenReturn(initialRei);
+		
 
 		// ACT
-		Reimbursement actualRei = mangService.approveReimbursement(initialRei);
-
+		Reimbursement actualRei = mangService.approveReimbursement(initialRei,myUser);
+		expectedRei.setRei_resolvedDate(actualRei.getRei_resolvedDate());
+		
 		// ASSERT
 		verify(reiRepo, times(1)).save(initialRei);
 		assertEquals(ReiStatus.APPROVED, actualRei.getReiStatus());
@@ -84,12 +89,12 @@ class ManagerServiceTest {
 		// ARRANGE
 		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.DENIED, ReiType.FOOD);
-
+		User myUser = new User("suechan", "abc123", "Sue", "Liz", "suechan123@revature.net", UserRole.EMPLOYEE);
 		when(reiRepo.save(initialRei)).thenReturn(initialRei);
 
 		// ACT
-		Reimbursement actualRei = mangService.denyReimbursement(initialRei);
-
+		Reimbursement actualRei = mangService.denyReimbursement(initialRei,myUser);
+		expectedRei.setRei_resolvedDate(actualRei.getRei_resolvedDate());
 		// ASSERT
 		verify(reiRepo, times(1)).save(initialRei);
 		assertEquals(ReiStatus.DENIED, actualRei.getReiStatus());

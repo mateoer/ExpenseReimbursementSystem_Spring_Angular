@@ -1,11 +1,13 @@
 package root.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import root.dao.ReimbursementRepository;
 import root.model.Reimbursement;
+import root.model.User;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
 
@@ -24,15 +26,21 @@ public class ManagerService implements ManagerServiceInterface {
 	}
 
 	@Override
-	public Reimbursement approveReimbursement(Reimbursement reimb) {
+	public Reimbursement approveReimbursement(Reimbursement reimb, User user) {
 		reimb.setReiStatus(ReiStatus.APPROVED);
+		reimb.setRei_resolver(user.getUserId());
+		LocalDateTime lcdt = LocalDateTime.now();
+		reimb.setRei_resolvedDate(lcdt);
 		Reimbursement myReimb = reiRepo.save(reimb);
 		return myReimb;
 	}
 
 	@Override
-	public Reimbursement denyReimbursement(Reimbursement reimb) {
+	public Reimbursement denyReimbursement(Reimbursement reimb, User user) {
 		reimb.setReiStatus(ReiStatus.DENIED);
+		reimb.setRei_resolver(user.getUserId());
+		LocalDateTime lcdt = LocalDateTime.now();
+		reimb.setRei_resolvedDate(lcdt);
 		Reimbursement myReimb = reiRepo.save(reimb);
 		return myReimb;
 	}

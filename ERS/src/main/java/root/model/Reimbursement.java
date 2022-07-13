@@ -1,6 +1,6 @@
 package root.model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,10 +33,10 @@ public class Reimbursement {
 	private int rei_amount;
 	
 	@Column (name = "rei_submitted_date")
-	private Date rei_submitteDate;
+	private LocalDateTime rei_submitteDate;
 	
 	@Column (name = "rei_resolved_date")
-	private Date rei_resolvedDate;
+	private LocalDateTime rei_resolvedDate;
 	
 	@Column (name = "rei_description")
 	private String rei_description;

@@ -13,10 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import root.controller.EmployeeController;
+import root.dao.UserRepository;
 import root.model.Reimbursement;
+import root.model.User;
+import root.model.UserRole;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
 import root.service.EmployeeService;
@@ -35,6 +39,9 @@ class EmployeeControllerTest {
 	// implementation
 	EmployeeService empService;
 
+	@Autowired
+	private UserRepository userRepo;
+
 	@BeforeEach
 	void setUp() throws Exception {
 		empController = new EmployeeController(empService);
@@ -47,13 +54,15 @@ class EmployeeControllerTest {
 		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 
-		when(empService.addReimbursement(initialRei)).thenReturn(initialRei);
+		User myUser = new User("suechan", "abc123", "Sue", "Liz", "suechan123@revature.net", UserRole.EMPLOYEE);
+		userRepo.save(myUser);
+		when(empService.addReimbursement(initialRei, myUser)).thenReturn(initialRei);
 
 		// ACT
-		Reimbursement actualRei = empController.addReimbursement(initialRei);
+		Reimbursement actualRei = empController.addReimbursement(initialRei, myUser);
 
 		// ASSERT
-		verify(empService, times(1)).addReimbursement(initialRei);
+		verify(empService, times(1)).addReimbursement(initialRei, myUser);
 		assertEquals(expectedRei, actualRei);
 
 	}
@@ -81,6 +90,36 @@ class EmployeeControllerTest {
 		verify(empService, times(1)).getAllReimbursements();
 		assertEquals(expectedReiList, actualReiList);
 
+	}
+
+	@Test
+	void getAllReimbursementsByUserIdTest() {
+		// ARRANGE
+		List<Reimbursement> initialReiList = new ArrayList<>();
+		initialReiList.add(new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD));
+		initialReiList.add(new Reimbursement(30, "gas", ReiStatus.PENDING, ReiType.GAS));
+		initialReiList.add(new Reimbursement(12, "ticket", ReiStatus.PENDING, ReiType.OTHER));
+		initialReiList.add(new Reimbursement(60, "hostel", ReiStatus.PENDING, ReiType.LODGING));
+		initialReiList.add(new Reimbursement(20, "ppv fee", ReiStatus.PENDING, ReiType.LODGING));
+
+		User myUser = new User("mateoer", "abc123", "Eric", "Mateo", "eric234@revature.net", UserRole.EMPLOYEE);
+		userRepo.save(myUser);
+
+		for (Reimbursement reimbursement : initialReiList) {
+			reimbursement.setRei_author(myUser.getUserId());
+		}
+		
+		List<Reimbursement> expectedReiList = new ArrayList<>();
+		expectedReiList.addAll(initialReiList);
+
+		when(empService.getAllReimbursementsByUserId(myUser)).thenReturn(initialReiList);
+
+		// ACT
+		List<Reimbursement> actualReiList = empController.getAllReimbursementsByUserId(myUser);
+
+		// ASSERT
+		verify(empService, times(1)).getAllReimbursementsByUserId(myUser);
+		assertEquals(expectedReiList, actualReiList);
 	}
 
 }

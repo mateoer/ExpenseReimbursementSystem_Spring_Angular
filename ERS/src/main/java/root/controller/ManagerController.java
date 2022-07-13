@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import root.model.Reimbursement;
+import root.model.User;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
 import root.service.ManagerService;
@@ -34,15 +35,15 @@ public class ManagerController {
 	//approveReimbursements
 	@PostMapping("/approvereimbursement")
 	@ResponseStatus(HttpStatus.OK)
-	public Reimbursement approveReimbursement (@RequestBody Reimbursement reiToApprove) {
-		return mangService.approveReimbursement(reiToApprove);
+	public Reimbursement approveReimbursement (@RequestBody Reimbursement reiToApprove, User user) {
+		return mangService.approveReimbursement(reiToApprove, user);
 	}
 	
 	//denyReimbursements
 	@PostMapping("/denyreimbursement")
 	@ResponseStatus(HttpStatus.OK)
-	public Reimbursement denyReimbursement (@RequestBody Reimbursement reiToDeny) {
-		return mangService.denyReimbursement(reiToDeny);
+	public Reimbursement denyReimbursement (@RequestBody Reimbursement reiToDeny, User user) {
+		return mangService.denyReimbursement(reiToDeny, user);
 	}
 	
 	//filterReimbursementsByStatus

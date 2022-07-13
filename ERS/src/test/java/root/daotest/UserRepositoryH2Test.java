@@ -27,7 +27,7 @@ class UserRepositoryH2Test {
 //	@Modifying
 //	@Query(value = "INSERT INTO user_table (first_name, last_name, user_password, username, email, type) VALUES ('Eric', 'Mateo', 'helloWorld', 'mateoer','eric234@revature.net', 'E');")
 	void saveEntitiesToRepository () {
-		User myUser = userRepository.findByUsername("mateoer");
+		User myUser = userRepository.findByUsername("suechan");
 		
 		assertNotNull(myUser.getUsername());
 		System.out.println("Username: "+ myUser.getUsername());

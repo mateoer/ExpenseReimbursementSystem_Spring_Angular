@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import root.model.Reimbursement;
+import root.model.User;
 import root.service.EmployeeService;
 
 @RestController
@@ -26,22 +27,20 @@ public class EmployeeController {
 	//addNewReimbursement
 	@PostMapping("/addreimbursement")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Reimbursement addReimbursement(@RequestBody Reimbursement newReimbursement) {
-		
-//		if (newReimbursement.getRei_amount() == 0 || 
-//			newReimbursement.getReiStatus() == null || 
-//			newReimbursement.getReiType() == null  ) {
-//			
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Couldn't create new reimbursement");
-//		}
-		
-		return employeeService.addReimbursement(newReimbursement);
+	public Reimbursement addReimbursement(@RequestBody Reimbursement newReimbursement, User user) {		
+		return employeeService.addReimbursement(newReimbursement, user);
 	}
 	
 	//getAllReimbursements
 	@GetMapping("/getreimbursements")
 	public List<Reimbursement> getAllReimbursements (){
 		return employeeService.getAllReimbursements();
+	}
+	
+	//getAllReimbursements associated to the user
+	@GetMapping("/userreimbursements")
+	public List<Reimbursement> getAllReimbursementsByUserId(User user){
+		return employeeService.getAllReimbursementsByUserId(user);
 	}
 	
 }
