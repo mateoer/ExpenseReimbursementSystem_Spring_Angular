@@ -91,7 +91,7 @@ class ReimbursementRepositoryH2Test {
 
 		System.out.println("Expected");
 		for (Reimbursement reimbursement : expectedReiList) {
-			System.out.println("ID: " + reimbursement.getReiId() + "\tStatus: " + reimbursement.getReiType());
+			System.out.println("ID: " + reimbursement.getReiId() + "\tStatus: " + reimbursement.getReiType()+ "\tResolver: "+reimbursement.getRei_resolver());
 		}
 
 	}

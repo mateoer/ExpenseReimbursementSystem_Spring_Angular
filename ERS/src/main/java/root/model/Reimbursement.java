@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -30,7 +29,7 @@ public class Reimbursement {
 	private int reiId;
 	
 	@Column (name = "rei_amount")
-	private int rei_amount;
+	private double rei_amount;
 	
 	@Column (name = "rei_submitted_date")
 	private LocalDateTime rei_submitteDate;
@@ -58,14 +57,14 @@ public class Reimbursement {
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "rei_author", referencedColumnName = "user_id")
+//	@JoinColumn(name = "rei_author", referencedColumnName = "user_id")
 	private User reiAuthor;
 
 	public Reimbursement() {
 		
 	}
 	
-	public Reimbursement(int rei_amount, String rei_description, ReiStatus reiStatus,
+	public Reimbursement(double rei_amount, String rei_description, ReiStatus reiStatus,
 			ReiType reiType) {
 		super();
 		this.rei_amount = rei_amount;

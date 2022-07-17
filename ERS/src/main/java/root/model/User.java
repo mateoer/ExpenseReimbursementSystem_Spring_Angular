@@ -48,7 +48,7 @@ public class User {
 	@Enumerated (EnumType.STRING)
 	private UserRole userRole;	
 	
-	@OneToMany(mappedBy = "rei_author", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "rei_author", fetch = FetchType.LAZY)
 //	@JoinColumn(name = "rei_author", referencedColumnName = "user_id")
 	private List<Reimbursement> reimbursements;
 	

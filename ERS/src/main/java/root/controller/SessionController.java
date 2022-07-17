@@ -4,20 +4,19 @@ package root.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import root.dao.UserRepository;
 import root.model.User;
 import root.model.UserRole;
 
 @Controller
+//@CrossOrigin(origins = "http://localhost:9050/")
 //@RestController
 public class SessionController {
 	
@@ -29,12 +28,12 @@ public class SessionController {
 		this.userRepo = userRepo;
 	}
 	
-//	@GetMapping("/")
-	@RequestMapping("/")
-	public String routeLoginPage() {
-		System.out.println("In the main login router");
-		return "forward:/login";
-	}
+////	@GetMapping("/")
+//	@RequestMapping("/")
+//	public String routeLoginPage() {
+//		System.out.println("In the main login router");
+//		return "forward:/index.html";
+//	}
 
 	@GetMapping("/getName")
 	@ResponseBody
@@ -51,19 +50,32 @@ public class SessionController {
 	}
 	
 	@PostMapping("/login")
+//	@RequestMapping("/login")
 	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
+//	@ResponseStatus(HttpStatus.OK)
 	public String login (HttpSession httpSession, @RequestBody User incomingUser) {
 		System.out.println("\n\nIn the login method");
 		
 		User dbUser = loginAuthentication(incomingUser);
 		if (dbUser == null) {
-			return "No user found";
+			System.out.println("Login failed");
+			return "/index.html";
 		}
 		httpSession.setAttribute("currentUser", dbUser);		
 		
-		loginRedirect(dbUser);		
-		return "Login successful";		
+		System.out.println("Login successful");	
+		
+//		if (dbUser.getUserRole() == UserRole.MANAGER) {
+//			System.out.println("Manager found");
+////			return "/manager";
+//			return "/resources/html/FMHome.html";
+//		} else {
+//			System.out.println("Employee found");
+////			return "/employee";
+//			return "/resources/html/EMHome.html";
+//		}
+		
+		return loginRedirect(dbUser);		
 	}
 	
 //	@GetMapping("/logout")
@@ -91,10 +103,12 @@ public class SessionController {
 	public String loginRedirect(User reqUser) {
 		if (reqUser.getUserRole() == UserRole.MANAGER) {
 			System.out.println("Manager found");
-			return "/manager";
+//			return "/manager";
+			return "/resources/html/FMHome.html";
 		} else {
 			System.out.println("Employee found");
-			return "/employee";
+//			return "/employee";
+			return "/resources/html/EMHome.html";
 		}
 	}
 }
