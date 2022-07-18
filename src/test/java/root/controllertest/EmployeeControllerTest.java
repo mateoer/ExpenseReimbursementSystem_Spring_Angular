@@ -13,11 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import root.controller.EmployeeController;
-import root.dao.UserRepository;
 import root.model.Reimbursement;
 import root.model.User;
 import root.model.UserRole;
@@ -39,8 +37,7 @@ class EmployeeControllerTest {
 	// implementation
 	EmployeeService empService;
 
-	@Autowired
-	private UserRepository userRepo;
+	
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -55,7 +52,7 @@ class EmployeeControllerTest {
 		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 
 		User myUser = new User("suechan", "abc123", "Sue", "Liz", "suechan123@revature.net", UserRole.EMPLOYEE);
-		userRepo.save(myUser);
+//		userRepo.save(myUser);
 		when(empService.addReimbursement(initialRei, myUser)).thenReturn(initialRei);
 
 		// ACT
@@ -103,7 +100,7 @@ class EmployeeControllerTest {
 		initialReiList.add(new Reimbursement(20, "ppv fee", ReiStatus.PENDING, ReiType.LODGING));
 
 		User myUser = new User("mateoer", "abc123", "Eric", "Mateo", "eric234@revature.net", UserRole.EMPLOYEE);
-		userRepo.save(myUser);
+//		userRepo.save(myUser);
 
 		for (Reimbursement reimbursement : initialReiList) {
 			reimbursement.setRei_author(myUser.getUserId());
