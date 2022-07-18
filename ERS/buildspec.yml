@@ -16,4 +16,7 @@ phases:
       - echo Build completed on `date`
 artifacts:
   files:
-    - target/messageUtil-1.0.jar
+    - target/*.jar
+    - scripts/*.sh
+    - ./ERS/appspec.yml
+  discard-paths: yes
