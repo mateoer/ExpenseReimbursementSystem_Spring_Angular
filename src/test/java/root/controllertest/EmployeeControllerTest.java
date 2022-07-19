@@ -103,7 +103,7 @@ class EmployeeControllerTest {
 //		userRepo.save(myUser);
 
 		for (Reimbursement reimbursement : initialReiList) {
-			reimbursement.setRei_author(myUser.getUserId());
+			reimbursement.setReiAuthor(myUser.getUserId());
 		}
 		
 		List<Reimbursement> expectedReiList = new ArrayList<>();

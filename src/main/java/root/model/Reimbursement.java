@@ -40,8 +40,8 @@ public class Reimbursement {
 	@Column (name = "rei_description")
 	private String rei_description;
 	
-	@Column (name = "rei_author", insertable = false ,updatable = false)
-	private int rei_author;
+	@Column(name = "rei_author"/* , insertable = false ,updatable = false */)
+	private int reiAuthor;
 	
 	@Column (name = "rei_resolver")
 	private int rei_resolver;
@@ -58,7 +58,7 @@ public class Reimbursement {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "rei_author", referencedColumnName = "user_id")
-	private User reiAuthor;
+	private User reimbursementAuthor;
 
 	public Reimbursement() {
 		
@@ -72,6 +72,16 @@ public class Reimbursement {
 		this.reiStatus = reiStatus;
 		this.reiType = reiType;
 	}
+
+	public Reimbursement(double rei_amount, String rei_description, int reiAuthor) {
+		super();
+		this.rei_amount = rei_amount;
+		this.rei_description = rei_description;
+		this.reiAuthor = reiAuthor;
+	}
+
+	
+	
 	
 	
 	

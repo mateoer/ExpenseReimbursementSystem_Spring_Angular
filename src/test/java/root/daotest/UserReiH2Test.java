@@ -46,7 +46,7 @@ class UserReiH2Test {
 		myRei.setRei_description("ice cream");
 		myRei.setReiType(ReiType.FOOD);
 		myRei.setReiStatus(ReiStatus.PENDING);
-		myRei.setReiAuthor(myUser);
+		myRei.setReiAuthor(myUser.getUserId());
 		reiRepo.save(myRei);
 		
 		

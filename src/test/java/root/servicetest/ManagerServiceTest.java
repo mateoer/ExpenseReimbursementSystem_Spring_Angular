@@ -43,17 +43,26 @@ class ManagerServiceTest {
 	@Test
 	void viewReimbursementsTest() {
 		// ARRANGE
-		List<Reimbursement> initialReiList = new ArrayList<>();
-		initialReiList.add(new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD));
-		initialReiList.add(new Reimbursement(30, "gas", ReiStatus.PENDING, ReiType.GAS));
-		initialReiList.add(new Reimbursement(12, "ticket", ReiStatus.PENDING, ReiType.OTHER));
-		initialReiList.add(new Reimbursement(60, "hostel", ReiStatus.PENDING, ReiType.LODGING));
-		initialReiList.add(new Reimbursement(20, "ppv fee", ReiStatus.PENDING, ReiType.LODGING));
+		List<Reimbursement> initialReiList1 = new ArrayList<>();
+		initialReiList1.add(new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD));
+		initialReiList1.add(new Reimbursement(30, "gas", ReiStatus.PENDING, ReiType.GAS));
+		initialReiList1.add(new Reimbursement(12, "ticket", ReiStatus.PENDING, ReiType.OTHER));
+		User user1 = new User("suechan");
+		user1.setReimbursements(initialReiList1);
+		
+		List<Reimbursement> initialReiList2 = new ArrayList<>();
+		initialReiList2.add(new Reimbursement(60, "hostel", ReiStatus.PENDING, ReiType.LODGING));
+		initialReiList2.add(new Reimbursement(20, "ppv fee", ReiStatus.PENDING, ReiType.LODGING));
+		User user2 = new User("mateoer");
+		user2.setReimbursements(initialReiList2);
 
 		List<Reimbursement> expectedReiList = new ArrayList<>();
-		expectedReiList.addAll(initialReiList);
+		expectedReiList.addAll(initialReiList1);
+		expectedReiList.addAll(initialReiList2);
+		
+		
 
-		when(reiRepo.findAll()).thenReturn(initialReiList);
+		when(reiRepo.findAll()).thenReturn(expectedReiList);
 
 		// ACT
 		List<Reimbursement> actualReiList = mangService.viewReimbursements();
@@ -61,6 +70,8 @@ class ManagerServiceTest {
 		// ASSERT
 		verify(reiRepo, times(1)).findAll();
 		assertEquals(expectedReiList, actualReiList);
+		
+		
 	}
 
 	@Test

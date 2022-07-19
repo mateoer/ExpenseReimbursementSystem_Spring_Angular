@@ -1,12 +1,13 @@
 package root.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,9 +49,9 @@ public class User {
 	@Enumerated (EnumType.STRING)
 	private UserRole userRole;	
 	
-	@OneToMany(mappedBy = "rei_author", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "reimbursementAuthor", cascade = CascadeType.ALL, orphanRemoval = true)
 //	@JoinColumn(name = "rei_author", referencedColumnName = "user_id")
-	private List<Reimbursement> reimbursements;
+	private List<Reimbursement> reimbursements = new ArrayList<>();
 	
 	public User () {
 		
@@ -66,6 +67,10 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.userRole = userRole;
+	}
+	public User(String username) {
+		super();
+		this.username = username;
 	}
 	
 	

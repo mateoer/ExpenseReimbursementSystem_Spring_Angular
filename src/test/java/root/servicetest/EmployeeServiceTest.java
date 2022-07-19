@@ -86,14 +86,14 @@ class EmployeeServiceTest {
 		//randomly
 		
 		expectedRei.setRei_submitteDate(actualRei.getRei_submitteDate());
-		expectedRei.setRei_author(myUser.getUserId());
+		expectedRei.setReiAuthor(myUser.getUserId());
 		
 		
 		// ASSERT
 		verify(reiRepo, times(1)).save(initialRei);
 		assertEquals(expectedRei, actualRei);
 		System.out.println("User Id:    " + myUser.getUserId());
-		System.out.println("Rei author: " + actualRei.getRei_author());
+		System.out.println("Rei author: " + actualRei.getReiAuthor());
 	}
 
 	@Test
@@ -110,7 +110,7 @@ class EmployeeServiceTest {
 		userRepo.save(myUser);
 		
 		for (Reimbursement reimbursement : initialReiList) {
-			reimbursement.setRei_author(myUser.getUserId());
+			reimbursement.setReiAuthor(myUser.getUserId());
 		}
 		
 		List<Reimbursement> expectedReiList = new ArrayList<>();
@@ -128,7 +128,7 @@ class EmployeeServiceTest {
 		
 		System.out.println("myUser ID: "+myUser.getUserId());
 		for (Reimbursement reimbursement : actualReiList) {
-			System.out.print(reimbursement.getRei_author()+" ");
+			System.out.print(reimbursement.getReiAuthor()+" ");
 		}
 		System.out.println();
 

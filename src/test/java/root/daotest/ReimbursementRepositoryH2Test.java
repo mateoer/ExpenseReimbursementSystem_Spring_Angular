@@ -43,7 +43,7 @@ class ReimbursementRepositoryH2Test {
 	@Test
 	void findByReiStatusTest() {
 
-		//ARRANGE
+		// ARRANGE
 		List<Reimbursement> initialReiList = new ArrayList<>();
 		initialReiList.add(new Reimbursement(20, "ice cream", ReiStatus.APPROVED, ReiType.FOOD));
 		initialReiList.add(new Reimbursement(30, "gas", ReiStatus.DENIED, ReiType.GAS));
@@ -55,11 +55,11 @@ class ReimbursementRepositoryH2Test {
 		reimbursementRepo.saveAll(initialReiList);
 
 		List<Reimbursement> expectedReiList = new ArrayList<>();
-		
-		//ACT
+
+		// ACT
 		expectedReiList = reimbursementRepo.findByReiStatus(ReiStatus.PENDING);
-		
-		//ASSERT
+
+		// ASSERT
 		assertNotEquals(expectedReiList, initialReiList);
 
 		System.out.println("Expected");
@@ -82,18 +82,58 @@ class ReimbursementRepositoryH2Test {
 		reimbursementRepo.saveAll(initialReiList);
 
 		List<Reimbursement> expectedReiList = new ArrayList<>();
-		
-		//ACT
+
+		// ACT
 		expectedReiList = reimbursementRepo.findByReiType(ReiType.LODGING);
-		
-		//ASSERT
+
+		// ASSERT
 		assertNotEquals(expectedReiList, initialReiList);
 
 		System.out.println("Expected");
 		for (Reimbursement reimbursement : expectedReiList) {
-			System.out.println("ID: " + reimbursement.getReiId() + "\tStatus: " + reimbursement.getReiType()+ "\tResolver: "+reimbursement.getRei_resolver());
+			System.out.println("ID: " + reimbursement.getReiId() + "\tStatus: " + reimbursement.getReiType()
+					+ "\tResolver: " + reimbursement.getRei_resolver());
 		}
 
 	}
 
+	@Test
+	void findByReiAuthorTest() {
+		// ARRANGE
+		List<Reimbursement> initialReiList = new ArrayList<>();
+		initialReiList.add(new Reimbursement(20, "ice cream", 2));
+		initialReiList.add(new Reimbursement(30, "gas", 2));
+		initialReiList.add(new Reimbursement(12, "ticket", 2));
+		initialReiList.add(new Reimbursement(12, "ticket", 2));
+		initialReiList.add(new Reimbursement(60, "hostel", 2));
+		initialReiList.add(new Reimbursement(20, "ppv fee", 2));
+
+		Reimbursement reiFromOtherUser1 = new Reimbursement(55, "tequila", 1);
+		Reimbursement reiFromOtherUser2 = new Reimbursement(20, "movies", 1);
+
+		List<Reimbursement> reiList = new ArrayList<>();
+		reiList.addAll(initialReiList);
+		reiList.add(reiFromOtherUser2);
+		reiList.add(reiFromOtherUser1);
+
+		reimbursementRepo.saveAll(reiList);
+
+		List<Reimbursement> expectedReiList = new ArrayList<>();
+
+		// ACT
+		expectedReiList = reimbursementRepo.findByReiAuthor(2);
+		
+		//ASSERT
+		assertEquals(expectedReiList, initialReiList);
+		assertNotEquals(expectedReiList, reiList);
+		System.out.println("ExpectedReilist");
+		for (Reimbursement reimbursement : expectedReiList) {
+			System.out.println("amount: "+reimbursement.getRei_amount()+"\tdescription: "+reimbursement.getRei_description()+"\tauthor: "+reimbursement.getReiAuthor());
+		}
+		System.out.println("Reilist");
+		for (Reimbursement reimbursement : reiList) {
+			System.out.println("amount: "+reimbursement.getRei_amount()+"\tdescription: "+reimbursement.getRei_description()+"\tauthor: "+reimbursement.getReiAuthor());
+		}
+
+	}
 }

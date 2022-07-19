@@ -33,7 +33,7 @@ public class EmployeeService implements EmployeeServiceInterface {
 
 	@Override
 	public Reimbursement addReimbursement(Reimbursement reimb, User user) {
-		reimb.setRei_author(user.getUserId());
+		reimb.setReiAuthor(user.getUserId());
 		LocalDateTime lcdt = LocalDateTime.now();
 		reimb.setRei_submitteDate(lcdt);
 		Reimbursement myReimb = reiRepo.save(reimb);

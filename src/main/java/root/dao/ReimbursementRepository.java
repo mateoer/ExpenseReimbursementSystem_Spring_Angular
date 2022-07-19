@@ -16,11 +16,6 @@ public interface ReimbursementRepository extends JpaRepository<Reimbursement, In
 	List<Reimbursement> findByReiStatus(ReiStatus status);	
 	List<Reimbursement> findByReiType(ReiType reiType);
 	
-	
-	
-	
-	
-	List<Reimbursement> findByReiAuthor(int rei_author);	
-	
+	List<Reimbursement> findByReiAuthor(int reiAuthor);	
 	
 }
