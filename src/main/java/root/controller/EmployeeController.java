@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import root.model.Reimbursement;
 import root.model.User;
+import root.model.UserReiContext;
 import root.service.EmployeeService;
 
 @RestController
@@ -27,14 +28,17 @@ public class EmployeeController {
 	//addNewReimbursement
 	@PostMapping("/addreimbursement")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Reimbursement addReimbursement(@RequestBody Reimbursement newReimbursement, User user) {		
+	public Reimbursement addReimbursement(@RequestBody UserReiContext userReiContext){		
+		Reimbursement newReimbursement = userReiContext.getReimbursement();
+		
+		User user =  userReiContext.getUser();		
 		return employeeService.addReimbursement(newReimbursement, user);
 	}
 	
 	//getAllReimbursements
 	@GetMapping("/getreimbursements")
-	public List<Reimbursement> getAllReimbursements (){
-		return employeeService.getAllReimbursements();
+	public List<Reimbursement> getAllReimbursements (@RequestBody User user){		
+		return employeeService.getAllReimbursementsByUserId(user);
 	}
 	
 	//getAllReimbursements associated to the user

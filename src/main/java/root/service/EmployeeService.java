@@ -27,7 +27,7 @@ public class EmployeeService implements EmployeeServiceInterface {
 	}
 	@Override
 	public List<Reimbursement> getAllReimbursementsByUserId(User user) {
-		int reiAuthor = user.getUserId();
+		Integer reiAuthor = user.getUserId();
 		return reiRepo.findByReiAuthor(reiAuthor);
 	}
 
