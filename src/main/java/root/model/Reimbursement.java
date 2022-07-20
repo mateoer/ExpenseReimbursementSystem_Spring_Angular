@@ -12,14 +12,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
 
-@Data
+@Setter
+
+@Getter
+
+@AllArgsConstructor
+
+
+@ToString
 @Entity
 @Table(name = "reimbursements_table")
+@JsonIgnoreProperties(value = {"reimbursementAuthor"}, allowSetters = true, allowGetters = true)
 public class Reimbursement {
 	
 	
@@ -41,10 +55,10 @@ public class Reimbursement {
 	private String rei_description;
 	
 	@Column(name = "rei_author"/* , insertable = false ,updatable = false */)
-	private int reiAuthor;
+	private Integer reiAuthor;
 	
 	@Column (name = "rei_resolver")
-	private int rei_resolver;
+	private Integer rei_resolver;
 	
 	
 	
@@ -55,8 +69,9 @@ public class Reimbursement {
 	@Enumerated (EnumType.STRING)
 	private ReiType reiType;
 	
-	
+	@Transient
 	@ManyToOne(fetch = FetchType.LAZY)
+//	@JsonBackReference
 //	@JoinColumn(name = "rei_author", referencedColumnName = "user_id")
 	private User reimbursementAuthor;
 

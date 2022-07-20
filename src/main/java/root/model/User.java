@@ -8,20 +8,34 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Data
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+
+@Getter
+
+@AllArgsConstructor
+
+@ToString
 @Entity
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorValue("user_role")
 //@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
 @Table(name = "user_table")
+@JsonIgnoreProperties(value = {"reimbursements"}, allowSetters = true, allowGetters = true)
 public class User {
 	
 	@Id
@@ -49,9 +63,20 @@ public class User {
 	@Enumerated (EnumType.STRING)
 	private UserRole userRole;	
 	
-	@OneToMany(mappedBy = "reimbursementAuthor", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Transient
+//	@JsonManagedReference
+	@OneToMany(mappedBy = "reimbursementAuthor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 //	@JoinColumn(name = "rei_author", referencedColumnName = "user_id")
 	private List<Reimbursement> reimbursements = new ArrayList<>();
+	
+	public void addReimbursements(Reimbursement rei) {
+		reimbursements.add(rei);
+		rei.setReimbursementAuthor(this);
+	}
+	public void removeReimbursements(Reimbursement rei) {
+		reimbursements.remove(rei);
+		rei.setReimbursementAuthor(null);
+	}
 	
 	public User () {
 		

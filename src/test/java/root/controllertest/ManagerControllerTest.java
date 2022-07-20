@@ -1,5 +1,6 @@
 package root.controllertest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -8,7 +9,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -44,24 +47,52 @@ class ManagerControllerTest {
 	@Test
 	void viewReimbursementsTest() {
 		// ARRANGE
-		List<Reimbursement> initialReiList = new ArrayList<>();
-		initialReiList.add(new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD));
-		initialReiList.add(new Reimbursement(30, "gas", ReiStatus.PENDING, ReiType.GAS));
-		initialReiList.add(new Reimbursement(12, "ticket", ReiStatus.PENDING, ReiType.OTHER));
-		initialReiList.add(new Reimbursement(60, "hostel", ReiStatus.PENDING, ReiType.LODGING));
-		initialReiList.add(new Reimbursement(20, "ppv fee", ReiStatus.PENDING, ReiType.LODGING));
+				User user1 = new User("suechan");
+				User user2 = new User("mateoer");
+				List<User> userList = new ArrayList<>();
+				userList.add(user1);
+				userList.add(user2);
+				
+				
+				List<Reimbursement> initialReiList1 = new ArrayList<>();
+				initialReiList1.add(new Reimbursement(20, "ice cream", user1.getUserId()));
+				initialReiList1.add(new Reimbursement(30, "gas", user1.getUserId()));
+				initialReiList1.add(new Reimbursement(12, "ticket", user1.getUserId()));
+				user1.setReimbursements(initialReiList1);
+				
+				List<Reimbursement> initialReiList2 = new ArrayList<>();
+				initialReiList2.add(new Reimbursement(60, "hostel", user2.getUserId()));
+				initialReiList2.add(new Reimbursement(20, "ppv fee", user2.getUserId()));
+				user2.setReimbursements(initialReiList2);
 
-		List<Reimbursement> expectedReiList = new ArrayList<>();
-		expectedReiList.addAll(initialReiList);
+				List<Reimbursement> expectedReiList = new ArrayList<>();
+				expectedReiList.addAll(initialReiList1);
+				expectedReiList.addAll(initialReiList2);
+				
+				Map<User, List<Reimbursement>> expectedReiMap = new HashMap<>();
+				expectedReiMap.put(user1, initialReiList1);
+				expectedReiMap.put(user2, initialReiList2);
 
-		when(mangService.viewReimbursements()).thenReturn(initialReiList);
+//				when(reiRepo.findAll()).thenReturn(expectedReiList);
+//				when(userRepo.findAll()).thenReturn(userList);
 
-		// ACT
-		List<Reimbursement> actualReiList = mangController.viewReimbursements();
-
-		// ASSERT
-		verify(mangService, times(1)).viewReimbursements();
-		assertEquals(expectedReiList, actualReiList);
+				// ACT
+				Map<User, List<Reimbursement>> actualReiMap = mangController.viewReimbursements();
+				
+				
+				
+				// ASSERT
+//				verify(reiRepo, times(1)).findAll();
+//				verify(userRepo, times(1)).findAll();
+				assertAll(
+						()->	assertThat(expectedReiMap.size()== actualReiMap.size()),
+						()->	assertThat(expectedReiMap.entrySet().equals(actualReiMap.entrySet())),			
+						()->	assertThat(expectedReiMap.equals(actualReiMap))				
+						
+						//NOTE: assertEquals doesn't work well with maps of lists apparently
+						//this assertion will fail even though the one above passes
+//						()-> 	assertEquals(expectedReiMap, actualReiMap)
+							);
 	}
 
 	

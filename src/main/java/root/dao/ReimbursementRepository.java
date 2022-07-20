@@ -13,9 +13,12 @@ import root.model.enumscontainer.ReiType;
 @Repository
 public interface ReimbursementRepository extends JpaRepository<Reimbursement, Integer> {
 
-	List<Reimbursement> findByReiStatus(ReiStatus status);	
-	List<Reimbursement> findByReiType(ReiType reiType);
+	public List<Reimbursement> findByReiStatus(ReiStatus status);	
+	public List<Reimbursement> findByReiType(ReiType reiType);
 	
-	List<Reimbursement> findByReiAuthor(int reiAuthor);	
+//	@Query("SELECT * FROM User u INNER JOIN Reimbursement r ON u.userId = r.reiAuthor")
+//	public List<Reimbursement> viewReimbursements();
+	
+	public List<Reimbursement> findByReiAuthor(int reiAuthor);	
 	
 }
