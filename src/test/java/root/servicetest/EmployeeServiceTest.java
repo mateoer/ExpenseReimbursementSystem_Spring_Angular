@@ -1,5 +1,6 @@
 package root.servicetest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -33,6 +34,8 @@ class EmployeeServiceTest {
 	@Mock
 	private ReimbursementRepository reiRepo;
 	
+	
+	
 	@Autowired
 	private UserRepository userRepo;
 
@@ -40,31 +43,10 @@ class EmployeeServiceTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		empService = new EmployeeService(reiRepo);		
+		empService = new EmployeeService(reiRepo,userRepo);		
 	}
 
-	@Test
-	void getAllReimbursementsTest() {
-		// ARRANGE
-		List<Reimbursement> initialReiList = new ArrayList<>();
-		initialReiList.add(new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD));
-		initialReiList.add(new Reimbursement(30, "gas", ReiStatus.PENDING, ReiType.GAS));
-		initialReiList.add(new Reimbursement(12, "ticket", ReiStatus.PENDING, ReiType.OTHER));
-		initialReiList.add(new Reimbursement(60, "hostel", ReiStatus.PENDING, ReiType.LODGING));
-		initialReiList.add(new Reimbursement(20, "ppv fee", ReiStatus.PENDING, ReiType.LODGING));
-
-		List<Reimbursement> expectedReiList = new ArrayList<>();
-		expectedReiList.addAll(initialReiList);
-
-		when(reiRepo.findAll()).thenReturn(initialReiList);
-
-		// ACT
-		List<Reimbursement> actualReiList = empService.getAllReimbursements();
-
-		// ASSERT
-		verify(reiRepo, times(1)).findAll();
-		assertEquals(expectedReiList, actualReiList);
-	}
+	
 
 	@Test
 	void addReimbursementTest() {
@@ -91,7 +73,7 @@ class EmployeeServiceTest {
 		
 		// ASSERT
 		verify(reiRepo, times(1)).save(initialRei);
-		assertEquals(expectedRei, actualRei);
+		assertThat(expectedRei.equals(actualRei));
 		System.out.println("User Id:    " + myUser.getUserId());
 		System.out.println("Rei author: " + actualRei.getReiAuthor());
 	}

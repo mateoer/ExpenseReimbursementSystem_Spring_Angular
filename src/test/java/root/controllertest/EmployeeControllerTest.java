@@ -98,7 +98,7 @@ class EmployeeControllerTest {
 		when(empService.getAllReimbursementsByUserId(myUser)).thenReturn(initialReiList);
 
 		// ACT
-		List<Reimbursement> actualReiList = empController.getAllReimbursementsByUserId(myUser);
+		List<Reimbursement> actualReiList = empController.getAllReimbursements(myUser);
 
 		// ASSERT
 		verify(empService, times(1)).getAllReimbursementsByUserId(myUser);

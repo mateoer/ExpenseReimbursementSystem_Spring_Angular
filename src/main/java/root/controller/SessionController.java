@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,18 +13,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import root.dao.UserRepository;
 import root.model.User;
 import root.model.UserRole;
+import root.service.EmployeeService;
 
 @Controller
 //@CrossOrigin(origins = "http://localhost:9050/")
 //@RestController
 public class SessionController {
 	
+	private EmployeeService employeeService;
 	private UserRepository userRepo;
 	
 	@Autowired
-	public SessionController(UserRepository userRepo) {
-		super();
-		this.userRepo = userRepo;
+	public SessionController(EmployeeService employeeService) {
+		this.employeeService = employeeService;
 	}
 	
 ////	@GetMapping("/")
@@ -35,18 +35,13 @@ public class SessionController {
 //		return "forward:/index.html";
 //	}
 
-	@GetMapping("/getName")
-	@ResponseBody
-	public User getLoggedInUser (HttpSession httpSession) {
-		System.out.println("\n\n\nIn the getLoggedInUser method");
+	@PostMapping("/retrieveusername")
+	public String getUserName(@RequestBody User reqUser) {
+		User respUser = employeeService.getUserName(reqUser);
+		System.out.println(respUser.getFirstName()+" "+respUser.getLastName());
+		String response = respUser.getFirstName()+" "+respUser.getLastName();
+		return response;
 		
-		User currentUser = (User)httpSession.getAttribute("currentUser");
-		
-		if (currentUser == null) {
-			return new User(null, null, null, null, null, null);
-		}
-		
-		return currentUser;
 	}
 	
 	@PostMapping("/login")
