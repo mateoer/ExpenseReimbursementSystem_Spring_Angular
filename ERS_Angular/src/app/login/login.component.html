@@ -14,20 +14,20 @@
       src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
       class="profile-img-card"
     />
-      <form>
-        <div class="form-group">
+      <form #loginGroup="ngForm">
+        <div >
           <label for="username">Username</label>
           <input
             type="text"
             id="username"
-            formControlName="username"
+            name="username"
             class="form-control"
           />
           <label for="password">Password</label>
           <input
             type="password"
             id="password"
-            formControlName="password"
+            name="password"
             class="form-control"
           />
         </div>

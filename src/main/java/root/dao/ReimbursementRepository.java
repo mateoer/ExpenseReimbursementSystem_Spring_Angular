@@ -15,6 +15,7 @@ public interface ReimbursementRepository extends JpaRepository<Reimbursement, In
 
 	public List<Reimbursement> findByReiStatus(ReiStatus status);	
 	public List<Reimbursement> findByReiType(ReiType reiType);
+	public Reimbursement findByReiId(int reiId);
 	
 //	@Query("SELECT * FROM User u INNER JOIN Reimbursement r ON u.userId = r.reiAuthor")
 //	public List<Reimbursement> viewReimbursements();

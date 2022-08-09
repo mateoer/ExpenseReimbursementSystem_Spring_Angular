@@ -16,8 +16,6 @@ import root.model.UserRole;
 import root.service.EmployeeService;
 
 @Controller
-//@CrossOrigin(origins = "http://localhost:9050/")
-//@RestController
 public class SessionController {
 	
 	private EmployeeService employeeService;
@@ -28,12 +26,6 @@ public class SessionController {
 		this.employeeService = employeeService;
 	}
 	
-////	@GetMapping("/")
-//	@RequestMapping("/")
-//	public String routeLoginPage() {
-//		System.out.println("In the main login router");
-//		return "forward:/index.html";
-//	}
 
 	@PostMapping("/retrieveusername")
 	public String getUserName(@RequestBody User reqUser) {

@@ -27,6 +27,12 @@ public class ManagerService implements ManagerServiceInterface {
 	}
 
 	@Override
+	public User getUserName(User reqUser) {		
+		return userRepo.findByUserId(reqUser.getUserId());
+	}
+	
+	
+	@Override
 	public Map<User, List<Reimbursement>> viewReimbursements() {
 		List<Reimbursement> reiList = new ArrayList<>();
 		reiList = getAllReimbursements();
@@ -67,23 +73,23 @@ public class ManagerService implements ManagerServiceInterface {
 	}
 
 	@Override
-	public Reimbursement approveReimbursement(Reimbursement reimb, User user) {
-		reimb.setReiStatus(ReiStatus.APPROVED);
-		reimb.setRei_resolver(user.getUserId());
+	public Reimbursement approveReimbursement(Reimbursement reimb) {		
+		Reimbursement myReimbursement = reiRepo.findByReiId(reimb.getReiId()); 				
+		myReimbursement.setReiStatus(ReiStatus.APPROVED);
 		LocalDateTime lcdt = LocalDateTime.now();
-		reimb.setRei_resolvedDate(lcdt);
-		Reimbursement myReimb = reiRepo.save(reimb);
-		return myReimb;
+		myReimbursement.setRei_resolvedDate(lcdt);
+		reiRepo.save(myReimbursement);
+		return reiRepo.findByReiId(myReimbursement.getReiId());	
 	}
 
 	@Override
-	public Reimbursement denyReimbursement(Reimbursement reimb, User user) {
-		reimb.setReiStatus(ReiStatus.DENIED);
-		reimb.setRei_resolver(user.getUserId());
+	public Reimbursement denyReimbursement(Reimbursement reimb) {
+		Reimbursement myReimbursement = reiRepo.findByReiId(reimb.getReiId()); 				
+		myReimbursement.setReiStatus(ReiStatus.DENIED);
 		LocalDateTime lcdt = LocalDateTime.now();
-		reimb.setRei_resolvedDate(lcdt);
-		Reimbursement myReimb = reiRepo.save(reimb);
-		return myReimb;
+		myReimbursement.setRei_resolvedDate(lcdt);
+		reiRepo.save(myReimbursement);
+		return reiRepo.findByReiId(myReimbursement.getReiId());	
 	}
 
 	@Override
@@ -95,5 +101,6 @@ public class ManagerService implements ManagerServiceInterface {
 	public List<Reimbursement> filterReimbursementsByType(ReiType reiType) {		
 		return reiRepo.findByReiType(reiType);
 	}
+
 
 }

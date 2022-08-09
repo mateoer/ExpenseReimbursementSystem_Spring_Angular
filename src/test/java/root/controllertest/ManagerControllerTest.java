@@ -96,50 +96,50 @@ class ManagerControllerTest {
 	}
 
 	
-	@Test
-	void approveReimbursementTest() {
-		// ARRANGE
-		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
-		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.APPROVED, ReiType.FOOD);
-		User myUser = new User("suechan", "abc123", "Sue", "Liz", "suechan123@revature.net", UserRole.EMPLOYEE);
-		when(mangService.approveReimbursement(initialRei,myUser)).thenReturn(expectedRei);
-		
-		System.out.println("ReiStatus(initialRei): "+initialRei.getReiStatus());
-		// ACT
-		Reimbursement actualRei = mangController.approveReimbursement(initialRei,myUser);
-		System.out.println("ReiStatus(actualRei): "+actualRei.getReiStatus());
-
-		// ASSERT
-		verify(mangService, times(1)).approveReimbursement(initialRei,myUser);
-		
-		assertAll(
-			()->	assertEquals(ReiStatus.APPROVED, actualRei.getReiStatus()),
-			()->	assertEquals(expectedRei, actualRei)				
-				);
-		
-		System.out.println("expectedRei: "+expectedRei.getReiStatus()+"  actualRei: "+actualRei.getReiStatus());
-	}
+//	@Test
+//	void approveReimbursementTest() {
+//		// ARRANGE
+//		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
+//		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.APPROVED, ReiType.FOOD);
+//		User myUser = new User("suechan", "abc123", "Sue", "Liz", "suechan123@revature.net", UserRole.EMPLOYEE);
+//		when(mangService.approveReimbursement(initialRei,myUser)).thenReturn(expectedRei);
+//		
+//		System.out.println("ReiStatus(initialRei): "+initialRei.getReiStatus());
+//		// ACT
+//		Reimbursement actualRei = mangController.approveReimbursement(initialRei,myUser);
+//		System.out.println("ReiStatus(actualRei): "+actualRei.getReiStatus());
+//
+//		// ASSERT
+//		verify(mangService, times(1)).approveReimbursement(initialRei,myUser);
+//		
+//		assertAll(
+//			()->	assertEquals(ReiStatus.APPROVED, actualRei.getReiStatus()),
+//			()->	assertEquals(expectedRei, actualRei)				
+//				);
+//		
+//		System.out.println("expectedRei: "+expectedRei.getReiStatus()+"  actualRei: "+actualRei.getReiStatus());
+//	}
 
 	
-	@Test
-	void denyReimbursementTest() {
-
-		// ARRANGE
-		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
-		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.DENIED, ReiType.FOOD);
-		User myUser = new User("suechan", "abc123", "Sue", "Liz", "suechan123@revature.net", UserRole.EMPLOYEE);
-		when(mangService.denyReimbursement(initialRei,myUser)).thenReturn(expectedRei);
-
-		// ACT
-		Reimbursement actualRei = mangController.denyReimbursement(initialRei,myUser);
-
-		// ASSERT
-		verify(mangService, times(1)).denyReimbursement(initialRei,myUser);
-		assertAll(
-				()->	assertEquals(ReiStatus.DENIED, actualRei.getReiStatus()),
-				()->	assertEquals(expectedRei, actualRei)				
-					);
-	}
+//	@Test
+//	void denyReimbursementTest() {
+//
+//		// ARRANGE
+//		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
+//		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.DENIED, ReiType.FOOD);
+//		User myUser = new User("suechan", "abc123", "Sue", "Liz", "suechan123@revature.net", UserRole.EMPLOYEE);
+//		when(mangService.denyReimbursement(initialRei,myUser)).thenReturn(expectedRei);
+//
+//		// ACT
+//		Reimbursement actualRei = mangController.denyReimbursement(initialRei,myUser);
+//
+//		// ASSERT
+//		verify(mangService, times(1)).denyReimbursement(initialRei,myUser);
+//		assertAll(
+//				()->	assertEquals(ReiStatus.DENIED, actualRei.getReiStatus()),
+//				()->	assertEquals(expectedRei, actualRei)				
+//					);
+//	}
 
 	
 	@Test

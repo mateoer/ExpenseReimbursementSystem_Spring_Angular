@@ -51,7 +51,7 @@
             Status
           </th>
           <th scope="col">Type</th>
-          <th scope="col">Author ID</th>
+          <!-- <th scope="col">Author ID</th> -->
           <th scope="col">Submitted</th>
           <th scope="col">Resolved</th>          
         </tr>
@@ -63,7 +63,7 @@
         <td>{{rei.rei_description | uppercase}}</td>  
         <td>{{rei.reiStatus}}</td>  
         <td>{{rei.reiType}}</td>
-        <td>{{rei.reiAuthor}}</td>
+        <!-- <td>{{rei.reiAuthor}}</td> -->
         <td>{{rei.rei_submitteDate | date:"MM/dd/yy"}}</td>            
         <td>{{rei.rei_resolvedDate ? (rei.rei_resolvedDate | date:"MM/dd/yy") : '_____'}}</td>            
       </tr>      

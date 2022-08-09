@@ -23,8 +23,10 @@ export class EmployeeComponent implements OnInit {
 
     
   typesOfReimbursement : any[] = ['LODGING','GAS','FOOD','OTHER'];
+
+  
   newReimbursementObj: Reimbursement = {
-    rei_amount: 0,
+    rei_amount!: 0,
     rei_description: '',
     reiType: ReiType.OTHER,
     reiStatus: Status.PENDING
@@ -42,17 +44,13 @@ export class EmployeeComponent implements OnInit {
      * but since that array is changed to hold filtered values, it needs reimbsCopyArray
      * to replenish all values again
      */
-    this.empService.getEmpReimbursements().subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);
+    this.empService.getEmpReimbursements().subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);    
     this.empService.getEmpReimbursements().subscribe(reiArray => this.reiArray = reiArray);
-
-    this.empService.getNewRei().subscribe(e => e = this.newReimbursementObj);
-    
   }
   
 
    
   public createNewReimbursement() { 
-    console.log(this.newReimbursementObj);    
     return this.empService.newReimbursement(this.newReimbursementObj).subscribe();        
   }
 
