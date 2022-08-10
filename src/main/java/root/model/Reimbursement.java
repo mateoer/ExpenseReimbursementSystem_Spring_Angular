@@ -37,6 +37,12 @@ import root.model.enumscontainer.ReiType;
 public class Reimbursement {
 	
 	
+	public Reimbursement(double rei_amount, String rei_description) {
+		super();
+		this.rei_amount = rei_amount;
+		this.rei_description = rei_description;
+	}
+
 	@Id
 	@Column (name = "rei_id")
 	@GeneratedValue (strategy = GenerationType.IDENTITY)

@@ -18,7 +18,7 @@
   </form>
   <br />
 
-  <div>
+  <div class="table">
     <br>
     <h5>REIMBURSEMENT REQUESTS </h5>    
     <select id="filterReis" name="reimbs" [(ngModel)]="selected" (ngModelChange)="onSelect()" >
@@ -26,7 +26,8 @@
       <option *ngFor="let reis of filterRei; let i = index " [value]="reis">
         {{reis}}
       </option>     
-    </select> 
+    </select>
+
     <input class="blue" id="Refresh" type="submit" value="Remove Filter" (click)="removeFilter()" />
     <input class="blue" id="Refresh" type="submit" value="Refresh" (click)="reloadCurrentPage()" />
     <br><br>
@@ -37,27 +38,27 @@
           <th scope="col">ID</th>
           <th scope="col">Amount</th>
           <th scope="col">Description</th>
-          <th scope="col">Status</th>
+
+          <th scope="col">
+            Status
+          </th>
           <th scope="col">Type</th>
-          <th scope="col">Employee</th>
+          <!-- <th scope="col">Author ID</th> -->
           <th scope="col">Submitted</th>
           <th scope="col">Resolved</th>          
         </tr>
       </thead>
       <tbody id="empTableBody"></tbody>
-      <tr *ngFor="let user in reiArray">        
-      <ng-template *ngFor="let rei in user.reimbursements"> 
+      <tr *ngFor="let rei of reiList"> 
         <td>{{rei.reiId}}</td>
         <td>{{rei.rei_amount | number:"1.2" }}</td>
         <td>{{rei.rei_description | uppercase}}</td>  
         <td>{{rei.reiStatus}}</td>  
         <td>{{rei.reiType}}</td>
-        <!-- <td>{{user.firstName +" "+user.lastName}}</td> -->
-        <td>{{rei.reiType}}</td>
+        <!-- <td>{{rei.reiAuthor}}</td> -->
         <td>{{rei.rei_submitteDate | date:"MM/dd/yy"}}</td>            
-        <td>{{rei.rei_resolvedDate ? (rei.rei_resolvedDate | date:"MM/dd/yy") : '_____'}}</td> 
-      </ng-template>      
-    </tr>           
+        <td>{{rei.rei_resolvedDate ? (rei.rei_resolvedDate | date:"MM/dd/yy") : '_____'}}</td>            
+      </tr>      
     </table>
   </div>
 

@@ -1,3 +1,5 @@
+
+//Used to retreive reimbursement lists on both, manager and employee pages
 export interface EmpReimbursements {
 
     reiId : number;

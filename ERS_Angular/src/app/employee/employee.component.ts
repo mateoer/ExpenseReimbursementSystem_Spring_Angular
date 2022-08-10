@@ -26,10 +26,11 @@ export class EmployeeComponent implements OnInit {
 
   
   newReimbursementObj: Reimbursement = {
-    rei_amount!: 0,
+    rei_amount: 0,
     rei_description: '',
     reiType: ReiType.OTHER,
-    reiStatus: Status.PENDING
+    reiStatus: Status.PENDING,
+    reiId: 0
   };
     
   
@@ -38,12 +39,7 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {    
     this.onSelect();
-    this.empService.getUserName().subscribe(fNameLName => this.fNameLName = fNameLName);
-
-    /**ReiArray needs to be subscribed to load table on init
-     * but since that array is changed to hold filtered values, it needs reimbsCopyArray
-     * to replenish all values again
-     */
+    this.empService.getUserName().subscribe(fNameLName => this.fNameLName = fNameLName);    
     this.empService.getEmpReimbursements().subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);    
     this.empService.getEmpReimbursements().subscribe(reiArray => this.reiArray = reiArray);
   }

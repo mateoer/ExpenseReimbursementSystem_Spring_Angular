@@ -1,7 +1,6 @@
 package root.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import root.model.Reimbursement;
 import root.model.User;
-import root.model.enumscontainer.ReiStatus;
-import root.model.enumscontainer.ReiType;
 import root.service.ManagerService;
 
 @RestController
@@ -36,11 +33,11 @@ public class ManagerController {
 		return mangService.getUserName(reqUser);
 	}
 
-	// viewReimbursements
-	@GetMapping("/viewreimbursements")
-	public Map<User, List<Reimbursement>> viewReimbursements() {
-		System.out.println("\nReimbursement list retrieved\n");
-		return mangService.viewReimbursements();
+	
+	@GetMapping("/getlistofreimbursements")
+	public List<Reimbursement> viewListOfReimbursements() {
+		System.out.println("\nList of all Reimbursements retrieved\n");
+		return mangService.listOfAllReimbursements();
 	}
 
 	// approveReimbursements
@@ -57,21 +54,7 @@ public class ManagerController {
 	public Reimbursement denyReimbursement(@RequestBody Reimbursement reimb) {
 		System.out.println("\nDenied\n");
 		return mangService.denyReimbursement(reimb);
-	}
-	
-	
-	
-	/////NOT USING THESE METHODS. FILTERING IS DONE AT CLIENT SIDE
+	}	
 
-	// filterReimbursementsByStatus
-	@GetMapping("/filterbystatus")
-	public List<Reimbursement> filterByStatus(@RequestBody ReiStatus status) {
-		return mangService.filterReimbursementsByStatus(status);
-	}
-
-	// filterReimbursementsByType
-	@GetMapping("/filterbytype")
-	public List<Reimbursement> filterByType(@RequestBody ReiType reiType) {
-		return mangService.filterReimbursementsByType(reiType);
-	}
+	
 }

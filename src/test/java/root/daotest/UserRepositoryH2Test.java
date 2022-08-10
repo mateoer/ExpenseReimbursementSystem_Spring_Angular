@@ -15,9 +15,7 @@ import root.model.UserRole;
 
 
 @DataJpaTest
-//@Sql(scripts = "/user-schema.sql")
 @Sql(scripts = "/create-data.sql")
-//@Sql(scripts = "/cleanup-data.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 class UserRepositoryH2Test {
 
 	@Autowired

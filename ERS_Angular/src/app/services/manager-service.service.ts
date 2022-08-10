@@ -1,18 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
-import { ListEmployeesReimb } from '../interfaces/list-employees-reimb';
-import { ReiId } from '../interfaces/rei-id';
+import { Observable } from 'rxjs';
+import { EmpReimbursements } from '../interfaces/emp-reimbursements';
+import { Reimbursement, ReiType, Status } from '../interfaces/reimbursement';
 import { UserId } from '../interfaces/user-id';
 import { UserName } from '../interfaces/user-name';
-import { from, take } from 'rxjs';
 
 let user: UserId = {
   userId: 1
 }
 
-let reimbursement: ReiId = {
-  reiId: 0
+let reimbursement: Reimbursement = {
+  reiId: 0,
+  rei_amount: 0,
+  rei_description: '',
+  reiType: ReiType.LODGING,
+  reiStatus: Status.PENDING
 }
 
 @Injectable({
@@ -22,17 +25,17 @@ export class ManagerService {
 
   API_URL = `http://localhost:9050`;
    
-  VIEW_REI = `${this.API_URL}/viewreimbursements` 
   VIEW_USER = `${this.API_URL}/getmngusername`;
   APP_REI = `${this.API_URL}/approvereimbursement`;
   DEN_REI = `${this.API_URL}/denyreimbursement`;
+  LIST_REI = `${this.API_URL}/getlistofreimbursements`;
 
   constructor(private http: HttpClient) { }
 
-  public viewAllReimbursements(): Observable<ListEmployeesReimb>{
-    return this.http.get<ListEmployeesReimb>(`${this.VIEW_REI}`);            
+  public viewListOfAllReimbursements(): Observable<EmpReimbursements[]>{
+    return this.http.get<EmpReimbursements[]>(`${this.LIST_REI}`);
   }
-
+  
   public getUserName(): Observable<UserName> {
     return this.http.post<UserName>(`${this.VIEW_USER}`, user);
   } 
