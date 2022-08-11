@@ -16,7 +16,7 @@ import root.model.UserReiContext;
 import root.service.EmployeeService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 public class EmployeeController {
 
 	private EmployeeService employeeService;
