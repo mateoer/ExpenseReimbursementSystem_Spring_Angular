@@ -19,7 +19,7 @@ let user: UserId = {
 })
 export class EmployeeService {
   
-  API_URL = `http://localhost:9050`;
+  API_URL = `http://54.85.200.45:9050`;
    
   GET_REI = `${this.API_URL}/getreimbursements` 
   GET_USER = `${this.API_URL}/getusername`;
