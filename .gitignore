@@ -1,32 +1,17 @@
-# Package Files #
-*.jar
-*.war
-*.ear
-
-### NPM ###
-node_modules/
-
-### Gradle ###
-.gradle
-
-
-### Maven ###
+HELP.md
 target/
-log/
-
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
-#.classpath #intending to let people import projects a bit easier
+.classpath
 .factorypath
-#.project #intending to let people import projects a bit easier
+.project
 .settings
 .springBeans
-Servers/
-.recommenders/
-.metadata/
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
@@ -35,92 +20,55 @@ Servers/
 *.ipr
 
 ### NetBeans ###
-nbproject/private/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-# e2e
-/e2e/*.js
-/e2e/*.map
-
-# System Files
-.DS_Store
-Thumbs.db
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
-!/theVaultDebug.log
-/.metadata/
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
 
-### NPM ###
-node_modules/
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
 
-### Gradle ###
-.gradle
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-##Spring Boot##
-.yml
-
-### Maven ###
-target/
-log/
-
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
-
-### STS ###
-.apt_generated
-#.classpath #intending to let people import projects a bit easier
-.factorypath
-#.project #intending to let people import projects a bit easier
-.settings
-.springBeans
-Servers/
-.recommenders/
-.metadata/
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-
-# IDE - VSCode
+# Visual Studio Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.history/*
 
-# e2e
-/e2e/*.js
-/e2e/*.map
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
 
-# System Files
+# System files
 .DS_Store
 Thumbs.db
-/.metadata/
-
