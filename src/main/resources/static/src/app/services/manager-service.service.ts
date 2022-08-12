@@ -23,7 +23,7 @@ let reimbursement: Reimbursement = {
 })
 export class ManagerService {
 
-  API_URL = `http://localhost:9050`;
+  API_URL = `http://54.85.200.45:9050`;
    
   VIEW_USER = `${this.API_URL}/getmngusername`;
   APP_REI = `${this.API_URL}/approvereimbursement`;
