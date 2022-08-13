@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { LoginService } from '../services/login-service.service';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +10,19 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  loginGroup = new FormGroup({
-    username: new FormControl(),
-    password: new FormControl()
-  });
+  
+  constructor(private loginService: LoginService) { }
 
-  constructor() { }
-
+  outputMessage: string = '';
   ngOnInit(): void {
+    this.loginService.findUserRole().subscribe(outputMessage => this.outputMessage = outputMessage.toString());
+    this.showMessage();
   }
+
+  showMessage(){
+    return this.outputMessage;
+  }
+
+  
 
 }
