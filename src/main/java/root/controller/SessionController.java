@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import root.model.StringResponse;
 import root.model.User;
+import root.model.UserResponse;
 import root.model.UserRole;
 import root.service.UserService;
 
@@ -23,6 +24,27 @@ public class SessionController {
 	@Autowired
 	public SessionController(UserService myUserService) {
 		this.myUserService = myUserService;
+	}
+	
+	@PostMapping("/getcredentials")
+	@ResponseBody
+	public User getUserCredentials(@RequestBody User userReq) {
+		User userResp = myUserService.getUser(userReq);
+		return userResp;
+	}
+	
+	
+	@PostMapping("/getcredentials2")
+	@ResponseBody
+	public UserResponse getUserCredentials2(@RequestBody User userReq) {
+		User userDummy = myUserService.getUser2(userReq);
+		UserResponse userResp = new UserResponse();
+		
+		if (userDummy == null) {
+			userResp.setFound(false);
+		}
+		userResp.setUser(userDummy);
+		return userResp;
 	}
 	
 	@PostMapping("/typeofuser")
