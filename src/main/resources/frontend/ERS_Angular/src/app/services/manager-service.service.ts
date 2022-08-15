@@ -6,9 +6,6 @@ import { Reimbursement, ReiType, Status } from '../interfaces/reimbursement';
 import { UserId } from '../interfaces/user-id';
 import { UserName } from '../interfaces/user-name';
 
-let user: UserId = {
-  userId: 1
-}
 
 let reimbursement: Reimbursement = {
   reiId: 0,
@@ -23,7 +20,7 @@ let reimbursement: Reimbursement = {
 })
 export class ManagerService {
 
-  API_URL = `http://54.85.200.45:9050`;
+  API_URL = `http://localhost:9050`;
    
   VIEW_USER = `${this.API_URL}/getmngusername`;
   APP_REI = `${this.API_URL}/approvereimbursement`;
@@ -37,13 +34,17 @@ export class ManagerService {
   }
   
   public getUserName(): Observable<UserName> {
+    let myUserId = JSON.parse(sessionStorage.getItem('userId')!);
+      const user: UserId = {
+        userId: myUserId
+      };  
     return this.http.post<UserName>(`${this.VIEW_USER}`, user);
   } 
 
   public approveReimbursement(reimbId: number): Observable<any>{
     const headers = { 'content-type': 'application/json'}; 
     reimbursement.reiId = reimbId;
-    console.log(reimbursement);
+    
       
       return this.http.post<any>(`${this.APP_REI}`,  
       reimbursement
@@ -53,7 +54,6 @@ export class ManagerService {
   public denyReimbursement(reimbId: number): Observable<any>{
     const headers = { 'content-type': 'application/json'}; 
     reimbursement.reiId = reimbId;
-    console.log(reimbursement);
       
       return this.http.post<any>(`${this.DEN_REI}`,  
       reimbursement

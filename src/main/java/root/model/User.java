@@ -38,6 +38,7 @@ import lombok.ToString;
 @JsonIgnoreProperties(value = {"reimbursements"}, allowSetters = true, allowGetters = true)
 public class User {
 	
+		
 	@Id
 	@Column (name = "user_id")
 	@GeneratedValue (strategy = GenerationType.IDENTITY)

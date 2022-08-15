@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EmpReimbursements } from '../interfaces/emp-reimbursements';
 import { Reimbursement, ReiType, Status } from '../interfaces/reimbursement';
-import { UserName } from '../interfaces/user-name';
+import { LoginComponent } from '../login/login.component';
 import { EmployeeService } from '../services/employee-service.service';
 
 
@@ -10,7 +10,7 @@ import { EmployeeService } from '../services/employee-service.service';
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
-export class EmployeeComponent implements OnInit {
+export class EmployeeComponent implements OnInit, OnDestroy {
 
   filterRei : any[] = [' ','APPROVED','PENDING','DENIED'];
   selected: string = ' ';
@@ -18,12 +18,8 @@ export class EmployeeComponent implements OnInit {
   reimbsCopyArray: EmpReimbursements[] = []; 
   reiArray: EmpReimbursements[] = [];
 
-  fNameLName: UserName = {firstName : '', lastName: ''};
-  employeeName: string = ' ';
-
     
   typesOfReimbursement : any[] = ['LODGING','GAS','FOOD','OTHER'];
-
   
   newReimbursementObj: Reimbursement = {
     rei_amount: 0,
@@ -31,28 +27,35 @@ export class EmployeeComponent implements OnInit {
     reiType: ReiType.OTHER,
     reiStatus: Status.PENDING,
     reiId: 0
-  };
-    
-  
+  };  
 
-  constructor(private empService : EmployeeService) { }  
+  constructor(public empService : EmployeeService, public loginComponent: LoginComponent) { } 
+  
+  ngOnDestroy(): void {
+    sessionStorage.clear();
+    localStorage.clear();
+    this.empService.getEmpReimbursements()
+      .subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray)
+      .unsubscribe();
+
+    this.empService.getEmpReimbursements()
+      .subscribe(reiArray => this.reiArray = reiArray)
+      .unsubscribe();  
+  }  
 
   ngOnInit() {    
     this.onSelect();
-    this.empService.getUserName().subscribe(fNameLName => this.fNameLName = fNameLName);    
     this.empService.getEmpReimbursements().subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);    
     this.empService.getEmpReimbursements().subscribe(reiArray => this.reiArray = reiArray);
-  }
+  }  
   
-
    
   public createNewReimbursement() { 
     return this.empService.newReimbursement(this.newReimbursementObj).subscribe();        
   }
 
   public getUser(){
-    this.employeeName = this.fNameLName.firstName+" "+this.fNameLName.lastName;
-    return this.employeeName;
+    return sessionStorage.getItem('firstName')+" "+ sessionStorage.getItem('lastName');
   }
 
   public onSelect(){
