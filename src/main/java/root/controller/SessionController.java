@@ -12,7 +12,6 @@ import root.model.User;
 import root.model.UserResponse;
 import root.service.UserService;
 
-//@RestController
 @Controller
 @CrossOrigin
 public class SessionController {

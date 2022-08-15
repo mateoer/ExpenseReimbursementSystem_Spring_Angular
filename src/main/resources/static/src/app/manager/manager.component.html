@@ -1,0 +1,69 @@
+<div class="form-container">
+  <div>
+      <h2 id="welcomeTextName">Welcome, {{getUser() | uppercase }}</h2>    
+      <br />
+  </div>
+  <div class="signin">
+          <h4>Approve Reimbursement</h4>
+          <form novalidate #appRei="ngForm" (ngSubmit)="approveReimb()" >
+            <input type="number" placeholder="reimbursement id" name="reiAppId" [(ngModel)]="reimbIdNumberApp" required>
+            <input type="submit" value="Approve" [disabled]="appRei.invalid">
+          </form>
+          <br>
+
+          <h4>Reject Reimbursement</h4>
+          <form novalidate #denyRei="ngForm" (ngSubmit)="denyReimb()" >
+            <input type="number" placeholder="reimbursement id" name="reiAppId" [(ngModel)]="reimbIdNumberDeny" required>
+            <input type="submit" value="Reject" [disabled]="denyRei.invalid">
+          </form>
+          <br />
+  </div>
+
+  <div class="table">
+    <br>
+    <h5>REIMBURSEMENT REQUESTS </h5>    
+    <select id="filterReis" name="reimbs" [(ngModel)]="selected" (ngModelChange)="onSelect()" >
+      <option disabled selected>Filter</option>
+      <option *ngFor="let reis of filterRei; let i = index " [value]="reis">
+        {{reis}}
+      </option>     
+    </select>
+
+    <input class="blue" id="Refresh" type="submit" value="Remove Filter" (click)="removeFilter()" />
+    <input class="blue" id="Refresh" type="submit" value="Refresh" (click)="reloadCurrentPage()" />
+    <br><br>
+
+    <table id="empTable" class="table">
+      <thead>
+        <tr class="table-info">
+          <th scope="col">ID</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Description</th>
+
+          <th scope="col">
+            Status
+          </th>
+          <th scope="col">Type</th>
+          <!-- <th scope="col">Author ID</th> -->
+          <th scope="col">Submitted</th>
+          <th scope="col">Resolved</th>          
+        </tr>
+      </thead>
+      <tbody id="empTableBody"></tbody>
+      <tr *ngFor="let rei of reiList"> 
+        <td>{{rei.reiId}}</td>
+        <td>{{rei.rei_amount | number:"1.2" }}</td>
+        <td>{{rei.rei_description | uppercase}}</td>  
+        <td>{{rei.reiStatus}}</td>  
+        <td>{{rei.reiType}}</td>
+        <!-- <td>{{rei.reiAuthor}}</td> -->
+        <td>{{rei.rei_submitteDate | date:"MM/dd/yy"}}</td>            
+        <td>{{rei.rei_resolvedDate ? (rei.rei_resolvedDate | date:"MM/dd/yy") : '_____'}}</td>            
+      </tr>      
+    </table>
+  </div>
+
+  
+  <br>
+  <button type="submit" class="btn btn-primary" routerLink="/login" >Logout</button>
+</div>

@@ -1,0 +1,28 @@
+
+
+<div id="login-form">
+  <div class="card card-container">
+    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+    <form novalidate  #myLoginGroup="ngForm" (ngSubmit)="loginUser()">
+        <label for="username">Username</label>
+        <input required type="text" name="username" class="form-control" 
+            placeholder="enter username"   [(ngModel)]="loginForm.username">
+        <label for="password">Password</label>
+        <input required type="password" name="password" class="form-control"
+            placeholder="enter password"   [(ngModel)]="loginForm.password">
+        <!-- <div *ngIf="userFound === false">
+          No user found. 
+        </div> -->
+        <br />
+      <div class="form-group">
+        <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
+          class="btn btn-primary" class="form-control"          
+          value="Login" 
+          [disabled]="myLoginGroup.invalid">
+          
+        <!-- <button type="submit" class="btn btn-primary" routerLink="/employee">Employee</button>
+        <button type="submit" class="btn btn-primary" routerLink="/manager">Manager</button> -->
+      </div>
+    </form>
+  </div>
+</div>
