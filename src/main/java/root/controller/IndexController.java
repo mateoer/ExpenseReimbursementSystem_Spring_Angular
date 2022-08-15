@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:9050/")
+@CrossOrigin
 public class IndexController implements ErrorController {
     
     private static final String PATH = "/error";

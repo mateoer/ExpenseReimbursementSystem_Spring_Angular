@@ -16,7 +16,7 @@ import root.model.User;
 import root.service.ManagerService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:9050/")
+@CrossOrigin
 public class ManagerController {
 
 	private ManagerService mangService;
