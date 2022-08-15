@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EmpReimbursements } from '../interfaces/emp-reimbursements';
-import { UserName } from '../interfaces/user-name';
+import { LoginComponent } from '../login/login.component';
 import { ManagerService } from '../services/manager-service.service';
 
 @Component({
@@ -8,41 +8,42 @@ import { ManagerService } from '../services/manager-service.service';
   templateUrl: './manager.component.html',
   styleUrls: ['./manager.component.css']
 })
-export class ManagerComponent implements OnInit {
+export class ManagerComponent implements OnInit, OnDestroy {
 
-  filterRei : any[] = [' ','APPROVED','PENDING','DENIED'];
-  selected: string = ' '; 
+  constructor(private mngService : ManagerService, public loginComponent: LoginComponent) { }
   
+  ngOnDestroy(): void {
+    sessionStorage.clear();
+    localStorage.clear();
+    this.mngService.viewListOfAllReimbursements()
+      .subscribe(copyOfReiList => this.copyOfReiList = copyOfReiList)
+      .unsubscribe();
+
+    this.mngService.viewListOfAllReimbursements()
+      .subscribe(reiList => this.reiList = reiList)
+      .unsubscribe();  
+  }
+  
+  filterRei : any[] = [' ','APPROVED','PENDING','DENIED'];
+  selected: string = ' ';   
   
   // reiMapList = new Map<UserList, ListReis[]> ();
   reiList: EmpReimbursements[] = [];
-  copyOfReiList: EmpReimbursements[] = [];
-  
-  //Manager's name for welcome message
-  fNameLName: UserName = {firstName : '', lastName: ''};
-  managerName: string = ' ';
+  copyOfReiList: EmpReimbursements[] = [];  
 
   //These are required to approve/deny reimburseents
   reimbIdNumberApp!: number;
   reimbIdNumberDeny!: number; 
 
-  
-
-  constructor(private mngService : ManagerService) { }
-
-  
 
   ngOnInit() {
     this.onSelect();
-    this.mngService.getUserName().subscribe(fNameLName => this.fNameLName = fNameLName);
-    this.mngService.viewListOfAllReimbursements().subscribe(reiList => this.reiList = reiList);
     this.mngService.viewListOfAllReimbursements().subscribe(copyOfReiList => this.copyOfReiList = copyOfReiList);
+    this.mngService.viewListOfAllReimbursements().subscribe(reiList => this.reiList = reiList);
   }
-
   
   public getUser(){
-    this.managerName = this.fNameLName.firstName+" "+this.fNameLName.lastName;
-    return this.managerName;
+    return sessionStorage.getItem('firstName')+" "+ sessionStorage.getItem('lastName');
   }
 
   public approveReimb(){
@@ -54,10 +55,10 @@ export class ManagerComponent implements OnInit {
   }
 
   public onSelect(){
-    if (this.selected == ' ') {      
-      return this.reiList; 
+    if (this.selected == ' ') {
+      return this.reiList = this.copyOfReiList; 
     } 
-      return this.reiList = this.copyOfReiList.filter(e => e.reiStatus == this.selected);
+      return this.reiList = this.copyOfReiList.filter(e => e.reiStatus == this.selected);    
   }
   
   public removeFilter(){
