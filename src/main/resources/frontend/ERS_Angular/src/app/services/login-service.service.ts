@@ -12,7 +12,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-  API_URL = `http://54.85.200.45:9050`;
+  API_URL = `http://localhost:9050`;
   USER_CREDENTIALS = `${this.API_URL}/getcredentials`;
 
   

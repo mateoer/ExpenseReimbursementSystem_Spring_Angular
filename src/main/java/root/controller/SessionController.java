@@ -13,7 +13,7 @@ import root.model.UserResponse;
 import root.service.UserService;
 
 @Controller
-@CrossOrigin(origins = "http://http://54.85.200.45:9050/")
+@CrossOrigin(origins = "http://localhost:9050/")
 public class SessionController {
 	
 	private UserService myUserService;
