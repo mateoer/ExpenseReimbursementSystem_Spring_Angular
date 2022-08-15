@@ -28,6 +28,9 @@ public class SessionController {
 	@PostMapping("/getcredentials")
 	@ResponseBody
 	public UserResponse getUserCredentials2(@RequestBody User userReq){
+		if(userReq == null) {
+			return null;
+		}
 		User userDummy = myUserService.getUser2(userReq);
 		UserResponse userResp = new UserResponse();
 		
