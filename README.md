@@ -50,7 +50,7 @@ To-do list:
 
 > Make sure your IDE has project Lombok installed. On Eclipse-based IDEs: Help -> About.. -> Look for Lombok and version
 
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/Capture.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/Capture.PNG" width=30% height=30%>
 <br />
 
 
@@ -102,7 +102,7 @@ Run the application. <br/>
   **Now, with the application running run the script **ERS_SA_Script.sql** on your DB application to populate the tables. Remember, it is in PostgreSQL**<br/><br/>
   **Before running the application a second time, make sure to uncomment **ddl-auto: none** on **application.yml** **<br/><br/>
   
-  <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/boot.PNG" width=50% height=50%>
+  <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/boot.PNG" width=40% height=40%>
   <br /><br/>
 
 
