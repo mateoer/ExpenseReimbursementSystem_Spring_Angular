@@ -44,11 +44,14 @@ To-do list:
 
 > git clone https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular.git
 
-> Have an RDS and connect to your DB
+> Have a RDS and connect to your DB. It must be able to run PostgreSQL scripts, in this example I'm using DBeaver.
+
+> Have VS Code or any other IDE with Node.js installed. We will need **ng** and **npm** commands for the Angular part of the application
 
 > Have an IDE capable of running Spring Boot applications, such as Spring STS.
 
-> Make sure your IDE has project Lombok installed. On Eclipse-based IDEs: Help -> About.. -> Look for Lombok and version
+> Make sure your Java IDE has project Lombok installed. On Eclipse-based IDEs: Help -> About.. -> Look for Lombok and version.
+> If Lombok is not installed, you can follow this guide https://projectlombok.org/setup/eclipse
 
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/Capture.PNG" width=30% height=30%>
 <br />
@@ -56,7 +59,8 @@ To-do list:
 
 ## Usage
 
-On your DB make sure to save the **endpoint**, **port number**, **username**, and **password**.<br/>
+On DBeaver <br/><br/>
+Make sure to save the **endpoint**, **port number**, **username**, and **password**.<br/>
 Then create environment variables on the local system and name them as this:
 >    TRAINING_DB_ENDPOINT -> for endpoint and port
 >    
@@ -75,9 +79,8 @@ On VS Code <br/>
 - Open the folder ../ERS_Spring_Angular/src/main/resources/frontend/**ERS_Angular**<br/>
 - Open the terminal and run **npm install** to retrieve node modules<br/>
 - Once it's done run **ng build**<br/>
- By running **ng serve** you can check if the application works. Clicking on the link produced confirms that it is able to load up. However, it is not ready yet.
-<br/>  
-  **You can close VS Code now**<br/>
+ By running **ng serve** you can check if the application works. Clicking on the link produced confirms that it is able to load up. However, it is not ready yet. 
+- You can close VS Code now<br/>
 <br />
 
 On Java IDE (in this case Spring STS v3).<br/>
@@ -96,17 +99,17 @@ On Java IDE (in this case Spring STS v3).<br/>
 <br />
 
 Run the application. <br/>
-- On Spring STS it gets included when imported and STS detects it's a Spring Boot application<br/>
-  Select **ERS[9050]** and click the **start** button. It will start the application.<br/>
+- Spring STS detects Spring Boot applications after updating the Maven project<br/>
+  Simply select **ERS[9050]** and click the **start** button on the Boot Dashboard panel. It will start the application.<br/>
   **NOTE: the application runs on port 9050. So, make sure no other application is running on that port at that moment.**<br/><br/>
-  **Now, with the application running run the script **ERS_SA_Script.sql** on your DB application to populate the tables. Remember, it is in PostgreSQL**<br/><br/>
-  **Before running the application a second time, make sure to uncomment **ddl-auto: none** on **application.yml** **<br/><br/>
+- **Now, with the application running run the script **ERS_SA_Script.sql** on your DB application to populate the tables. Remember, it is in PostgreSQL**
+- Before running the application a second time, make sure to uncomment **ddl-auto: none** on **application.yml**
   
   <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/boot.PNG" width=40% height=40%>
   <br /><br/>
 
 
-Now the project is ready to go<br/><br/>
+Now the project is ready to go. Go to localhost:9050//<br/><br/>
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/login.PNG" width=50% height=50%>
 <br />
 - To log in with authorized credentials use:
