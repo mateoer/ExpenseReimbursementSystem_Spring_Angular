@@ -19,6 +19,7 @@ As an added feature this application was hosted into an EC2 instance and it is c
 * VS Code
 * TypeScript
 * Java
+* PostgreSQL
 
 
 ## Features
@@ -55,8 +56,8 @@ To-do list:
 
 ## Usage
 
-- Once an AWS DB is ready make sure to save the endpoint, port number, username, and password
-- Then create environment variables on the local system and name them as this:
+On your DB make sure to save the **endpoint**, **port number**, **username**, and **password**.<br/>
+Then create environment variables on the local system and name them as this:
 >    TRAINING_DB_ENDPOINT -> for endpoint and port
 >    
 >    ERS_DB_DBNAME -> for DB name
@@ -64,46 +65,48 @@ To-do list:
 >    TRAINING_DB_USERNAME -> for username
 >    
 >    TRAINING_DB_PASSWORD -> for password
-- On your DB application connected to the AWS endpoint open the DB assigned to **ERS_DB_DBNAME** but don't run the script **ERS_SA_Script.sql** just yet. 
+
+Open the DB assigned to **ERS_DB_DBNAME** from your DB application (like DBeaver) but don't run the script **ERS_SA_Script.sql** (found in the root folder) just yet.
+<br/>
    **Note that the script is in PostgreSQL**  
+<br/>
+
+On VS Code <br/>
+- Open the folder ../ERS_Spring_Angular/src/main/resources/frontend/**ERS_Angular**<br/>
+- Open the terminal and run **npm install** to retrieve node modules<br/>
+- Once it's done run **ng build**<br/>
+ By running **ng serve** you can check if the application works. Clicking on the link produced confirms that it is able to load up. However, it is not ready yet.
+<br/>  
+  **You can close VS Code now**<br/>
 <br />
 
--  On VS Code open the folder ../ERS_Spring_Angular/src/main/resources/frontend/**ERS_Angular**
-  Open the terminal and run **npm install** to retrieve node modules
-  Once it's done run **ng build**
-  By running **ng serve** you can check if the application works. Clicking on the link produced confirms that it is able to load up. However, it is not ready yet.
-  
-  **You can close VS Code now**
-<br />
-
-- Load your Java IDE (in this case Spring STS v3).
-<br />
+On Java IDE (in this case Spring STS v3).<br/>
 
 - Go to **File** **->** **Open Project from File System** and select this project
   **Expense Reimbursement System** wherever it was downloaded in your system
-<br />
-
-- **Right click on the project name -> Maven -> Update Maven Project**
-
-- On **application.yml** found at **src/main/resources**
-  Comment out the line **ddl-auto: none** and uncomment **ddl-auto: create** before running the application the first time.
-  This will create the tables in the database. 
   
-  After the tables have been created, comment out **ddl-auto: create** and uncomment **ddl-auto: none**.
+- Right click on the project name -> Maven -> Update Maven Project
+
+- On **application.yml** found at **src/main/resources**<br/>
+  Comment out the line **ddl-auto: none** and uncomment **ddl-auto: create** before running the application the first time.<br/>
+  This will create the tables in the database.<br/> 
+  
+  After the tables have been created, comment out **ddl-auto: create** and uncomment **ddl-auto: none**.<br/>
   This way you avoid having to re-populate the tables every time you restart the application
 <br />
 
-- Run the application. On Spring STS it gets included when imported and STS detects it's a Spring Boot application
-  Select **ERS[9050]** and clock the **start** button. It will start the application.
-  NOTE: the application runs on port 9050. So, make sure no other application is running on that port at that moment.
+Run the application. <br/>
+- On Spring STS it gets included when imported and STS detects it's a Spring Boot application<br/>
+  Select **ERS[9050]** and click the **start** button. It will start the application.<br/>
+  **NOTE: the application runs on port 9050. So, make sure no other application is running on that port at that moment.**<br/><br/>
+  **Now, with the application running run the script **ERS_SA_Script.sql** on your DB application to populate the tables. Remember, it is in PostgreSQL**<br/><br/>
+  **Before running the application a second time, make sure to uncomment **ddl-auto: none** on **application.yml** **<br/><br/>
   
   <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/boot.PNG" width=50% height=50%>
-  <br />
-  <br />
+  <br /><br/>
 
 
-
-Now the project is ready to go
+Now the project is ready to go<br/><br/>
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/login.PNG" width=50% height=50%>
 <br />
 - To log in with authorized credentials use:
@@ -112,20 +115,20 @@ Now the project is ready to go
 >     Employee             suechan         abc123
 >  
 >     Finance Manager       admin          abc123
-<br />
+<br/>
 
-- Employee
-All reimbursements associated with that user are retrieved on page load
+Employee<br/>
+- All reimbursements associated with that user are retrieved on page load<br/>
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/employee.PNG" width=50% height=50%>
 <br />
 
-- You can filter reimbursements by status
+- You can filter reimbursements by status<br/>
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/filter.PNG" width=50% height=50%>
 <br />
 
-- Finance Manager
+Finance Manager<br/>
 
-User name is retrieved automatically from the database as well 
+- User name is retrieved automatically from the database as well <br/>
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/manager.PNG" width=50% height=50%>
 <br />
 
