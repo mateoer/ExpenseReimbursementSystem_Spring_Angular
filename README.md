@@ -54,7 +54,7 @@ To-do list:
 > Make sure your Java IDE has project Lombok installed. On Eclipse-based IDEs: Help -> About.. -> Look for Lombok and version.
 > If Lombok is not installed, you can follow this guide https://projectlombok.org/setup/eclipse
 
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/Capture.PNG" width=30% height=30%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/Capture.PNG" width=40% height=40%>
 <br />
 
 
