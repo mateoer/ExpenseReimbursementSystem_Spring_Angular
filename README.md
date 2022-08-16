@@ -12,6 +12,7 @@ As an added feature this application was hosted into an EC2 instance and it is c
 
 * Angular
 * Spring Boot
+* Node.js
 * AWS RDS, EC2, CodeBuild, CodeDeploy, CodePipeline
 
 * DBeaver
