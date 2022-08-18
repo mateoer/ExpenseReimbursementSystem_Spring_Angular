@@ -43,7 +43,10 @@ export class LoginComponent implements OnInit{
     });  
   }  
   
+  greetingMessage!: any;
+
   ngOnInit() {
+    this.loginService.greetings().subscribe(e => this.greetingMessage = e);
     sessionStorage.clear();
     localStorage.clear();
   }
@@ -58,18 +61,26 @@ export class LoginComponent implements OnInit{
     sessionStorage.setItem('found', JSON.stringify(this.userCredentials.found));
   }  
 
+  userLoggedIn(){
+    let myUser = JSON.parse(sessionStorage.getItem('found')!);
+    return myUser;  
+  }
   
-  loginUser(){
     
+  loginUser(){
     this.loginService.findUserLogin(this.loginForm).subscribe();
     this.loginService.findUserLogin(this.loginForm).subscribe(e =>{
-      if (e.found == true) {
+      if (e.found == true) { 
         this.userCredentials = e;        
         this.sessionSave();
         const moveTo = this.userCredentials.user.userRole.toLowerCase();
         this._route.navigate([`/${moveTo}`]);
       }
-    });    
-  }   
+    });  
+  } 
+  
+  
 
 }
+
+

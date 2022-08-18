@@ -24,12 +24,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Setter
-
 @Getter
-
 @AllArgsConstructor
-
 @ToString
+
 @Entity
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorValue("user_role")

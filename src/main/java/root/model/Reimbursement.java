@@ -24,13 +24,10 @@ import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
 
 @Setter
-
 @Getter
-
 @AllArgsConstructor
-
-
 @ToString
+
 @Entity
 @Table(name = "reimbursements_table")
 @JsonIgnoreProperties(value = {"reimbursementAuthor"}, allowSetters = true, allowGetters = true)

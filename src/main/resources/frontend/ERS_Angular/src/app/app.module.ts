@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ManagerComponent } from './manager/manager.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { PreventLoggedInAccessService } from './services/prevent-logged-in-access.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { EmployeeComponent } from './employee/employee.component';
     HttpClientModule
     
   ],
-  providers: [AppComponent],
+  providers: [AppComponent, PreventLoggedInAccessService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

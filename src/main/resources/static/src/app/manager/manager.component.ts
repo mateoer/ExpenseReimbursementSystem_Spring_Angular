@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EmpReimbursements } from '../interfaces/emp-reimbursements';
 import { LoginComponent } from '../login/login.component';
 import { ManagerService } from '../services/manager-service.service';
@@ -10,7 +11,9 @@ import { ManagerService } from '../services/manager-service.service';
 })
 export class ManagerComponent implements OnInit, OnDestroy {
 
-  constructor(private mngService : ManagerService, public loginComponent: LoginComponent) { }
+  constructor(private mngService : ManagerService, 
+              public loginComponent: LoginComponent,
+              public _route: Router) { }
   
   ngOnDestroy(): void {
     sessionStorage.clear();
@@ -38,11 +41,17 @@ export class ManagerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.onSelect();
+    if (JSON.parse(sessionStorage.getItem('found')!) == false) {
+      this._route.navigate(["/login"]);
+    }
     this.mngService.viewListOfAllReimbursements().subscribe(copyOfReiList => this.copyOfReiList = copyOfReiList);
     this.mngService.viewListOfAllReimbursements().subscribe(reiList => this.reiList = reiList);
   }
   
   public getUser(){
+    if (JSON.parse(sessionStorage.getItem('found')!) == false) {
+      this._route.navigate(["/login"]);
+    }
     return sessionStorage.getItem('firstName')+" "+ sessionStorage.getItem('lastName');
   }
 
