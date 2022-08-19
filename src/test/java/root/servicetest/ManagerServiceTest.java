@@ -20,6 +20,7 @@ import root.dao.ReimbursementRepository;
 import root.dao.UserRepository;
 import root.model.Reimbursement;
 import root.service.ManagerService;
+import root.service.mail.EmailService;
 
 @SpringBootTest
 //@Sql(scripts = "/create-data.sql")
@@ -34,11 +35,14 @@ class ManagerServiceTest {
 	private UserRepository userRepo;
 	
 	@Mock
+	private EmailService emailService;
+	
+	@Mock
 	private ManagerService mangService;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		mangService = new ManagerService(reiRepo,userRepo);
+		mangService = new ManagerService(reiRepo,userRepo, emailService);
 	}
 
 	

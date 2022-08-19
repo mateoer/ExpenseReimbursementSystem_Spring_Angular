@@ -19,5 +19,18 @@ spring:
       ddl-auto: none
 #      ddl-auto: create-drop
 #       ddl-auto: create
-  
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    port: 587
+    username: user987456321789
+    password: obgppatovkyrbdfn
+    properties:
+      mail: 
+        smtp: 
+          auth: true
+          starttls: 
+            enable: true
+    protocol: smtp
+    test-connection: false
       

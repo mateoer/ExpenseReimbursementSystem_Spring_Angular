@@ -10,16 +10,23 @@ import root.dao.UserRepository;
 import root.model.Reimbursement;
 import root.model.User;
 import root.model.enumscontainer.ReiStatus;
+import root.service.mail.EmailService;
 
 @Service
 public class ManagerService implements ManagerServiceInterface {
 	
 	private ReimbursementRepository reiRepo;
 	private UserRepository userRepo;
+	private EmailService emailService;
 	
-	public ManagerService (ReimbursementRepository reiRepo, UserRepository userRepo) {
+//	public ManagerService (ReimbursementRepository reiRepo, UserRepository userRepo) {
+//		this.reiRepo = reiRepo;
+//		this.userRepo = userRepo;
+//	}
+	public ManagerService (ReimbursementRepository reiRepo, UserRepository userRepo, EmailService emailService) {
 		this.reiRepo = reiRepo;
 		this.userRepo = userRepo;
+		this.emailService = emailService;
 	}
 
 	@Override
@@ -35,6 +42,13 @@ public class ManagerService implements ManagerServiceInterface {
 		LocalDateTime lcdt = LocalDateTime.now();
 		mdaReimbursement.setRei_resolvedDate(lcdt);
 		reiRepo.save(mdaReimbursement);
+		
+		int userAuthorId = mdaReimbursement.getReiAuthor();
+		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
+		String subject = "Reimbursement ACCEPTED";
+		String emailContent = "Your reimbursement has been ACCEPTED";
+		emailService.sendSimpleMessage(userEmail, subject, emailContent);
+		
 		return reiRepo.findByReiId(mdaReimbursement.getReiId());	
 	}
 
@@ -45,6 +59,13 @@ public class ManagerService implements ManagerServiceInterface {
 		LocalDateTime lcdt = LocalDateTime.now();
 		myReimbursement.setRei_resolvedDate(lcdt);
 		reiRepo.save(myReimbursement);
+		
+		int userAuthorId = myReimbursement.getReiAuthor();
+		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
+		String subject = "Reimbursement REJECTED";
+		String emailContent = "Your reimbursement was REJECTED";
+		emailService.sendSimpleMessage(userEmail, subject, emailContent);
+		
 		return reiRepo.findByReiId(myReimbursement.getReiId());	
 	}	
 
