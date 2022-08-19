@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EmpReimbursements } from '../interfaces/emp-reimbursements';
 import { Reimbursement, ReiType, Status } from '../interfaces/reimbursement';
 import { LoginComponent } from '../login/login.component';
@@ -22,14 +23,16 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   typesOfReimbursement : any[] = ['LODGING','GAS','FOOD','OTHER'];
   
   newReimbursementObj: Reimbursement = {
-    rei_amount: 0,
+    rei_amount: NaN,
     rei_description: '',
     reiType: ReiType.OTHER,
     reiStatus: Status.PENDING,
     reiId: 0
   };  
 
-  constructor(public empService : EmployeeService, public loginComponent: LoginComponent) { } 
+  constructor(public empService : EmployeeService, 
+              public loginComponent: LoginComponent,
+              public _route: Router) { } 
   
   ngOnDestroy(): void {
     sessionStorage.clear();
@@ -45,16 +48,25 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {    
     this.onSelect();
+    if (JSON.parse(sessionStorage.getItem('found')!) == false) {
+      this._route.navigate(["/login"]);
+    }
     this.empService.getEmpReimbursements().subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);    
     this.empService.getEmpReimbursements().subscribe(reiArray => this.reiArray = reiArray);
   }  
   
    
   public createNewReimbursement() { 
-    return this.empService.newReimbursement(this.newReimbursementObj).subscribe();        
+    this.empService.newReimbursement(this.newReimbursementObj).subscribe();
+    this.newReimbursementObj.rei_description = '';
+    this.newReimbursementObj.rei_amount = NaN;
+    this.newReimbursementObj.reiType = ReiType.OTHER;
   }
 
   public getUser(){
+    if (JSON.parse(sessionStorage.getItem('found')!) == false) {
+      this._route.navigate(["/login"]);
+    }
     return sessionStorage.getItem('firstName')+" "+ sessionStorage.getItem('lastName');
   }
 
@@ -70,8 +82,10 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.reiArray = this.reimbsCopyArray; 
   }
 
-  public reloadCurrentPage(){
-    window.location.reload();
+  public refreshTable(){
+    // window.location.reload();
+    this.removeFilter();
+    this.ngOnInit();
   }
 
 }

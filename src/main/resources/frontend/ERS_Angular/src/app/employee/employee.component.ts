@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EmpReimbursements } from '../interfaces/emp-reimbursements';
 import { Reimbursement, ReiType, Status } from '../interfaces/reimbursement';
 import { LoginComponent } from '../login/login.component';
@@ -29,7 +30,9 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     reiId: 0
   };  
 
-  constructor(public empService : EmployeeService, public loginComponent: LoginComponent) { } 
+  constructor(public empService : EmployeeService, 
+              public loginComponent: LoginComponent,
+              public _route: Router) { } 
   
   ngOnDestroy(): void {
     sessionStorage.clear();
@@ -45,6 +48,9 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {    
     this.onSelect();
+    if (JSON.parse(sessionStorage.getItem('found')!) == false) {
+      this._route.navigate(["/login"]);
+    }
     this.empService.getEmpReimbursements().subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);    
     this.empService.getEmpReimbursements().subscribe(reiArray => this.reiArray = reiArray);
   }  
@@ -58,6 +64,9 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   }
 
   public getUser(){
+    if (JSON.parse(sessionStorage.getItem('found')!) == false) {
+      this._route.navigate(["/login"]);
+    }
     return sessionStorage.getItem('firstName')+" "+ sessionStorage.getItem('lastName');
   }
 

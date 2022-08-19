@@ -57,10 +57,12 @@ export class ManagerComponent implements OnInit, OnDestroy {
 
   public approveReimb(){
     this.mngService.approveReimbursement(this.reimbIdNumberApp).subscribe();
+    this.reimbIdNumberApp = NaN;
   }
 
   public denyReimb(){
     this.mngService.denyReimbursement(this.reimbIdNumberDeny).subscribe();
+    this.reimbIdNumberDeny = NaN;
   }
 
   public onSelect(){
@@ -75,8 +77,10 @@ export class ManagerComponent implements OnInit, OnDestroy {
     this.reiList = this.copyOfReiList; 
   }
 
-  public reloadCurrentPage(){
-    window.location.reload();
+  public refreshTable(){
+    // window.location.reload();
+    this.removeFilter();
+    this.ngOnInit();
   }
 
 
