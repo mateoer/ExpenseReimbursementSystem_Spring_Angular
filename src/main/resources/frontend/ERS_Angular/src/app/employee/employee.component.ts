@@ -22,7 +22,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   typesOfReimbursement : any[] = ['LODGING','GAS','FOOD','OTHER'];
   
   newReimbursementObj: Reimbursement = {
-    rei_amount: 0,
+    rei_amount: NaN,
     rei_description: '',
     reiType: ReiType.OTHER,
     reiStatus: Status.PENDING,
@@ -51,7 +51,10 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   
    
   public createNewReimbursement() { 
-    return this.empService.newReimbursement(this.newReimbursementObj).subscribe();        
+    this.empService.newReimbursement(this.newReimbursementObj).subscribe();
+    this.newReimbursementObj.rei_description = '';
+    this.newReimbursementObj.rei_amount = NaN;
+    this.newReimbursementObj.reiType = ReiType.OTHER;
   }
 
   public getUser(){
@@ -70,8 +73,10 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.reiArray = this.reimbsCopyArray; 
   }
 
-  public reloadCurrentPage(){
-    window.location.reload();
+  public refreshTable(){
+    // window.location.reload();
+    this.removeFilter();
+    this.ngOnInit();
   }
 
 }
