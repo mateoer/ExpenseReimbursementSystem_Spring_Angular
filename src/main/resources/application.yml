@@ -2,7 +2,9 @@ server:
   port: 9050
  
 spring:
-
+  
+#  autoconfigure:
+#    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   datasource:
     url: jdbc:postgresql://${ERS_DB_ENDPOINT}/${ERS_DB_DBNAME}
     
