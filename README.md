@@ -34,7 +34,7 @@ Features:
 * Ability to create new requests
 
 To-do list:
-* Spring Security
+* Spring Security (***Done, will update soon)
 * Spring Mail to receive alerts about reimbursement's status (***Done, will update soon)
 * Ability to reset passwords
 * Ability to upload profile pictures/ recepit pictures together with the reimbursement request
