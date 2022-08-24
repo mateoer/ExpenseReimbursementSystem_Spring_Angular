@@ -43,6 +43,7 @@ public class ManagerService implements ManagerServiceInterface {
 		mdaReimbursement.setRei_resolvedDate(lcdt);
 		reiRepo.save(mdaReimbursement);
 		
+		//EMAIL NOTIFICATION		
 //		int userAuthorId = mdaReimbursement.getReiAuthor();
 //		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
 //		String subject = "Reimbursement ACCEPTED";
@@ -60,6 +61,7 @@ public class ManagerService implements ManagerServiceInterface {
 		myReimbursement.setRei_resolvedDate(lcdt);
 		reiRepo.save(myReimbursement);
 		
+		//EMAIL NOTIFICATION
 //		int userAuthorId = myReimbursement.getReiAuthor();
 //		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
 //		String subject = "Reimbursement REJECTED";

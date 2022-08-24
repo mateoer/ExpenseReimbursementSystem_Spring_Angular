@@ -7,5 +7,6 @@ public interface UserServiceInterface {
 	
 	public UserRole getUserRole(int userId);
 	public User getUser(User user);
+	public User getUserByID(int userId);
 	public User getUser2(User user);
 }

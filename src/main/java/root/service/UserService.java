@@ -34,6 +34,13 @@ public class UserService implements UserServiceInterface {
 	public User getUser2(User user) {
 		User myUser = userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 		return myUser;
+	}
+
+
+	@Override
+	public User getUserByID(int userId) {
+		User myUser = userRepo.findByUserId(userId);
+		return myUser;
 	}	
 	
 }

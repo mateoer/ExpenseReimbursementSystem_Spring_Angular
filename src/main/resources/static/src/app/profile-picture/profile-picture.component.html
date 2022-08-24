@@ -1,0 +1,13 @@
+<div class="pfp" type="file" >
+    <input type="file" id="imgupload" (change)="onFileSelected($event)" /> 
+    <ng-container *ngIf="src != null || '' || undefined; else elseBlock">
+        <div>
+            <img [src]="src" [width]="size" [height]="size" />        
+        </div>
+    </ng-container>
+    <ng-template #elseBlock>
+        <div>
+            <img [width]="size" [height]="size" src="https://via.placeholder.com/100.png?text=Avitar-Picture" alt=" ">
+        </div>
+    </ng-template>
+</div>

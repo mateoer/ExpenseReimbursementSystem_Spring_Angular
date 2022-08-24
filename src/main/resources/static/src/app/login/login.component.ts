@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit{
       firstName: '',
       lastName: '',
       email: '',
-      userRole: ''
+      userRole: '',
+      profilePicName: ''
     },
     found: false
   };
@@ -54,10 +55,12 @@ export class LoginComponent implements OnInit{
   public sessionSave(){
     sessionStorage.setItem('userId', JSON.stringify(this.userCredentials.user.userId));
     sessionStorage.setItem('username', this.userCredentials.user.username);
+    sessionStorage.setItem('password', this.userCredentials.user.password);
     sessionStorage.setItem('firstName', this.userCredentials.user.firstName);
     sessionStorage.setItem('lastName', this.userCredentials.user.lastName);
     sessionStorage.setItem('email', this.userCredentials.user.lastName);
     sessionStorage.setItem('userRole', this.userCredentials.user.userRole);
+    sessionStorage.setItem('profilePicture', this.userCredentials.user.profilePicName);
     sessionStorage.setItem('found', JSON.stringify(this.userCredentials.found));
   }  
 

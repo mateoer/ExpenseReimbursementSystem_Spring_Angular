@@ -8,11 +8,12 @@ import { LoginComponent } from './login/login.component';
 import { ManagerComponent } from './manager/manager.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { PreventLoggedInAccessService } from './services/prevent-logged-in-access.service';
+import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent, ManagerComponent, EmployeeComponent
+    LoginComponent, ManagerComponent, EmployeeComponent, ProfilePictureComponent
   ],
   imports: [
     FormsModule,

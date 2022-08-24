@@ -1,10 +1,35 @@
 server:
   port: 9050
- 
+
+cloud:
+  aws:
+    region:
+      static: us-east-1       
+    credentials:
+      access-key: ${AWSAccessKeyId}
+      secret-key: ${AWSSecretKey}
+    stack:
+      auto: false
+      
+    
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
+        
 spring:
   
-#  autoconfigure:
-#    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 10MB
+  autoconfigure:
+    exclude:
+      - org.springframework.cloud.aws.autoconfigure.context.ContextInstanceDataAutoConfiguration
+      - org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
+      - org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration  
   datasource:
     url: jdbc:postgresql://${ERS_DB_ENDPOINT}/${ERS_DB_DBNAME}
     

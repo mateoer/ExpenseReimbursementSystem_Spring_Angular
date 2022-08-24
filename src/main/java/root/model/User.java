@@ -62,6 +62,9 @@ public class User {
 	@Enumerated (EnumType.STRING)
 	private UserRole userRole;	
 	
+	@Column(name = "profile_picture_name")
+	private String profilePicName;
+	
 	@Transient
 //	@JsonManagedReference
 	@OneToMany(mappedBy = "reimbursementAuthor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
