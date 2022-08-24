@@ -13,7 +13,10 @@ const routes: Routes = [
   },
   {
     path: 'login', component: LoginComponent
-  },  
+  },
+  {
+    path: 'pfp', component: ProfilePictureComponent
+  },
   {
     path: 'manager', component: ManagerComponent 
      , canActivate: [PreventLoggedInAccessService]
