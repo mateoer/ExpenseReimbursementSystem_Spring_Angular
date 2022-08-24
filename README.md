@@ -31,13 +31,14 @@ Features:
 * Onload functionalities to retrieve reimbursement tables
 * Filtering requests
 * Request, Approve and Deny functionalities
-* Ability to create new requests
+* Employee account has ability to create new requests
+* Manager account has ability to approve/deny requests
 
 To-do list:
 * Spring Security (***Done, will update soon)
 * Spring Mail to receive alerts about reimbursement's status (***Done, will update soon)
+* Ability to upload profile pictures (***Done, will update soon)
 * Ability to reset passwords
-* Ability to upload profile pictures/ recepit pictures together with the reimbursement request
 * Password hasshing functionality
 
 
