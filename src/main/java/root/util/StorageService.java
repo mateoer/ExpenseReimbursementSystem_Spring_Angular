@@ -35,7 +35,7 @@ public class StorageService {
 		String tempFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 		amazonS3.putObject(new PutObjectRequest(AWSConfig.getBucketName(), tempFileName, fileObj));
 
-//		fileObj.delete();
+		fileObj.delete();
 		System.out.println("File Uploaded\n" + tempFileName);
 		return tempFileName;
 	}
