@@ -1,6 +1,6 @@
 <!-- <h2>Greeting</h2> -->
 <div class="background">
-<h4 align="left">{{greetingMessage}}</h4>
+  <h4 align="center">{{greetingMessage}}</h4>
 
 <div id="login-form">
   <div class="card card-container">
@@ -16,6 +16,10 @@
           No user found. 
         </div> -->
         <br />
+        <p routerLink="/loginreset"
+            style="color:dodgerblue; cursor: pointer">Forgot password?</p>
+        <div *ngIf="noUserFoundMessage != '' ">{{noUserFoundMessage}}</div>
+        <br>
       <div class="form-group">
         <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
           class="btn btn-primary" class="form-control"          

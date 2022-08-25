@@ -62,6 +62,9 @@ public class User {
 	@Enumerated (EnumType.STRING)
 	private UserRole userRole;	
 	
+	@Column(name = "password_reset_token")
+	private String passwordResetToken;
+	
 	@Column(name = "profile_picture_name")
 	private String profilePicName;
 	

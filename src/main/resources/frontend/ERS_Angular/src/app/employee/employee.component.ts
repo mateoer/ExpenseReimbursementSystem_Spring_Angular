@@ -35,15 +35,15 @@ export class EmployeeComponent implements OnInit, OnDestroy {
               public _route: Router) { } 
   
   ngOnDestroy(): void {
-    sessionStorage.clear();
-    localStorage.clear();
-    this.empService.getEmpReimbursements()
-      .subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray)
-      .unsubscribe();
+    // sessionStorage.clear();
+    // localStorage.clear();
+    // this.empService.getEmpReimbursements()
+    //   .subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray)
+    //   .unsubscribe();
 
-    this.empService.getEmpReimbursements()
-      .subscribe(reiArray => this.reiArray = reiArray)
-      .unsubscribe();  
+    // this.empService.getEmpReimbursements()
+    //   .subscribe(reiArray => this.reiArray = reiArray)
+    //   .unsubscribe();  
   }  
 
   ngOnInit() {    

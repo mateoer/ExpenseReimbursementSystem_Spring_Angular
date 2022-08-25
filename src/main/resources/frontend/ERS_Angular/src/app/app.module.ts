@@ -9,11 +9,20 @@ import { ManagerComponent } from './manager/manager.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { PreventLoggedInAccessService } from './services/prevent-logged-in-access.service';
 import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
+import { LoginResetComponent } from './components/login-reset/login-reset.component';
+import { HomeResetComponent } from './components/home-reset/home-reset.component';
+import { ChildResetComponent } from './components/home-reset/child-reset/child-reset.component';
+import { ChildLoginResetComponent } from './components/login-reset/child-login-reset/child-login-reset.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FinalizepasswordresetComponent } from './components/finalizepasswordreset/finalizepasswordreset.component';
+import { ChildFinalizeResetComponent } from './components/finalizepasswordreset/child-finalize-reset/child-finalize-reset.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent, ManagerComponent, EmployeeComponent, ProfilePictureComponent
+    LoginComponent, ManagerComponent, EmployeeComponent, 
+    ProfilePictureComponent, LoginResetComponent, HomeResetComponent, ChildResetComponent, ChildLoginResetComponent, NavbarComponent, FinalizepasswordresetComponent, ChildFinalizeResetComponent
+    
   ],
   imports: [
     FormsModule,

@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit{
   }  
   
   greetingMessage!: any;
+  noUserFoundMessage: string = '';
 
   ngOnInit() {
     this.loginService.greetings().subscribe(e => this.greetingMessage = e);
@@ -78,6 +79,8 @@ export class LoginComponent implements OnInit{
         this.sessionSave();
         const moveTo = this.userCredentials.user.userRole.toLowerCase();
         this._route.navigate([`/${moveTo}`]);
+      }else{
+        this.noUserFoundMessage = "User not found";
       }
     });  
   } 

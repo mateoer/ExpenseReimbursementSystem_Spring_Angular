@@ -50,6 +50,7 @@ label {
   background-image: url(../../assets/photo-1657278127206-3299435f1cad.jpg) ;
   background-repeat: no-repeat;
   background-size: 100%;
+  background-attachment: fixed;
   background-position: center;
   padding-top: 5%;
   padding-bottom: 15%;

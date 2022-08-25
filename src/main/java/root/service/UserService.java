@@ -1,20 +1,25 @@
 package root.service;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import root.dao.UserRepository;
 import root.model.User;
 import root.model.UserRole;
+import root.service.mail.EmailService;
 
 @Service
 public class UserService implements UserServiceInterface {
 
 	private UserRepository userRepo;
+	private EmailService emailService;
 	
 	@Autowired
-	public UserService(UserRepository userRepo) {
+	public UserService(UserRepository userRepo, EmailService emailService) {
 		this.userRepo = userRepo;
+		this.emailService = emailService;		
 	}
 	
 	
@@ -25,13 +30,13 @@ public class UserService implements UserServiceInterface {
 	}
 
 	@Override
-	public User getUser(User user) {
+	public User getUserByUsername(User user) {
 		User myUser = userRepo.findByUsername(user.getUsername());
 		return myUser;
 	}
 
 	@Override
-	public User getUser2(User user) {
+	public User getUserByUsernameAndPassword(User user) {
 		User myUser = userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 		return myUser;
 	}
@@ -41,8 +46,58 @@ public class UserService implements UserServiceInterface {
 	public User getUserByID(int userId) {
 		User myUser = userRepo.findByUserId(userId);
 		return myUser;
+	}
+
+
+	@Override
+	public User getUserByUsernameAndEmail(User user) {
+		User myUser = userRepo.findByUsernameAndEmail(user.getUsername(), user.getEmail());
+		return myUser;
+	}
+
+
+	@Override
+	public User updateUserPassword(User user, String newPassword) {
+		User myUser = userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		if (myUser != null) {
+			myUser.setPassword(newPassword);
+			userRepo.save(myUser);
+		}
+		return myUser;
 	}	
 	
+
+
+	@Override
+	public User savePasswordResetTokenAndSendEmail(User user) {
+		User myUser = userRepo.findByUsernameAndEmail(user.getUsername(), user.getEmail());
+		String resetKey = UUID.randomUUID() + "";
+		myUser.setPasswordResetToken(resetKey);
+		userRepo.save(myUser);
+		passwordResetEmailNotification(myUser,resetKey);
+		return myUser;
+	}
+	
+	@Override
+	public User getUserByResetToken(String newPassword, String resetToken) {
+		User myUser = userRepo.findByPasswordResetToken(resetToken);
+		if (myUser != null) {
+			myUser.setPassword(newPassword);
+			userRepo.save(myUser);
+		}
+		return myUser;
+	}
+	
+	public void passwordResetEmailNotification(User user,String resetKey) {
+		String userEmail = user.getEmail();
+		String subject = "Password RESET";
+		String emailContent = "Reset token: "+ resetKey
+				+ "\nUse this token to reset your password"
+				+ "\nGo to:  'http://localhost:4200/finalizepasswordreset' ";
+		emailService.sendSimpleMessage(userEmail, subject, emailContent);
+	}
+
+
 }
 
 

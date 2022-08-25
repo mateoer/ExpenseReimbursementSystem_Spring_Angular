@@ -16,15 +16,15 @@ export class ManagerComponent implements OnInit, OnDestroy {
               public _route: Router) { }
   
   ngOnDestroy(): void {
-    sessionStorage.clear();
-    localStorage.clear();
-    this.mngService.viewListOfAllReimbursements()
-      .subscribe(copyOfReiList => this.copyOfReiList = copyOfReiList)
-      .unsubscribe();
+    // sessionStorage.clear();
+    // localStorage.clear();
+    // this.mngService.viewListOfAllReimbursements()
+    //   .subscribe(copyOfReiList => this.copyOfReiList = copyOfReiList)
+    //   .unsubscribe();
 
-    this.mngService.viewListOfAllReimbursements()
-      .subscribe(reiList => this.reiList = reiList)
-      .unsubscribe();  
+    // this.mngService.viewListOfAllReimbursements()
+    //   .subscribe(reiList => this.reiList = reiList)
+    //   .unsubscribe();  
   }
   
   filterRei : any[] = [' ','APPROVED','PENDING','DENIED'];

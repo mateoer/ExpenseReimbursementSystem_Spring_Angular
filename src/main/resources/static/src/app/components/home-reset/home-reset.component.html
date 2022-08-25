@@ -1,0 +1,45 @@
+<nav class="navbar " style="width: 10%;margin-right: 7%;" >
+    <button  class="nav-link btn btn-primary" (click)="back()">Go back</button>
+      
+</nav>
+<div class="background">
+    <div id="login-form">
+        <div class="card card-container">
+            <img [src]="userImage" class="profile-img-card"/>
+          <form novalidate  #myLoginGroup="ngForm" (ngSubmit)="passwordReset()" >
+              <label for="password">Old Password</label>
+              <input required type="password" name="password" class="form-control" 
+                  placeholder="enter password"  [(ngModel)]="password" >                
+              <label for="new_password">New Password</label>
+              <input required type="password" name="new_password" class="form-control" 
+                  placeholder="enter new password"  [(ngModel)]="new_password" >                
+              <label for="re_new_password">Re-Enter New Password</label>
+              <input required type="password" name="re_new_password" class="form-control"
+                placeholder="re-enter new password"  [(ngModel)]="re_new_password" >
+            <br>
+              <app-child-reset 
+                  [message]="message"
+                  [password]="password"
+                  [new_password]="new_password"
+                  [re_new_password]="re_new_password">
+
+              </app-child-reset>
+            <br> 
+            <div class="form-group">
+              <div *ngIf="message != ''; else elseBlock ">
+                <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
+                class="btn btn-primary" class="form-control"          
+                value="Back to Home menu" 
+                (click)="back()">
+              </div> 
+              <ng-template #elseBlock>
+              <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
+                class="btn btn-primary" class="form-control"          
+                value="Reset password" 
+                [disabled]="myLoginGroup.invalid">
+              </ng-template>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>

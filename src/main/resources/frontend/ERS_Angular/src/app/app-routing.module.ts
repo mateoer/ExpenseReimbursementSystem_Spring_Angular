@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FinalizepasswordresetComponent } from './components/finalizepasswordreset/finalizepasswordreset.component';
+import { HomeResetComponent } from './components/home-reset/home-reset.component';
+import { LoginResetComponent } from './components/login-reset/login-reset.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { LoginComponent } from './login/login.component';
 import { ManagerComponent } from './manager/manager.component';
-import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
 import { PreventLoggedInAccessService } from './services/prevent-logged-in-access.service';
 
 const routes: Routes = [
@@ -15,7 +17,15 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'pfp', component: ProfilePictureComponent
+    path: 'finalizepasswordreset', component: FinalizepasswordresetComponent
+  },
+  {
+    path: 'loginreset', component: LoginResetComponent
+    
+  },
+  {
+    path: 'homereset', component: HomeResetComponent
+     , canActivate: [PreventLoggedInAccessService]
   },
   {
     path: 'manager', component: ManagerComponent 
