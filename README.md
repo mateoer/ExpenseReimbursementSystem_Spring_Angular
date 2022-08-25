@@ -13,7 +13,7 @@ As an added feature this application was hosted into an EC2 instance and it is c
 * Angular
 * Spring Boot
 * Node.js
-* AWS RDS, EC2, CodeBuild, CodeDeploy, CodePipeline
+* AWS RDS, EC2, S3, CodeBuild, CodeDeploy, CodePipeline
 
 * DBeaver
 * Spring STS 3
@@ -38,7 +38,7 @@ To-do list:
 * Spring Security (***Done, will update soon)
 * Spring Mail to receive alerts about reimbursement's status (***Done, will update soon)
 * Ability to upload profile pictures (***Done, will update soon)
-* Ability to reset passwords
+* Ability to reset passwords (***Done, will update soon)
 * Password hasshing functionality
 
 
