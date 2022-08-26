@@ -11,14 +11,16 @@
   <div class="signin">
           <h4>Approve Reimbursement</h4>
           <form novalidate #appRei="ngForm" (ngSubmit)="approveReimb()" >
-            <input type="number" placeholder="reimbursement id" name="reiAppId" [(ngModel)]="reimbIdNumberApp" required>
+            <input type="number" placeholder="reimbursement id" name="reiAppId" 
+                style="margin-right: 10px;"  [(ngModel)]="reimbIdNumberApp" required>
             <input type="submit" value="Approve" [disabled]="appRei.invalid">
           </form>
           <br>
 
           <h4>Reject Reimbursement</h4>
           <form novalidate #denyRei="ngForm" (ngSubmit)="denyReimb()" >
-            <input type="number" placeholder="reimbursement id" name="reiAppId" [(ngModel)]="reimbIdNumberDeny" required>
+            <input type="number" placeholder="reimbursement id" name="reiAppId" 
+                style="margin-right: 10px;"  [(ngModel)]="reimbIdNumberDeny" required>
             <input type="submit" value="Reject" [disabled]="denyRei.invalid">
           </form>
           <br />
@@ -27,14 +29,21 @@
   <div class="table">
     <br>
     <h5>REIMBURSEMENT REQUESTS </h5>    
-    <select id="filterReis" name="reimbs" [(ngModel)]="selected" (ngModelChange)="onSelect()" >
+    <select style="margin-right: 10px;" id="filterReis" name="reimbs" [(ngModel)]="selected" (ngModelChange)="onSelect()" >
       <option disabled selected>Filter</option>
       <option *ngFor="let reis of filterRei; let i = index " [value]="reis">
         {{reis}}
-      </option>     
+      </option>          
+    </select>
+    <select style="margin-right: 10px;" id="filterReiT" name="reimbs" [(ngModel)]="selectedType" (ngModelChange)="onSelectType()" >
+      <option disabled selected>Filter</option>
+      <option *ngFor="let reiT of filterReiType; let i = index " [value]="reiT">
+        {{reiT}}
+      </option>           
     </select>
 
-    <input class="blue" id="Refresh" type="submit" value="Remove Filter" (click)="removeFilter()" />
+    <input class="blue" id="Refresh" style="margin-right: 10px;" 
+          type="submit" value="Remove Filter" (click)="removeFilter()" />
     <input class="blue" id="Refresh" type="submit" value="Refresh" (click)="refreshTable()" />
     <br><br>
 

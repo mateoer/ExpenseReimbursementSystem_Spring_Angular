@@ -14,12 +14,15 @@
     
     <form novalidate #myForm="ngForm" (ngSubmit)="createNewReimbursement()">
 
-      <select name="type" [(ngModel)]="newReimbursementObj.reiType" required> 
+      <select name="type" style="margin-right: 10px;"
+        [(ngModel)]="newReimbursementObj.reiType" required> 
         <option value="" disabled selected>Type</option>
         <option *ngFor="let t of typesOfReimbursement" [value]="t">{{t}}</option>
       </select>
-      <input type="text"  placeholder="enter description" name="description" [(ngModel)]="newReimbursementObj.rei_description"  required>
-      <input placeholder="enter amount" type="number"   name="amount" [(ngModel)]="newReimbursementObj.rei_amount" required>
+      <input type="text"  placeholder="enter description" style="margin-right: 10px;" 
+          name="description" [(ngModel)]="newReimbursementObj.rei_description"  required>
+      <input placeholder="enter amount" type="number" style="margin-right: 10px;" 
+          name="amount" [(ngModel)]="newReimbursementObj.rei_amount" required>
       <input type="submit" value="Create" [disabled]="myForm.invalid">
 
     </form>
@@ -32,14 +35,21 @@
   <div class="table">
     <br>
     <h5>REIMBURSEMENT REQUESTS </h5>    
-    <select id="filterReis" name="reimbs" [(ngModel)]="selected" (ngModelChange)="onSelect()" >
+    <select style="margin-right: 10px;" id="filterReis" name="reimbs" [(ngModel)]="selected" (ngModelChange)="onSelect()" >
       <option disabled selected>Filter</option>
       <option *ngFor="let reis of filterRei; let i = index " [value]="reis">
         {{reis}}
-      </option>     
+      </option>          
+    </select>
+    <select style="margin-right: 10px;" id="filterReiT" name="reimbs" [(ngModel)]="selectedType" (ngModelChange)="onSelectType()" >
+      <option disabled selected>Filter</option>
+      <option *ngFor="let reiT of filterReiType; let i = index " [value]="reiT">
+        {{reiT}}
+      </option>           
     </select>
 
-    <input class="blue" id="Refresh" type="submit" value="Remove Filter" (click)="removeFilter()" />
+    <input class="blue" id="Refresh" style="margin-right: 10px;"
+        type="submit" value="Remove Filter" (click)="removeFilter()" />
     <input class="blue" id="Refresh" type="submit" value="Refresh" (click)="refreshTable()" />
     <br><br>
 

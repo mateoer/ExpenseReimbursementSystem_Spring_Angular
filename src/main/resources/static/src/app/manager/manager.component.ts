@@ -27,8 +27,10 @@ export class ManagerComponent implements OnInit, OnDestroy {
     //   .unsubscribe();  
   }
   
-  filterRei : any[] = [' ','APPROVED','PENDING','DENIED'];
+  filterRei :     any[] = [' ','APPROVED','PENDING','DENIED'];
+  filterReiType : any[] = [' ','LODGING','GAS','FOOD','OTHER'];
   selected: string = ' ';   
+  selectedType: string = ' ';   
   
   // reiMapList = new Map<UserList, ListReis[]> ();
   reiList: EmpReimbursements[] = [];
@@ -45,7 +47,10 @@ export class ManagerComponent implements OnInit, OnDestroy {
       this._route.navigate(["/login"]);
     }
     this.mngService.viewListOfAllReimbursements().subscribe(copyOfReiList => this.copyOfReiList = copyOfReiList);
-    this.mngService.viewListOfAllReimbursements().subscribe(reiList => this.reiList = reiList);
+    this.mngService.viewListOfAllReimbursements().subscribe(reiList => {
+      this.reiList = reiList;
+      this.reiList.sort((a,b)=> b.reiId - a.reiId);
+    });
   }
   
   public getUser(){
@@ -67,13 +72,29 @@ export class ManagerComponent implements OnInit, OnDestroy {
 
   public onSelect(){
     if (this.selected == ' ') {
-      return this.reiList = this.copyOfReiList; 
+      this.reiList = this.copyOfReiList;       
+      return this.reiList.sort((a,b)=> b.reiId - a.reiId);
     } 
-      return this.reiList = this.copyOfReiList.filter(e => e.reiStatus == this.selected);    
+      this.selectedType = ' ';
+      return this.reiList = this.copyOfReiList
+        .sort((a,b)=> b.reiId - a.reiId)
+          .filter(e => e.reiStatus == this.selected);      
+  }
+
+  public onSelectType(){
+    if (this.selectedType == ' ') {
+      this.reiList = this.copyOfReiList; 
+      return this.reiList.sort((a,b)=> b.reiId - a.reiId);
+    } 
+      this.selected = ' ';
+      return this.reiList = this.copyOfReiList
+        .sort((a,b)=> b.reiId - a.reiId)
+          .filter(e => e.reiType == this.selectedType);
   }
   
   public removeFilter(){
     this.selected = ' ';
+    this.selectedType = ' ';
     this.reiList = this.copyOfReiList; 
   }
 

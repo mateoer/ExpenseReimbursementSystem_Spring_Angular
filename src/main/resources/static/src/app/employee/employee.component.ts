@@ -13,8 +13,10 @@ import { EmployeeService } from '../services/employee-service.service';
 })
 export class EmployeeComponent implements OnInit, OnDestroy {
 
-  filterRei : any[] = [' ','APPROVED','PENDING','DENIED'];
-  selected: string = ' ';
+  filterRei :     any[] = [' ','APPROVED','PENDING','DENIED'];
+  filterReiType : any[] = [' ','LODGING','GAS','FOOD','OTHER'];
+  selected: string = ' ';   
+  selectedType: string = ' ';   
 
   reimbsCopyArray: EmpReimbursements[] = []; 
   reiArray: EmpReimbursements[] = [];
@@ -52,7 +54,11 @@ export class EmployeeComponent implements OnInit, OnDestroy {
       this._route.navigate(["/login"]);
     }
     this.empService.getEmpReimbursements().subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);    
-    this.empService.getEmpReimbursements().subscribe(reiArray => this.reiArray = reiArray);
+    this.empService.getEmpReimbursements().subscribe(reiArray =>
+      {
+        this.reiArray = reiArray;
+        this.reiArray.sort((a,b)=> b.reiId - a.reiId); 
+      });
   }  
   
    
@@ -72,13 +78,29 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   public onSelect(){
     if (this.selected == ' ') {
-      return this.reiArray = this.reimbsCopyArray; 
+      this.reiArray = this.reimbsCopyArray;       
+      return this.reiArray.sort((a,b)=> b.reiId - a.reiId);
     } 
-      return this.reiArray = this.reimbsCopyArray.filter(e => e.reiStatus == this.selected);    
+      this.selectedType = ' ';
+      return this.reiArray = this.reimbsCopyArray
+        .sort((a,b)=> b.reiId - a.reiId)
+          .filter(e => e.reiStatus == this.selected);      
+  }
+
+  public onSelectType(){
+    if (this.selectedType == ' ') {
+      this.reiArray = this.reimbsCopyArray; 
+      return this.reiArray.sort((a,b)=> b.reiId - a.reiId);
+    } 
+      this.selected = ' ';
+      return this.reiArray = this.reimbsCopyArray
+        .sort((a,b)=> b.reiId - a.reiId)
+          .filter(e => e.reiType == this.selectedType);
   }
   
   public removeFilter(){
     this.selected = ' ';
+    this.selectedType = ' ';
     this.reiArray = this.reimbsCopyArray; 
   }
 

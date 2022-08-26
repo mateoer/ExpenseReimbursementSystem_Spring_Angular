@@ -41,11 +41,11 @@ public class ManagerService implements ManagerServiceInterface {
 		reiRepo.save(mdaReimbursement);
 		
 		//EMAIL NOTIFICATION		
-//		int userAuthorId = mdaReimbursement.getReiAuthor();
-//		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
-//		String subject = "Reimbursement ACCEPTED";
-//		String emailContent = "Your reimbursement has been ACCEPTED";
-//		emailService.sendSimpleMessage(userEmail, subject, emailContent);
+		int userAuthorId = mdaReimbursement.getReiAuthor();
+		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
+		String subject = "Reimbursement ACCEPTED";
+		String emailContent = "Your reimbursement has been ACCEPTED";
+		emailService.sendSimpleMessage(userEmail, subject, emailContent);
 		
 		return reiRepo.findByReiId(mdaReimbursement.getReiId());	
 	}
@@ -59,11 +59,11 @@ public class ManagerService implements ManagerServiceInterface {
 		reiRepo.save(myReimbursement);
 		
 		//EMAIL NOTIFICATION
-//		int userAuthorId = myReimbursement.getReiAuthor();
-//		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
-//		String subject = "Reimbursement REJECTED";
-//		String emailContent = "Your reimbursement was REJECTED";
-//		emailService.sendSimpleMessage(userEmail, subject, emailContent);
+		int userAuthorId = myReimbursement.getReiAuthor();
+		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
+		String subject = "Reimbursement REJECTED";
+		String emailContent = "Your reimbursement was REJECTED";
+		emailService.sendSimpleMessage(userEmail, subject, emailContent);
 		
 		return reiRepo.findByReiId(myReimbursement.getReiId());	
 	}	

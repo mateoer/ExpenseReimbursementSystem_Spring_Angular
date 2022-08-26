@@ -67,8 +67,8 @@ public class UserService implements UserServiceInterface {
 
 	@Override
 	public User updateUserPassword(User user, String newPassword) {
-		String password = passwordEncoder.encode(user.getPassword());
-		User myUser = userRepo.findByUsernameAndPassword(user.getUsername(), password);
+		
+		User myUser = userRepo.findByUsername(user.getUsername());
 		if (myUser != null) {
 			myUser.setPassword(passwordEncoder.encode(newPassword));
 			userRepo.save(myUser);
@@ -103,7 +103,7 @@ public class UserService implements UserServiceInterface {
 		String subject = "Password RESET";
 		String emailContent = "Reset token: "+ resetKey
 				+ "\nUse this token to reset your password"
-				+ "\nGo to:  'http://localhost:4200/finalizepasswordreset' ";
+				+ "\nGo to:  'http://localhost:9050/finalizepasswordreset' ";
 		emailService.sendSimpleMessage(userEmail, subject, emailContent);
 	}
 
