@@ -39,7 +39,7 @@ To-do list:
 * Spring Mail to receive alerts about reimbursement's status (***Done, will update soon)
 * Ability to upload profile pictures (***Done, will update soon)
 * Ability to reset passwords (***Done, will update soon)
-* Password hasshing functionality
+* Password hasshing functionality (***Done, will update soon)
 
 
 ## Getting Started
