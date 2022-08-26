@@ -19,10 +19,7 @@ public class ManagerService implements ManagerServiceInterface {
 	private UserRepository userRepo;
 	private EmailService emailService;
 	
-//	public ManagerService (ReimbursementRepository reiRepo, UserRepository userRepo) {
-//		this.reiRepo = reiRepo;
-//		this.userRepo = userRepo;
-//	}
+
 	public ManagerService (ReimbursementRepository reiRepo, UserRepository userRepo, EmailService emailService) {
 		this.reiRepo = reiRepo;
 		this.userRepo = userRepo;

@@ -3,6 +3,7 @@ package root.service;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import root.dao.UserRepository;
@@ -15,11 +16,13 @@ public class UserService implements UserServiceInterface {
 
 	private UserRepository userRepo;
 	private EmailService emailService;
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	public UserService(UserRepository userRepo, EmailService emailService) {
+	public UserService(UserRepository userRepo, EmailService emailService, PasswordEncoder passwordEncoder) {
 		this.userRepo = userRepo;
-		this.emailService = emailService;		
+		this.emailService = emailService;	
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	
@@ -37,8 +40,14 @@ public class UserService implements UserServiceInterface {
 
 	@Override
 	public User getUserByUsernameAndPassword(User user) {
-		User myUser = userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-		return myUser;
+		
+		User myUser = userRepo.findByUsername(user.getUsername());
+		if (myUser == null) return null;
+		if (passwordEncoder.matches(user.getPassword(), myUser.getPassword()))
+			return myUser;
+		else {
+			return null;
+		}		
 	}
 
 
@@ -58,9 +67,10 @@ public class UserService implements UserServiceInterface {
 
 	@Override
 	public User updateUserPassword(User user, String newPassword) {
-		User myUser = userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		String password = passwordEncoder.encode(user.getPassword());
+		User myUser = userRepo.findByUsernameAndPassword(user.getUsername(), password);
 		if (myUser != null) {
-			myUser.setPassword(newPassword);
+			myUser.setPassword(passwordEncoder.encode(newPassword));
 			userRepo.save(myUser);
 		}
 		return myUser;
@@ -82,7 +92,7 @@ public class UserService implements UserServiceInterface {
 	public User getUserByResetToken(String newPassword, String resetToken) {
 		User myUser = userRepo.findByPasswordResetToken(resetToken);
 		if (myUser != null) {
-			myUser.setPassword(newPassword);
+			myUser.setPassword(passwordEncoder.encode(newPassword));
 			userRepo.save(myUser);
 		}
 		return myUser;

@@ -1,8 +1,6 @@
 package root.controller;
 
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +13,6 @@ import root.model.NewPasswordContextClass;
 import root.model.User;
 import root.model.UserResponse;
 import root.service.UserService;
-import root.service.mail.EmailService;
 
 @Controller
 @CrossOrigin
@@ -47,11 +44,12 @@ public class SessionController {
 		return userResp;
 	}
 	
+	
 	@GetMapping("/greetings")
 	@ResponseBody
 	public String greetings() {
 		System.out.println("\nGreetings\n" );
-		return "Hi There :)";
+		return "¯\\_(ツ)_/¯";
 	}
 	
 	@PostMapping("/validateUserEmail")
