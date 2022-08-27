@@ -40,6 +40,7 @@ To-do list:
 * Ability to upload profile pictures (***Done, will update soon)
 * Ability to reset passwords (***Done, will update soon)
 * Password hasshing functionality (***Done, will update soon)
+* Register new users (***Done, will update soon)
 
 
 ## Getting Started
