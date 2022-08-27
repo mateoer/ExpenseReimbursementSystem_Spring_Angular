@@ -1,5 +1,6 @@
 package root.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,8 +75,7 @@ public class UserService implements UserServiceInterface {
 			userRepo.save(myUser);
 		}
 		return myUser;
-	}	
-	
+	}		
 
 
 	@Override
@@ -98,6 +98,12 @@ public class UserService implements UserServiceInterface {
 		return myUser;
 	}
 	
+	@Override
+	public List<User> getAllUsernames(){
+		return userRepo.findAll();
+	}
+	
+	@Override
 	public void passwordResetEmailNotification(User user,String resetKey) {
 		String userEmail = user.getEmail();
 		String subject = "Password RESET";
@@ -105,6 +111,28 @@ public class UserService implements UserServiceInterface {
 				+ "\nUse this token to reset your password"
 				+ "\nGo to:  'http://localhost:9050/finalizepasswordreset' ";
 		emailService.sendSimpleMessage(userEmail, subject, emailContent);
+	}
+
+
+	@Override
+	public User createNewUser(User newUserRequest) {
+		
+		User checkUser = userRepo.findByUsername(newUserRequest.getUsername());
+		if (checkUser == null) 
+			checkUser = userRepo.findByEmail(newUserRequest.getEmail());
+		else return null;
+		
+		if (checkUser == null) {			
+			User myNewUser = newUserRequest;
+			myNewUser.setPassword(passwordEncoder.encode(newUserRequest.getPassword()));
+			myNewUser.setProfilePicName(null);
+			userRepo.save(myNewUser);
+			return myNewUser;			
+		} else {
+			return null;
+		}
+		
+		
 	}
 
 

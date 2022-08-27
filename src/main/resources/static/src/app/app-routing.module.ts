@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FinalizepasswordresetComponent } from './components/finalizepasswordreset/finalizepasswordreset.component';
 import { HomeResetComponent } from './components/home-reset/home-reset.component';
 import { LoginResetComponent } from './components/login-reset/login-reset.component';
+import { RegisterComponent } from './components/register/register.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { LoginComponent } from './login/login.component';
 import { ManagerComponent } from './manager/manager.component';
@@ -21,6 +22,10 @@ const routes: Routes = [
   },
   {
     path: 'loginreset', component: LoginResetComponent
+    
+  },
+  {
+    path: 'register', component: RegisterComponent
     
   },
   {

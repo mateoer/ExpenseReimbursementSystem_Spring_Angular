@@ -16,12 +16,15 @@ import { ChildLoginResetComponent } from './components/login-reset/child-login-r
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FinalizepasswordresetComponent } from './components/finalizepasswordreset/finalizepasswordreset.component';
 import { ChildFinalizeResetComponent } from './components/finalizepasswordreset/child-finalize-reset/child-finalize-reset.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ChildEmailCheckComponent } from './components/register/child-email-check/child-email-check.component';
+import { ChildPasswordCheckComponent } from './components/register/child-password-check/child-password-check.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
     LoginComponent, ManagerComponent, EmployeeComponent, 
-    ProfilePictureComponent, LoginResetComponent, HomeResetComponent, ChildResetComponent, ChildLoginResetComponent, NavbarComponent, FinalizepasswordresetComponent, ChildFinalizeResetComponent
+    ProfilePictureComponent, LoginResetComponent, HomeResetComponent, ChildResetComponent, ChildLoginResetComponent, NavbarComponent, FinalizepasswordresetComponent, ChildFinalizeResetComponent, RegisterComponent, ChildEmailCheckComponent, ChildPasswordCheckComponent
     
   ],
   imports: [

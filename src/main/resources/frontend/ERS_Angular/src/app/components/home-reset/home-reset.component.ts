@@ -17,13 +17,13 @@ export class HomeResetComponent implements OnInit {
   password= '';
   new_password='';
   re_new_password='';
-  userImage:any = null;
-  ngOnInit(): void {
-    if (sessionStorage.getItem('profilePicture') != 'null') {
+  userImage: string = "https://ssl.gstatic.com/accounts/ui/avatar_2x.png";
+  ngOnInit() {
+    
+    if (sessionStorage.getItem('profilePicture') != 'null' || '' || null || undefined) {
       this.pfp.getProfilePicture().subscribe(userImage => this.userImage = userImage );      
-    }else{
-      this.userImage = "//ssl.gstatic.com/accounts/ui/avatar_2x.png";
     }
+    
   }
 
   back(){

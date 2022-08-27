@@ -14,7 +14,7 @@ export class ProfilePictureService {
   UPLOAD_PFP = `${this.API_URL}/uploadPfp`;
   GET_PFP = `${this.API_URL}/getPfp`;
 
-  getProfilePicture(){    
+  getProfilePicture(): Observable<string>{    
       let myUser: UserCredentials = {
         user: {
           userId: JSON.parse(sessionStorage.getItem('userId')!),
@@ -28,7 +28,7 @@ export class ProfilePictureService {
         },
         found: JSON.parse(sessionStorage.getItem('found')!)
       }     
-    return this.http.post(`${this.GET_PFP}`, myUser, { responseType: 'text' as 'json' });    
+    return this.http.post<string>(`${this.GET_PFP}`, myUser, { responseType: 'text' as 'json' });    
   }
 
   uploadProfilePicture(formDataToSend: FormData){    

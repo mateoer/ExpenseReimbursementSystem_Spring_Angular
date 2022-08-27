@@ -5,7 +5,9 @@
 <div class="background">
     <div id="login-form">
         <div class="card card-container">
-            <img [src]="userImage" class="profile-img-card"/>
+              <img [src]="userImage" class="profile-img-card"/>
+          
+            
           <form novalidate  #myLoginGroup="ngForm" (ngSubmit)="passwordReset()" >
               <label for="password">Old Password</label>
               <input required type="password" name="password" class="form-control" 

@@ -23,9 +23,7 @@ export class ChildResetComponent extends HomeResetComponent implements OnInit, O
   
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('OnChanges');
-        console.log(JSON.stringify(changes));
- 
+     
         // tslint:disable-next-line:forin
         for (const propName in changes) {
              const change = changes[propName];

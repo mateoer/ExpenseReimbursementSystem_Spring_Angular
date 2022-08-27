@@ -14,13 +14,14 @@ export class ProfilePictureComponent implements OnInit {
   
   src: any = null;  
   size = 200;   
+  placeholderPfp = "https://via.placeholder.com/200.png?text=Avitar-Picture";
 
   constructor(private profileService: ProfilePictureService, public loginService: LoginService) { }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('profilePicture') != 'null') {
+    if (sessionStorage.getItem('profilePicture') != 'null' || '') {
       this.profileService.getProfilePicture().subscribe(src => this.src = src );      
-    }
+    } 
   }  
 
   selectedFile!: File;
@@ -35,9 +36,7 @@ export class ProfilePictureComponent implements OnInit {
     let userId = sessionStorage.getItem('userId')!;
     myPfp.append('file', this.selectedFile);    
     myPfp.append('userId', userId);    
-    this.profileService.uploadProfilePicture(myPfp).subscribe(src => this.src = src);
-    
-    // this.profileService.getProfilePicture().subscribe(src => this.src = src );
+    this.profileService.uploadProfilePicture(myPfp).subscribe(src => this.src = src);    
   }  
 
 }

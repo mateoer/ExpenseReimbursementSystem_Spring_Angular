@@ -1,20 +1,23 @@
 package root.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import root.model.NewPasswordContextClass;
 import root.model.User;
 import root.model.UserResponse;
 import root.service.UserService;
 
-@Controller
+@RestController
 @CrossOrigin
 public class SessionController {
 	
@@ -46,14 +49,12 @@ public class SessionController {
 	
 	
 	@GetMapping("/greetings")
-	@ResponseBody
 	public String greetings() {
 		System.out.println("\nGreetings\n" );
 		return "¯\\_(ツ)_/¯";
 	}
 	
 	@PostMapping("/validateUserEmail")
-	@ResponseBody
 	public String validateUserWithEmail(@RequestBody User userReq) {
 		User userDummy = myUserService.getUserByUsernameAndEmail(userReq);
 		if (userDummy != null) {
@@ -78,7 +79,6 @@ public class SessionController {
 	}
 	
 	@PostMapping("/validateResetToken")
-	@ResponseBody
 	public String validateResetToken(@RequestBody NewPasswordContextClass newPassReq) {
 		User myUser = newPassReq.getUser();
 		String newPassword = newPassReq.getNewPassword();
@@ -88,7 +88,56 @@ public class SessionController {
 		}else {
 			return "Error";
 		}
+	}	
+
+	
+	@GetMapping("/checkUsername/{username}")
+	public String usernameAvailable(@PathVariable ("username") String usernameToCheck) {	
+		
+		List<User> takenUsernames = myUserService.getAllUsernames();	
+		
+		for (User user : takenUsernames) {
+			if (user.getUsername().equals(usernameToCheck)) {
+				return "Username is not available";
+			}
+		}
+		
+		return "Username is available";		
 	}
+	
+	@GetMapping("/checkEmail/{email}")
+	public String emailAvailable(@PathVariable ("email") String emailToCheck) {	
+		
+		List<User> takenUsernames = myUserService.getAllUsernames();	
+		
+		for (User user : takenUsernames) {
+			if (user.getEmail().equals(emailToCheck)) {
+				return "Email is not available";
+			}
+		}
+		
+		return "";		
+	}
+	
+	@PostMapping("/registerNewUser")
+	public UserResponse createNewUser(@RequestBody UserResponse newUserRequest ) {
+		User newUserToCreate = newUserRequest.getUser();
+		User newlyCreatedUser = myUserService.createNewUser(newUserToCreate);
+		if (newlyCreatedUser == null) {
+			return null;
+		}
+		
+		
+		UserResponse userResp = new UserResponse();	
+						
+		userResp.setUser(newlyCreatedUser);
+		System.out.println("\nNew user registered\n" );
+		
+		return userResp;
+		
+
+	}
+	
 	
 	
 }

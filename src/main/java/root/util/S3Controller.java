@@ -64,8 +64,8 @@ public class S3Controller {
 	public String getPictureURL(@RequestBody UserResponse reqUser) throws IOException {
 		
 		User myUser = reqUser.getUser();
-		if (myUser.getProfilePicName() == null) {
-			return "No profile picture yet";
+		if (myUser.getProfilePicName() == null || myUser.getProfilePicName() == "") {
+			return "null";
 		}
 		String URL = storageServ.presignedUrl(myUser.getProfilePicName());
 		System.out.println("\n\n" + URL + "\n\n");
