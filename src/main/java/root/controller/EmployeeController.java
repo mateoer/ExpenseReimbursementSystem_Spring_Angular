@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import root.model.Reimbursement;
 import root.model.User;
 import root.model.UserReiContext;
+import root.model.enumscontainer.ReiStatus;
 import root.service.EmployeeService;
 
 @RestController
@@ -49,6 +50,23 @@ public class EmployeeController {
 		System.out.println("\nUser name retrieved\n");
 		return employeeService.getUserName(reqUser);
 		
+	}
+	
+	//deleteReimbursement
+	@PostMapping("/deleteReimbursement")
+	public String removeReimbursement(@RequestBody UserReiContext userReiContext) {
+		Reimbursement reimbToCancel = userReiContext.getReimbursement();
+		User reiCreator = userReiContext.getUser();
+		
+		Reimbursement reimbExist = employeeService
+				.getReiByIdAndAuthor(reimbToCancel, reiCreator);		
+		
+		if (reimbExist == null)
+			return "Cannot complete request";
+		else if (reimbExist.getReiStatus() == ReiStatus.APPROVED || reimbExist.getReiStatus() == ReiStatus.DENIED)
+			return "Cannot delete a processed request";
+		else			
+			return employeeService.cancelReimbursement(reimbExist);		
 	}
 	
 }

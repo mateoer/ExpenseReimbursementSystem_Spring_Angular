@@ -1,0 +1,147 @@
+<app-navbar></app-navbar>
+<div class="background">
+<app-profile-picture></app-profile-picture>
+<div class="form-container">
+
+  <div>
+    <!-- <h2>EMPLOYEE HOME </h2>     -->
+      <h2 id="welcomeTextName">Welcome, {{getUser() | uppercase }}</h2>    
+  </div><br><br><br>
+
+  <div class="singin">
+    <h3 style="margin-left:10px;">CREATE NEW REIMBURSEMENT REQUEST</h3>
+    
+    <form novalidate #myForm="ngForm" (ngSubmit)="createNewReimbursement()"   style="margin-left:10px;">
+      
+      <select name="type" style="margin-right: 10px;" class="btn " placeholder="enter type"
+        [(ngModel)]="newReimbursementObj.reiType" required> 
+        <option disabled value="" placeholder="type">type</option>
+        <option *ngFor="let t of typesOfReimbursement" [value]="t">{{t}}</option>
+      </select>
+      <input type="text"  placeholder="enter description" style="margin-right: 10px;" class="btn "
+          name="description" [(ngModel)]="newReimbursementObj.rei_description"  required>
+      <input placeholder="enter amount" type="number" style="margin-right: 10px;" class="btn "
+          name="amount" [(ngModel)]="newReimbursementObj.rei_amount" required>
+      <input type="submit" value="Create" class="btn " [disabled]="myForm.invalid">
+
+    </form>
+    <br><br>
+  
+
+  </div> 
+  
+  <div>
+  <div  >
+    <br>
+    <h3 style="margin-left:10px;">REIMBURSEMENT REQUESTS</h3>    
+    <select style="margin-right: 10px;margin-left: 10px;" id="filterReis" class="btn "
+      name="reimbs" [(ngModel)]="selected" (ngModelChange)="onSelect()" >
+      <!-- <option disabled selected>Filter</option> -->
+      <option *ngFor="let reis of filterRei; let i = index " [value]="reis">
+        {{reis}}
+      </option>          
+    </select>
+    <select style="margin-right: 10px;" id="filterReiT" name="reimbs" class="btn " 
+          [(ngModel)]="selectedType" (ngModelChange)="onSelectType()" >
+      <!-- <option disabled selected>Filter</option> -->
+      <option *ngFor="let reiT of filterReiType; let i = index " [value]="reiT" >
+        {{reiT}}
+      </option>           
+    </select>
+
+    <input class="blue" id="Refresh" style="margin-right: 10px;" class="btn "
+        type="submit" value="Remove Filter" (click)="removeFilter()" />
+    <input class="blue" id="Refresh" type="submit"                    class="btn "
+        value="Refresh" (click)="refreshTable()" style="margin-right: 10px;"/>
+  </div>
+    
+<!-- MODAL START-->
+
+<!-- MODAL END -->
+
+    <br>
+    <!-- TABLE STARTS HERE -->
+    
+    <div [style.visibility]="dataLoading ? 'hidden' : 'visible' ">
+      <div class="example-container ">
+        <table mat-table [dataSource]="dataSource" matSort >
+          
+    <!-- ROW DEFINITIONS START -->
+          <ng-container matColumnDef="ID">
+            <tr><th mat-header-cell *matHeaderCellDef mat-sort-header  >ID</th></tr>
+            <tr><td mat-cell *matCellDef="let row" style="width: 5%" >{{row.reiId}}</td></tr>
+          </ng-container>
+
+          <ng-container matColumnDef="Amount">
+            <tr><th mat-header-cell *matHeaderCellDef mat-sort-header   >AMOUNT</th></tr>
+            <tr><td mat-cell *matCellDef="let row" style="width: 20%">{{row.rei_amount | number:"1.2"}}</td></tr>
+          </ng-container>
+
+          <ng-container matColumnDef="Description">
+            <tr><th mat-header-cell *matHeaderCellDef mat-sort-header   >DESCRIPTION</th></tr>
+            <tr><td mat-cell *matCellDef="let row" style="width: 20%">{{row.rei_description | uppercase}}</td></tr>
+          </ng-container>
+
+          <ng-container matColumnDef="Status">
+            <tr><th mat-header-cell *matHeaderCellDef mat-sort-header   >STATUS</th></tr>
+            <tr><td mat-cell *matCellDef="let row" style="width: 15%">{{row.reiStatus}}</td></tr>
+          </ng-container>
+
+          <ng-container matColumnDef="Type">
+            <tr><th mat-header-cell *matHeaderCellDef mat-sort-header  >TYPE</th></tr>
+            <tr><td mat-cell *matCellDef="let row" style="width: 15%">{{row.reiType}}</td></tr>
+          </ng-container>
+
+          <ng-container matColumnDef="Submitted">
+            <tr><th mat-header-cell *matHeaderCellDef mat-sort-header   >SUBMITTED</th></tr>
+            <tr><td mat-cell *matCellDef="let row" style="width: 20%">{{row.rei_submitteDate | date:"MM/dd/yy"}}</td></tr>
+          </ng-container>
+
+          <ng-container matColumnDef="Resolved">
+            <tr><th mat-header-cell *matHeaderCellDef mat-sort-header   >RESOLVED</th></tr>
+            <tr><td mat-cell *matCellDef="let row" style="width: 30%">{{row.rei_resolvedDate ? (row.rei_resolvedDate | date:"MM/dd/yy") : '_____'}}</td></tr>
+          </ng-container>
+          
+    <!-- ROW DEFINITIONS END-->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="displayReimbursement(row)"></tr>
+        
+        </table>
+      </div>
+      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+    </div>
+    <!-- TABLE ENDS HERE -->
+  </div>
+  <br><br><br>
+  <button type="submit" class="btn btn-primary" routerLink="/login">Logout</button>
+</div>
+
+
+</div>
+
+
+
+<!-- <table id="empTable" class="table">
+  <thead>
+    <tr class="table-info">
+      <th scope="col">ID</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+      <th scope="col">Type</th>
+      <th scope="col">Submitted</th>
+      <th scope="col">Resolved</th>          
+    </tr>
+  </thead>
+  <tbody id="empTableBody"></tbody>
+  <tr *ngFor="let rei of reiArray"> 
+    <td>{{rei.reiId}}</td>
+    <td>{{rei.rei_amount | number:"1.2" }}</td>
+    <td>{{rei.rei_description | uppercase}}</td>  
+    <td>{{rei.reiStatus}}</td>  
+    <td>{{rei.reiType}}</td>
+    <td>{{rei.rei_submitteDate | date:"MM/dd/yy"}}</td>            
+    <td>{{rei.rei_resolvedDate ? (rei.rei_resolvedDate | date:"MM/dd/yy") : '_____'}}</td>            
+  </tr>      
+</table> -->

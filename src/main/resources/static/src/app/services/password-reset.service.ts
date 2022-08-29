@@ -1,20 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GeneralRouteService } from './general-route.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PasswordResetService {
 
-  constructor(private http: HttpClient) {}
-
-  API_URL = `http://localhost:9050`;
-  FROM_LOGIN = `${this.API_URL}/validateUserEmail`;
-  FROM_HOME = `${this.API_URL}/validateUserPassword`;
-  RESET_WITH_TOKEN = `${this.API_URL}/validateResetToken`;
+  constructor(private http: HttpClient, private urlService: GeneralRouteService) {} 
+  
 
   validateFromLogin(username: string, email: string){
-    return this.http.post(`${this.FROM_LOGIN}`, 
+    return this.http.post(`${this.urlService.FROM_LOGIN}`, 
     {
       "username": username,
       "email": email
@@ -23,7 +20,7 @@ export class PasswordResetService {
   }
 
   validateFromHome(oldpassword: string, newpassword: string){
-    return this.http.post(`${this.FROM_HOME}`,
+    return this.http.post(`${this.urlService.FROM_HOME}`,
     {
       "user":{
         "username": sessionStorage.getItem('username')!,
@@ -35,7 +32,7 @@ export class PasswordResetService {
   }
 
   validateResetToken(resetToken: string, new_password: string){
-    return this.http.post(`${this.RESET_WITH_TOKEN}`,
+    return this.http.post(`${this.urlService.RESET_WITH_TOKEN}`,
     {
       "user":{
         "passwordResetToken": resetToken

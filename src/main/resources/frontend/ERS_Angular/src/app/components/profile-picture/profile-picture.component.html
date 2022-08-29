@@ -1,0 +1,15 @@
+<div class="pfp" type="file" >
+    <input type="file" id="imgupload" (change)="onFileSelected($event)" />
+    <div> 
+    <ng-container *ngIf="src != null ; else elseBlock" >
+        <div>
+            <img [src]="src" [width]="size" [height]="size" />        
+        </div>
+    </ng-container>
+    <ng-template #elseBlock >
+        <div>
+            <img [src]="placeholderPfp" [width]="size" [height]="size" />
+        </div>
+    </ng-template>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfilePictureComponent } from 'src/app/profile-picture/profile-picture.component';
+import { ProfilePictureComponent } from 'src/app/components/profile-picture/profile-picture.component';
 import { PasswordResetService } from 'src/app/services/password-reset.service';
 import { ProfilePictureService } from 'src/app/services/profile-picture.service';
 import { HomeResetComponent } from '../home-reset.component';

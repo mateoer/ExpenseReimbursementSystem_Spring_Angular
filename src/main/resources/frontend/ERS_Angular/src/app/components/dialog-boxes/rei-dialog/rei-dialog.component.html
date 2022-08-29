@@ -1,0 +1,60 @@
+<div mat-dialog-content >
+    <button mat-button class="closeX ml-auto"  (click)="onNoClick()" >
+        &#10006;
+    </button>
+    <hr>
+
+    <div>
+    <mat-grid-list cols="3" rowHeight="25px" style="background-color: aliceblue;">
+        <mat-grid-tile><b>ID</b></mat-grid-tile> 
+        <mat-grid-tile><b>Amount</b></mat-grid-tile>
+        <mat-grid-tile><b>Submitted On</b></mat-grid-tile>
+        <mat-grid-tile>{{data.reiId}}</mat-grid-tile>
+        <mat-grid-tile>{{data.rei_amount | currency}}</mat-grid-tile>
+            <!-- <div *ngIf="editOn; else elseblock">
+                <input matInput [ngModel]="data.rei_amount">
+            </div>
+            <ng-template #elseblock>
+                <mat-grid-tile>{{data.rei_amount | currency}}</mat-grid-tile>
+            </ng-template> -->
+        
+        <mat-grid-tile>{{data.rei_submitteDate | date:"MM/dd/yy"}}</mat-grid-tile>
+    </mat-grid-list>
+    <hr>
+    <mat-grid-list cols="3" rowHeight="25px" style="background-color: aliceblue;">
+        <mat-grid-tile><b>Type</b></mat-grid-tile>
+        <mat-grid-tile><b>Status</b></mat-grid-tile>
+        <mat-grid-tile><b>Resolved On</b></mat-grid-tile>
+        <mat-grid-tile>{{data.reiType}}</mat-grid-tile>
+        <mat-grid-tile>{{data.reiStatus}}</mat-grid-tile>
+        <mat-grid-tile>{{data.rei_resolvedDate ? (data.rei_resolvedDate | date:"MM/dd/yy") : 'Unresolved'}}</mat-grid-tile>
+    </mat-grid-list>
+    <hr> 
+    <mat-grid-list cols="1" rowHeight="25px" style="background-color: aliceblue;" align="left">
+        <mat-grid-tile><b>Description</b></mat-grid-tile>
+        <mat-grid-tile>{{data.rei_description | uppercase}}</mat-grid-tile>
+    </mat-grid-list>
+    <hr><br>
+    </div>
+
+
+  <div *ngIf="responseMessage != '' " style="color:red;">    
+    <br>
+    {{responseMessage}}
+    <br><br>
+  </div>   
+  
+  <div mat-dialog-actions>
+    <div>
+        <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
+            (click)="onNoClick()">Close</button>
+    </div>      
+    <div *ngIf="data.reiStatus == 'PENDING'">
+        <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
+            (click)="cancelReimbursement()">Delete Reimbursement</button>
+        <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
+            (click)="editReimbursement()">Edit Reimbursement</button>
+    </div>   
+  </div>
+<!-- </form> -->
+</div>

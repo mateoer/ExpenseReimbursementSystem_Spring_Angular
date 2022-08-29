@@ -40,12 +40,26 @@ public class EmployeeService implements EmployeeServiceInterface {
 		reimb.setReiStatus(ReiStatus.PENDING);
 		Reimbursement myReimb = reiRepo.save(reimb);
 		return myReimb;
-	}
-
+	}	
 
 	@Override
 	public User getUserName(User reqUser) {		
 		return userRepo.findByUserId(reqUser.getUserId());
+	}
+	
+	@Override
+	public String cancelReimbursement(Reimbursement reimb) {
+		Reimbursement reiToCancel = reiRepo.findByReiId(reimb.getReiId());
+		if(reiToCancel != null) {
+			reiRepo.delete(reiToCancel);
+			return "Reimbursement was deleted";
+		}
+		return "Reimbursement not found";
+	}
+	
+	@Override
+	public Reimbursement getReiByIdAndAuthor(Reimbursement reimb, User user) {
+		return reiRepo.findByReiIdAndReiAuthor(reimb.getReiId(), user.getUserId());
 	}
 
 }

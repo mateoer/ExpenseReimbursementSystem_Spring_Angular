@@ -2,17 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserCredentials } from '../interfaces/user-credentials';
+import { GeneralRouteService } from './general-route.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfilePictureService {
 
-  constructor(private http: HttpClient) { }
-
-  API_URL = `http://localhost:9050`;
-  UPLOAD_PFP = `${this.API_URL}/uploadPfp`;
-  GET_PFP = `${this.API_URL}/getPfp`;
+  constructor(private http: HttpClient, private urlService: GeneralRouteService) { }  
 
   getProfilePicture(): Observable<string>{    
       let myUser: UserCredentials = {
@@ -28,11 +25,11 @@ export class ProfilePictureService {
         },
         found: JSON.parse(sessionStorage.getItem('found')!)
       }     
-    return this.http.post<string>(`${this.GET_PFP}`, myUser, { responseType: 'text' as 'json' });    
+    return this.http.post<string>(`${this.urlService.GET_PFP}`, myUser, { responseType: 'text' as 'json' });    
   }
 
   uploadProfilePicture(formDataToSend: FormData){    
-    return this.http.post(`${this.UPLOAD_PFP}`, formDataToSend, { responseType: 'text' as 'json' });
+    return this.http.post(`${this.urlService.UPLOAD_PFP}`, formDataToSend, { responseType: 'text' as 'json' });
   }
 
  
