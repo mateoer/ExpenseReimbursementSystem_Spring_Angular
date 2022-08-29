@@ -10,6 +10,7 @@ import root.dao.ReimbursementRepository;
 import root.dao.UserRepository;
 import root.model.Reimbursement;
 import root.model.User;
+import root.model.UserRole;
 import root.model.enumscontainer.ReiStatus;
 
 @Service
@@ -34,12 +35,22 @@ public class EmployeeService implements EmployeeServiceInterface {
 
 	@Override
 	public Reimbursement addReimbursement(Reimbursement reimb, User user) {
-		reimb.setReiAuthor(user.getUserId());
-		LocalDateTime lcdt = LocalDateTime.now();
-		reimb.setRei_submitteDate(lcdt);
-		reimb.setReiStatus(ReiStatus.PENDING);
-		Reimbursement myReimb = reiRepo.save(reimb);
-		return myReimb;
+		
+		User reqUser = userRepo.findByUserId(user.getUserId());
+		
+		if (reqUser != null) {
+			if (reqUser.getUserRole() == UserRole.EMPLOYEE) {
+				reimb.setReiAuthor(user.getUserId());
+				LocalDateTime lcdt = LocalDateTime.now();
+				reimb.setRei_submitteDate(lcdt);
+				reimb.setReiStatus(ReiStatus.PENDING);
+				Reimbursement myReimb = reiRepo.save(reimb);
+				
+				return myReimb;
+			}			
+		}
+		
+		return null;
 	}	
 
 	@Override

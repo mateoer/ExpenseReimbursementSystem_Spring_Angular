@@ -30,11 +30,18 @@ public class EmployeeController {
 	//addNewReimbursement
 	@PostMapping("/addreimbursement")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Reimbursement addReimbursement(@RequestBody UserReiContext userReiContext){		
+	public String addReimbursement(@RequestBody UserReiContext userReiContext){		
 		Reimbursement newReimbursement = userReiContext.getReimbursement();
-		System.out.println("\nNew Reimbursement Added\n");
-		User user =  userReiContext.getUser();		
-		return employeeService.addReimbursement(newReimbursement, user);
+		User user =  userReiContext.getUser();
+		
+		if (newReimbursement != null & user != null) {
+			Reimbursement dummyRei = employeeService.addReimbursement(newReimbursement, user);
+			if (dummyRei != null) {
+				System.out.println("\nNew Reimbursement Added\n");
+				return "New reimbursement added!";
+			}
+		}		
+		return "Something went wrong";
 	}
 	
 	//getAllReimbursements
