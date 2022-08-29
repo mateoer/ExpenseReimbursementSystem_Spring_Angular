@@ -20,6 +20,9 @@ import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
+
+  newReimbCreatedMessage: any = '';
+
   constructor(public empService : EmployeeService, 
               public loginComponent: LoginComponent,
               public _route: Router,
@@ -32,13 +35,13 @@ export class EmployeeComponent implements OnInit {
       if (JSON.parse(sessionStorage.getItem('found')!) == false) {
         this._route.navigate(["/login"]);
       }
-      this.empService.getEmpReimbursements()
-          .subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);    
-      this.empService.getEmpReimbursements().subscribe(reiArray =>
-        {
-          this.reiArray = reiArray;
-          this.reiArray.sort((a,b)=> b.reiId - a.reiId); 
-        });
+      // this.empService.getEmpReimbursements()
+      //     .subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);    
+      // this.empService.getEmpReimbursements().subscribe(reiArray =>
+      //   {
+      //     this.reiArray = reiArray;
+      //     this.reiArray.sort((a,b)=> b.reiId - a.reiId); 
+      //   });
 
 
         ///////new table function
@@ -65,6 +68,8 @@ export class EmployeeComponent implements OnInit {
       (reimbursements : EmpReimbursements[]) => 
       {
         reimbursements.sort((a,b)=> b.reiId - a.reiId);
+        this.reimbsCopyArray = reimbursements;
+        this.reiArray = reimbursements;        
         this.handleReimbursements(reimbursements);  
       }    
     );
@@ -106,14 +111,21 @@ export class EmployeeComponent implements OnInit {
     rei_description: '',
     reiType: ReiType.OTHER,
     reiStatus: Status.PENDING,
-    reiId: 0
+    reiId: NaN
   };  
    
   public createNewReimbursement() { 
-    this.empService.newReimbursement(this.newReimbursementObj).subscribe();
+    this.empService.newReimbursement(this.newReimbursementObj)
+        .subscribe((e:any)=> 
+        {
+            this.newReimbCreatedMessage = e;
+        });
     this.newReimbursementObj.rei_description = '';
     this.newReimbursementObj.rei_amount = NaN;
     this.newReimbursementObj.reiType = ReiType.OTHER;
+    setTimeout(() => {
+      this.newReimbCreatedMessage = ''
+    }, 2000);
   }
 
   public getUser(){
@@ -125,30 +137,24 @@ export class EmployeeComponent implements OnInit {
 
   public onSelect(){
     if (this.selected == ' ') {
-      this.reiArray = this.reimbsCopyArray;       
-      return this.reiArray.sort((a,b)=> b.reiId - a.reiId);
+      return this.dataSource = new MatTableDataSource(this.reiArray);
     } 
       this.selectedType = ' ';
-      return this.reiArray = this.reimbsCopyArray
-        .sort((a,b)=> b.reiId - a.reiId)
-          .filter(e => e.reiStatus == this.selected);      
+      return this.dataSource = new MatTableDataSource(this.reimbsCopyArray.filter(e => e.reiStatus == this.selected));      
   }
 
   public onSelectType(){
-    if (this.selectedType == ' ') {
-      this.reiArray = this.reimbsCopyArray; 
-      return this.reiArray.sort((a,b)=> b.reiId - a.reiId);
+    if (this.selectedType == ' ') {       
+      return this.dataSource = new MatTableDataSource(this.reiArray);
     } 
       this.selected = ' ';
-      return this.reiArray = this.reimbsCopyArray
-        .sort((a,b)=> b.reiId - a.reiId)
-          .filter(e => e.reiType == this.selectedType);
+      return this.dataSource = new MatTableDataSource(this.reimbsCopyArray.filter(e => e.reiType == this.selectedType));
   }
   
   public removeFilter(){
     this.selected = ' ';
     this.selectedType = ' ';
-    this.reiArray = this.reimbsCopyArray; 
+    this.dataSource = new MatTableDataSource(this.reimbsCopyArray);
   }
 
   public refreshTable(){    

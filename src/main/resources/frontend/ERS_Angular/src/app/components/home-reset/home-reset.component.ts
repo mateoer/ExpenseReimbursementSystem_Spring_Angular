@@ -17,7 +17,7 @@ export class HomeResetComponent implements OnInit {
   password= '';
   new_password='';
   re_new_password='';
-  userImage: string = "https://ssl.gstatic.com/accounts/ui/avatar_2x.png";
+  userImage: string = "../../../assets/avatar_2x.png";
   ngOnInit() {
     
     if (sessionStorage.getItem('profilePicture') != 'null' || '' || null || undefined) {

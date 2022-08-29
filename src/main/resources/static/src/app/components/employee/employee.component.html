@@ -23,8 +23,12 @@
       <input placeholder="enter amount" type="number" style="margin-right: 10px;" class="btn "
           name="amount" [(ngModel)]="newReimbursementObj.rei_amount" required>
       <input type="submit" value="Create" class="btn " [disabled]="myForm.invalid">
-
     </form>
+    <div *ngIf="newReimbCreatedMessage != ''" style="color:blue;" >
+      <br>
+      {{newReimbCreatedMessage}}
+      <br>
+    </div>
     <br><br>
   
 

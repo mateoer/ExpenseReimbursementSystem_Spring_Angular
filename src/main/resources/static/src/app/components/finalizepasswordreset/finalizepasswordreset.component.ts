@@ -21,7 +21,7 @@ export class FinalizepasswordresetComponent implements OnInit {
     if (sessionStorage.getItem('profilePicture') != 'null') {
       this.pfp.getProfilePicture().subscribe(userImage => this.userImage = userImage );      
     }else{
-      this.userImage = "//ssl.gstatic.com/accounts/ui/avatar_2x.png";
+      this.userImage = "../../../assets/avatar_2x.png";
     }
   }
 

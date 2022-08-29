@@ -14,7 +14,7 @@ export class ProfilePictureComponent implements OnInit {
   
   src: any = null;  
   size = 200;   
-  placeholderPfp = "https://via.placeholder.com/200.png?text=Avitar-Picture";
+  placeholderPfp = "../../../assets/avatar_2x.png";
 
   constructor(private profileService: ProfilePictureService, public loginService: LoginService) { }
 

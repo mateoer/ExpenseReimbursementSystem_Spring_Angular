@@ -31,11 +31,11 @@ export class ManagerComponent implements OnInit {
     if (JSON.parse(sessionStorage.getItem('found')!) == false) {
       this._route.navigate(["/login"]);
     }
-    this.mngService.viewListOfAllReimbursements().subscribe(copyOfReiList => this.copyOfReiList = copyOfReiList);
-    this.mngService.viewListOfAllReimbursements().subscribe(reiList => {
-      this.reiList = reiList;
-      this.reiList.sort((a,b)=> b.reiId - a.reiId);
-    });
+    // this.mngService.viewListOfAllReimbursements().subscribe(copyOfReiList => this.copyOfReiList = copyOfReiList);
+    // this.mngService.viewListOfAllReimbursements().subscribe(reiList => {
+    //   this.reiList = reiList;
+    //   this.reiList.sort((a,b)=> b.reiId - a.reiId);
+    // });
 
     ///////new table function
     this.loadReimbursements();
@@ -62,6 +62,8 @@ export class ManagerComponent implements OnInit {
       (reimbursements : EmpReimbursements[]) => 
       {
         reimbursements.sort((a,b)=> b.reiId - a.reiId);
+        this.reiList = reimbursements;
+        this.copyOfReiList = reimbursements;
         this.handleReimbursements(reimbursements);  
       }    
     );
@@ -131,30 +133,24 @@ export class ManagerComponent implements OnInit {
 
   public onSelect(){
     if (this.selected == ' ') {
-      this.reiList = this.copyOfReiList;       
-      return this.reiList.sort((a,b)=> b.reiId - a.reiId);
+      return this.dataSource = new MatTableDataSource(this.reiList);
     } 
       this.selectedType = ' ';
-      return this.reiList = this.copyOfReiList
-        .sort((a,b)=> b.reiId - a.reiId)
-          .filter(e => e.reiStatus == this.selected);      
+      return this.dataSource = new MatTableDataSource(this.copyOfReiList.filter(e => e.reiStatus == this.selected));      
   }
 
   public onSelectType(){
-    if (this.selectedType == ' ') {
-      this.reiList = this.copyOfReiList; 
-      return this.reiList.sort((a,b)=> b.reiId - a.reiId);
+    if (this.selectedType == ' ') {       
+      return this.dataSource = new MatTableDataSource(this.reiList);
     } 
       this.selected = ' ';
-      return this.reiList = this.copyOfReiList
-        .sort((a,b)=> b.reiId - a.reiId)
-          .filter(e => e.reiType == this.selectedType);
+      return this.dataSource = new MatTableDataSource(this.copyOfReiList.filter(e => e.reiType == this.selectedType));
   }
   
   public removeFilter(){
     this.selected = ' ';
     this.selectedType = ' ';
-    this.reiList = this.copyOfReiList; 
+    this.dataSource = new MatTableDataSource(this.copyOfReiList);
   }
 
   public refreshTable(){

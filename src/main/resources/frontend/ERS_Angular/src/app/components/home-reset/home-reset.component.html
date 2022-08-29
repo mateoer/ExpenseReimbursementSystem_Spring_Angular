@@ -29,13 +29,13 @@
             <br> 
             <div class="form-group">
               <div *ngIf="message != ''; else elseBlock ">
-                <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
+                <input type="submit" style="background-color:rgb(78, 225, 225); color: black; border-color: black;"         
                 class="btn btn-primary" class="form-control"          
                 value="Back to Home menu" 
                 (click)="back()">
               </div> 
               <ng-template #elseBlock>
-              <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
+              <input type="submit" style="background-color:rgb(78, 225, 225); color: black; border-color: black;"         
                 class="btn btn-primary" class="form-control"          
                 value="Reset password" 
                 [disabled]="myLoginGroup.invalid">

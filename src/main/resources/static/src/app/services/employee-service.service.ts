@@ -31,19 +31,20 @@ export class EmployeeService {
     return this.http.post<UserName>(`${this.urlService.GET_USER}`, user);
   }  
 
-  public newReimbursement(NRO: Reimbursement): Observable<any> | any{    
-      const headers = { 'content-type': 'application/json'}; 
-      const reimbursement = NRO;
-      let myUserId = JSON.parse(sessionStorage.getItem('userId')!);
-      const user: UserId = {
-        userId: myUserId
-      };  
+  public newReimbursement(newReimbursement: Reimbursement): Observable<any> | any{    
+      
       return this.http.post<any>(`${this.urlService.NEW_REI}`,  
       {
-        reimbursement,
-        user    
+        "user":{
+          "userId": JSON.parse(sessionStorage.getItem('userId')!)
+        },
+        "reimbursement":{
+          "rei_amount": newReimbursement.rei_amount,
+          "rei_description": newReimbursement.rei_description,
+          "reiType": newReimbursement.reiType
+        }
       }
-      , {'headers':headers} );    
+      , { responseType: 'text' as 'json' } );    
   } 
 
   public cancelReimbursement(reimbId: number): Observable<any> | any{     
