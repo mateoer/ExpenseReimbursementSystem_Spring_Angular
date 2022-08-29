@@ -38,22 +38,27 @@ public class ManagerService implements ManagerServiceInterface {
 		User dummyUser = userRepo.findByUserId(user.getUserId());
 		Reimbursement mdaReimbursement = new Reimbursement(); 
 		
-		if (dummyUser != null | dummyUser.getUserRole() == UserRole.MANAGER) {
-			mdaReimbursement = reiRepo.findByReiId(reimb.getReiId());
-			mdaReimbursement.setReiStatus(ReiStatus.APPROVED);
-			LocalDateTime lcdt = LocalDateTime.now();
-			mdaReimbursement.setRei_resolvedDate(lcdt);
-			reiRepo.save(mdaReimbursement);
-			
-			//EMAIL NOTIFICATION		
-//		int userAuthorId = mdaReimbursement.getReiAuthor();
-//		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
-//		String subject = "Reimbursement ACCEPTED";
-//		String emailContent = "Your reimbursement has been ACCEPTED";
-//		emailService.sendSimpleMessage(userEmail, subject, emailContent);
+		if (dummyUser != null) {
+			if (dummyUser.getUserRole() == UserRole.MANAGER) {
+				
+				mdaReimbursement = reiRepo.findByReiId(reimb.getReiId());
+				mdaReimbursement.setReiStatus(ReiStatus.APPROVED);
+				LocalDateTime lcdt = LocalDateTime.now();
+				mdaReimbursement.setRei_resolvedDate(lcdt);
+				reiRepo.save(mdaReimbursement);
+				
+				//EMAIL NOTIFICATION		
+		//		int userAuthorId = mdaReimbursement.getReiAuthor();
+		//		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
+		//		String subject = "Reimbursement ACCEPTED";
+		//		String emailContent = "Your reimbursement has been ACCEPTED";
+		//		emailService.sendSimpleMessage(userEmail, subject, emailContent);
+				
+				return mdaReimbursement;
+			} 
 			
 		}		
-		return reiRepo.findByReiId(mdaReimbursement.getReiId());	
+		return null;	
 	}
 
 	@Override
@@ -62,23 +67,27 @@ public class ManagerService implements ManagerServiceInterface {
 		User dummyUser = userRepo.findByUserId(user.getUserId());
 		Reimbursement myReimbursement = new Reimbursement();
 		
-		if (dummyUser != null | dummyUser.getUserRole() == UserRole.MANAGER) {
-		
-			myReimbursement = reiRepo.findByReiId(reimb.getReiId()); 				
-			myReimbursement.setReiStatus(ReiStatus.DENIED);
-			LocalDateTime lcdt = LocalDateTime.now();
-			myReimbursement.setRei_resolvedDate(lcdt);
-			reiRepo.save(myReimbursement);
-		
-		//EMAIL NOTIFICATION
-	//		int userAuthorId = myReimbursement.getReiAuthor();
-	//		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
-	//		String subject = "Reimbursement REJECTED";
-	//		String emailContent = "Your reimbursement was REJECTED";
-	//		emailService.sendSimpleMessage(userEmail, subject, emailContent);
+		if (dummyUser != null) {
+			if (dummyUser.getUserRole() == UserRole.MANAGER) {
+				
+				myReimbursement = reiRepo.findByReiId(reimb.getReiId()); 				
+				myReimbursement.setReiStatus(ReiStatus.DENIED);
+				LocalDateTime lcdt = LocalDateTime.now();
+				myReimbursement.setRei_resolvedDate(lcdt);
+				reiRepo.save(myReimbursement);
+				
+				//EMAIL NOTIFICATION
+				//		int userAuthorId = myReimbursement.getReiAuthor();
+				//		String userEmail = userRepo.findByUserId(userAuthorId).getEmail();
+				//		String subject = "Reimbursement REJECTED";
+				//		String emailContent = "Your reimbursement was REJECTED";
+				//		emailService.sendSimpleMessage(userEmail, subject, emailContent);
+				
+				return myReimbursement;
+			} 
 			
 		}
-		return reiRepo.findByReiId(myReimbursement.getReiId());	
+		return null;	
 	}	
 
 	@Override
