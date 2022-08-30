@@ -41,6 +41,8 @@ To-do list:
 * Ability to reset passwords (***Done, will update soon)
 * Password hasshing functionality (***Done, will update soon)
 * Register new users (***Done, will update soon)
+* Ability to cancel/edit reimbursements (***Done, will update soon)
+* Clickable table rows (***Done, will update soon)
 
 
 ## Getting Started
