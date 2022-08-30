@@ -11,6 +11,7 @@ import root.model.Reimbursement;
 import root.model.User;
 import root.model.UserRole;
 import root.model.enumscontainer.ReiStatus;
+import root.service.interfaces.ManagerServiceInterface;
 import root.service.mail.EmailService;
 
 @Service

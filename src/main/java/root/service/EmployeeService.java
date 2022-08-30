@@ -12,6 +12,7 @@ import root.model.Reimbursement;
 import root.model.User;
 import root.model.UserRole;
 import root.model.enumscontainer.ReiStatus;
+import root.service.interfaces.EmployeeServiceInterface;
 
 @Service
 public class EmployeeService implements EmployeeServiceInterface {

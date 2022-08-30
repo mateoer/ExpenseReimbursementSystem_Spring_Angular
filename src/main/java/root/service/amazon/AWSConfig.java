@@ -1,4 +1,4 @@
-package root.util;
+package root.service.amazon;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

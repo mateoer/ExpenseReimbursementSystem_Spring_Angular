@@ -1,5 +1,6 @@
 package root.model;
 
+
 public enum UserRole {
 	MANAGER (Values.MANAGER),
 	EMPLOYEE (Values.EMPLOYEE);

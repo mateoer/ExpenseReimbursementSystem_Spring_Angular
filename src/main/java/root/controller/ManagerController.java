@@ -34,7 +34,7 @@ public class ManagerController {
 		return mangService.getUserName(reqUser);
 	}
 
-	
+	//viewListOfReimbursements
 	@GetMapping("/getlistofreimbursements")
 	public List<Reimbursement> viewListOfReimbursements() {
 		System.out.println("\nList of all Reimbursements retrieved\n");

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import root.dao.UserRepository;
 import root.model.User;
 import root.model.UserRole;
+import root.service.interfaces.UserServiceInterface;
 import root.service.mail.EmailService;
 
 @Service

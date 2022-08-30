@@ -25,7 +25,7 @@ import root.model.UserRole;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
 import root.service.EmployeeService;
-import root.service.EmployeeServiceInterface;
+import root.service.interfaces.EmployeeServiceInterface;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)

@@ -51,7 +51,8 @@ public class SessionController {
 	@GetMapping("/greetings")
 	public String greetings() {
 		System.out.println("\nGreetings\n" );
-		return "¯\\_(ツ)_/¯";
+//		return "¯\\_(ツ)_/¯";
+		return "";
 	}
 	
 	@PostMapping("/validateUserEmail")

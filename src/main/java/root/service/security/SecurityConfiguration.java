@@ -13,6 +13,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -21,39 +23,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfiguration {
 	
-	/*
-	 * //#5
-	 * 
-	 * @Autowired private DataSource dataSource;
-	 * 
-	 * @Bean public UserDetailsManager authenticateUsers() {
-	 * 
-	 * UserDetails user = User.withUsername("username")
-	 * .password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(
-	 * "password")).build(); JdbcUserDetailsManager users = new
-	 * JdbcUserDetailsManager(dataSource); users.
-	 * setAuthoritiesByUsernameQuery("select user_name,user_pwd,user_enabled from user where user_name=?"
-	 * ); users.
-	 * setUsersByUsernameQuery("select user_name,user_role from user where user_name=?"
-	 * ); users.createUser(user); return users; }
-	 */
+	 @Bean 
+	  public PasswordEncoder passwordEncoder() { 
+		  return new  BCryptPasswordEncoder(); 
+	  }
 	
-	/*
-	 * //#3
-	 * 
-	 * @Bean AuthenticationManager authenticationManager(AuthenticationConfiguration
-	 * authenticationConfiguration) throws Exception { return
-	 * authenticationConfiguration.getAuthenticationManager(); }
-	 */
-    
-	/*
-	 * //#4
-	 * 
-	 * @Bean public WebSecurityCustomizer webSecurityCustomizer() { return (web) ->
-	 * web.ignoring().antMatchers("/ignore1", "/ignore2"); }
-	 */  
-    
-    //#1
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable()					  
@@ -66,7 +40,6 @@ public class SecurityConfiguration {
 		return http.build();
 	}
 	
-	//#2
 	@Bean
     protected InMemoryUserDetailsManager configAuthentication() {
 

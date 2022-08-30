@@ -1,4 +1,4 @@
-package root.service;
+package root.service.interfaces;
 
 import java.util.List;
 
