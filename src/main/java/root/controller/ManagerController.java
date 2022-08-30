@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import root.model.Reimbursement;
 import root.model.User;
+import root.model.UserReiContext;
 import root.service.ManagerService;
 
 @RestController
@@ -43,17 +44,38 @@ public class ManagerController {
 	// approveReimbursements
 	@PostMapping("/approvereimbursement")
 	@ResponseStatus(HttpStatus.OK)
-	public Reimbursement approveReimbursement(@RequestBody Reimbursement reimb) {
+	public String approveReimbursement(@RequestBody UserReiContext userReiContext) {
 		System.out.println("\nApproved\n");
-		return mangService.approveReimbursement(reimb);
+		
+		Reimbursement reimbToApprove = userReiContext.getReimbursement();
+		User managerUser = userReiContext.getUser();
+		
+		if (reimbToApprove != null & managerUser != null) {
+			
+			Reimbursement dummyRei = mangService.approveReimbursement(reimbToApprove, managerUser);
+			if (dummyRei != null) {
+				return "Reimbursement was approved!";				
+			}
+		}
+		return "Something went wrong";
 	}
 
 	// denyReimbursements
 	@PostMapping("/denyreimbursement")
 	@ResponseStatus(HttpStatus.OK)
-	public Reimbursement denyReimbursement(@RequestBody Reimbursement reimb) {
+	public String denyReimbursement(@RequestBody UserReiContext userReiContext) {
 		System.out.println("\nDenied\n");
-		return mangService.denyReimbursement(reimb);
+
+		Reimbursement reimbToDeny = userReiContext.getReimbursement();
+		User managerUser = userReiContext.getUser();
+		
+		if (reimbToDeny != null & managerUser != null) {
+			Reimbursement dummyRei = mangService.denyReimbursement(reimbToDeny, managerUser);
+			if (dummyRei != null) {
+				return "Reimbursement was rejected succesfully!";
+			}
+		}
+		return "Something went wrong";
 	}	
 
 	

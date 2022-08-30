@@ -24,12 +24,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Setter
-
 @Getter
-
 @AllArgsConstructor
-
 @ToString
+
 @Entity
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorValue("user_role")
@@ -63,6 +61,12 @@ public class User {
 	@Column(name = "user_role")
 	@Enumerated (EnumType.STRING)
 	private UserRole userRole;	
+	
+	@Column(name = "password_reset_token")
+	private String passwordResetToken;
+	
+	@Column(name = "profile_picture_name")
+	private String profilePicName;
 	
 	@Transient
 //	@JsonManagedReference

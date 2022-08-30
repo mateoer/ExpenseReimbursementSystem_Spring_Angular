@@ -6,7 +6,8 @@ export interface UserCredentials {
         firstName: string,
         lastName: string,
         email: string,
-        userRole: string
+        userRole: string,
+        profilePicName: string
     },
     found: boolean
 }

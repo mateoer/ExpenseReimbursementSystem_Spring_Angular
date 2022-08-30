@@ -1,8 +1,35 @@
 server:
   port: 9050
- 
-spring:
 
+cloud:
+  aws:
+    region:
+      static: us-east-1       
+    credentials:
+      access-key: ${AWSAccessKeyId}
+      secret-key: ${AWSSecretKey}
+    stack:
+      auto: false
+      
+    
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
+        
+spring:
+  
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 10MB
+  autoconfigure:
+    exclude:
+      - org.springframework.cloud.aws.autoconfigure.context.ContextInstanceDataAutoConfiguration
+      - org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
+      - org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration  
   datasource:
     url: jdbc:postgresql://${ERS_DB_ENDPOINT}/${ERS_DB_DBNAME}
     
@@ -19,5 +46,18 @@ spring:
       ddl-auto: none
 #      ddl-auto: create-drop
 #       ddl-auto: create
-  
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    port: 587
+    username: user987456321789
+    password: obgppatovkyrbdfn
+    properties:
+      mail: 
+        smtp: 
+          auth: true
+          starttls: 
+            enable: true
+    protocol: smtp
+    test-connection: false
       
