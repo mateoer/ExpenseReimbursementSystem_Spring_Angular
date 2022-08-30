@@ -36,7 +36,7 @@
                           
             <!-- Email, Re-Email -->
               <label for="email">Email</label>
-              <input required type="text" name="email" class="form-control"
+              <input required type="email" name="email" class="form-control"
                   #input      (ngModelChange)="onEmailFilled($event, input)"
                 placeholder="enter email"  [(ngModel)]="registrationForm.user.email" >
               <div *ngIf="emailAvailableMessage != '' ">

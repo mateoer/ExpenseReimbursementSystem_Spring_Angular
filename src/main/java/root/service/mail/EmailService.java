@@ -6,15 +6,15 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-@Service("EmailService")
-public class EmailService implements EmailServiceInterface {
+@Service
+public class EmailService {
 
     private static final String NOREPLY_ADDRESS = "user987456321789@gmail.com";
 
     @Autowired
     private JavaMailSender emailSender;
 
-    @Override
+    
     public void sendSimpleMessage(String to, String subject, String text) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
@@ -27,6 +27,22 @@ public class EmailService implements EmailServiceInterface {
         } catch (MailException exception) {
             exception.printStackTrace();
         }
+    }
+    
+    public boolean validEmailAddress(String userEmail) {
+    	
+    	String splitStringEmail [] = userEmail.split("\\.");
+    	
+    	if (!(userEmail.contains("@"))) return false;
+    	if (!(userEmail.matches("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"))) return false;
+    	if (splitStringEmail.length > 2) return false;
+    	
+    	String domain = splitStringEmail[splitStringEmail.length - 1].toLowerCase();
+    	if(!(domain.equals("com") || domain.equals("edu") || domain.equals("gov") || domain.equals("net")))
+    		return false;
+    	
+    	return true;
+    	
     }
 
 	   

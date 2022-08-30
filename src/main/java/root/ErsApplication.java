@@ -4,8 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-@SpringBootApplication /* (exclude = { SecurityAutoConfiguration.class }) */
-//@EnableWebMvc
+@SpringBootApplication 
 public class ErsApplication {
 
 	public static void main(String[] args) {

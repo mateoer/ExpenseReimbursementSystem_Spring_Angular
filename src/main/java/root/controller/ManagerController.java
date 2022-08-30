@@ -52,9 +52,9 @@ public class ManagerController {
 		
 		if (reimbToApprove != null & managerUser != null) {
 			
-			Reimbursement dummyRei = mangService.approveReimbursement(reimbToApprove, managerUser);
-			if (dummyRei != null) {
-				return "Reimbursement was approved!";				
+			String dummyReiResp = mangService.approveReimbursement(reimbToApprove, managerUser);
+			if (dummyReiResp != null) {
+				return dummyReiResp;				
 			}
 		}
 		return "Something went wrong";
@@ -70,9 +70,9 @@ public class ManagerController {
 		User managerUser = userReiContext.getUser();
 		
 		if (reimbToDeny != null & managerUser != null) {
-			Reimbursement dummyRei = mangService.denyReimbursement(reimbToDeny, managerUser);
-			if (dummyRei != null) {
-				return "Reimbursement was rejected succesfully!";
+			String dummyReiResp = mangService.denyReimbursement(reimbToDeny, managerUser);
+			if (dummyReiResp != null) {
+				return dummyReiResp;
 			}
 		}
 		return "Something went wrong";
