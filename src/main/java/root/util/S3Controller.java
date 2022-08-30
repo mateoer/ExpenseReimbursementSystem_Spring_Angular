@@ -57,7 +57,7 @@ public class S3Controller {
 		myUser.setProfilePicName(newFileName);
 		userRepo.save(myUser);
 
-		return storageServ.presignedUrl(newFileName);
+		return myUser.getProfilePicName();
 	}
 
 	@PostMapping("/getPfp")

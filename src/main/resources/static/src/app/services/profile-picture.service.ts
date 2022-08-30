@@ -29,7 +29,7 @@ export class ProfilePictureService {
   }
 
   uploadProfilePicture(formDataToSend: FormData){    
-    return this.http.post(`${this.urlService.UPLOAD_PFP}`, formDataToSend, { responseType: 'text' as 'json' });
+    return this.http.post(`${this.urlService.UPLOAD_PFP}`, formDataToSend, { responseType: 'text' as 'json' });     
   }
 
  

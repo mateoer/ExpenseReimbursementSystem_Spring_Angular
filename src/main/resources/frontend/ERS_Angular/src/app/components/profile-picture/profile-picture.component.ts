@@ -36,7 +36,12 @@ export class ProfilePictureComponent implements OnInit {
     let userId = sessionStorage.getItem('userId')!;
     myPfp.append('file', this.selectedFile);    
     myPfp.append('userId', userId);    
-    this.profileService.uploadProfilePicture(myPfp).subscribe(src => this.src = src);    
+    this.profileService.uploadProfilePicture(myPfp)
+        .subscribe((e: any) => 
+        {
+          sessionStorage.setItem('profilePicture', e);          
+          this.profileService.getProfilePicture().subscribe(src => this.src = src );    
+        });
   }  
 
 }
