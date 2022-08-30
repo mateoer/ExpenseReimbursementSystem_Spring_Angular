@@ -18,6 +18,7 @@ export class GeneralRouteService {
   GET_USER = `${this.API_URL}/getusername`;
   NEW_REI = `${this.API_URL}/addreimbursement`;
   DEL_REI = `${this.API_URL}/deleteReimbursement`;
+  EDIT_REI = `${this.API_URL}/updateReimbursement`;
 
   //manager
   VIEW_USER = `${this.API_URL}/getmngusername`;

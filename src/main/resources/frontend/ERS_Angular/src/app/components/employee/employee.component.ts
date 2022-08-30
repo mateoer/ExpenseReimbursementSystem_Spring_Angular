@@ -13,7 +13,9 @@ import { ReiDialogComponent } from '../dialog-boxes/rei-dialog/rei-dialog.compon
 import { BlockScrollStrategy, NoopScrollStrategy } from '@angular/cdk/overlay';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 
-
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -123,9 +125,10 @@ export class EmployeeComponent implements OnInit {
     this.newReimbursementObj.rei_description = '';
     this.newReimbursementObj.rei_amount = NaN;
     this.newReimbursementObj.reiType = ReiType.OTHER;
+    this.refreshTable();
     setTimeout(() => {
       this.newReimbCreatedMessage = ''
-    }, 2000);
+    }, 3000);
   }
 
   public getUser(){

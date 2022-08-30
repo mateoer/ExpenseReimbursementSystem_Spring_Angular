@@ -19,18 +19,18 @@
         <div style="display:inline-block; 
                     white-space: nowrap; text-align: right; min-width: 70px;">
         <a routerLink="/register" 
-            style="color:dodgerblue; cursor: pointer; 
+            style="color:rgb(27, 155, 155); cursor: pointer; 
               margin-right: 15px; margin-left: 120px;">Register</a>
            
         <a routerLink="/loginreset" 
-            style="color:dodgerblue; cursor: pointer">Forgot password?</a>
+            style="color:rgb(27, 155, 155);cursor: pointer;">Forgot password?</a>
         </div> 
         <br>   
         <div *ngIf="noUserFoundMessage != '' ">{{noUserFoundMessage}}</div>
         <br>
       <div class="form-group">
-        <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
-          class="btn btn-primary" class="form-control"          
+        <input type="submit"          
+          class="btn btn-primary  form-control"           
           value="Login" 
           [disabled]="myLoginGroup.invalid">
           

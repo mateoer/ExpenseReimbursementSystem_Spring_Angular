@@ -12,4 +12,6 @@ public interface EmployeeServiceInterface {
 	public List<Reimbursement> getAllReimbursementsByUserId(User user);
 	public String cancelReimbursement(Reimbursement reimb);
 	public Reimbursement getReiByIdAndAuthor(Reimbursement reimb, User user);
+	public Reimbursement updateReimbursement(Reimbursement reimb, User user);
+	
 }

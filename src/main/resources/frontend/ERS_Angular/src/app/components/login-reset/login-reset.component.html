@@ -1,7 +1,7 @@
 <div class="background">
 <div id="login-form">
     <div class="card card-container">
-      <img id="profile-img" src="../../../assets/avatar_2x.png" class="profile-img-card" />
+      <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
       <form novalidate  #myLoginGroup="ngForm" (ngSubmit)="passwordReset()" >
           <label for="username">Username</label>
           <input required type="text" name="username" class="form-control" 
@@ -23,14 +23,12 @@
           
         <div class="form-group">
           <div *ngIf="message != '';else elseBlock ">
-            <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
-            class="btn btn-primary" class="form-control"          
+            <input type="submit" class="btn btn-primary  form-control"          
             value="Back to Login" 
             routerLink="/login">
           </div> 
           <ng-template #elseBlock>
-          <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
-            class="btn btn-primary" class="form-control"          
+          <input type="submit" class="btn btn-primary  form-control"          
             value="Reset password" 
             [disabled]="myLoginGroup.invalid">
           </ng-template>
@@ -38,8 +36,7 @@
         <br>
       </form>
       <br>
-      <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
-            class="btn btn-primary" class="form-control"          
+      <input type="submit" class="btn btn-primary  form-control"        
             value="Cancel" 
             routerLink="/login">
     </div>

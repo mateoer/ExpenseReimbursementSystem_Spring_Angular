@@ -24,7 +24,7 @@
           name="amount" [(ngModel)]="newReimbursementObj.rei_amount" required>
       <input type="submit" value="Create" class="btn " [disabled]="myForm.invalid">
     </form>
-    <div *ngIf="newReimbCreatedMessage != ''" style="color:blue;" >
+    <div *ngIf="newReimbCreatedMessage != ''" style="color:rgb(8, 96, 96); font-size: 18px;" >
       <br>
       {{newReimbCreatedMessage}}
       <br>
@@ -68,7 +68,7 @@
     
     <div [style.visibility]="dataLoading ? 'hidden' : 'visible' ">
       <div class="example-container ">
-        <table mat-table [dataSource]="dataSource" matSort >
+        <table mat-table [dataSource]="dataSource" matSort class="user-table" >
           
     <!-- ROW DEFINITIONS START -->
           <ng-container matColumnDef="ID">

@@ -4,38 +4,55 @@
     </button>
     <hr>
 
-    <div>
-    <mat-grid-list cols="3" rowHeight="25px" style="background-color: aliceblue;">
-        <mat-grid-tile><b>ID</b></mat-grid-tile> 
-        <mat-grid-tile><b>Amount</b></mat-grid-tile>
-        <mat-grid-tile><b>Submitted On</b></mat-grid-tile>
-        <mat-grid-tile>{{data.reiId}}</mat-grid-tile>
-        <mat-grid-tile>{{data.rei_amount | currency}}</mat-grid-tile>
-            <!-- <div *ngIf="editOn; else elseblock">
-                <input matInput [ngModel]="data.rei_amount">
-            </div>
-            <ng-template #elseblock>
-                <mat-grid-tile>{{data.rei_amount | currency}}</mat-grid-tile>
-            </ng-template> -->
-        
-        <mat-grid-tile>{{data.rei_submitteDate | date:"MM/dd/yy"}}</mat-grid-tile>
-    </mat-grid-list>
-    <hr>
-    <mat-grid-list cols="3" rowHeight="25px" style="background-color: aliceblue;">
-        <mat-grid-tile><b>Type</b></mat-grid-tile>
-        <mat-grid-tile><b>Status</b></mat-grid-tile>
-        <mat-grid-tile><b>Resolved On</b></mat-grid-tile>
-        <mat-grid-tile>{{data.reiType}}</mat-grid-tile>
-        <mat-grid-tile>{{data.reiStatus}}</mat-grid-tile>
-        <mat-grid-tile>{{data.rei_resolvedDate ? (data.rei_resolvedDate | date:"MM/dd/yy") : 'Unresolved'}}</mat-grid-tile>
-    </mat-grid-list>
-    <hr> 
-    <mat-grid-list cols="1" rowHeight="25px" style="background-color: aliceblue;" align="left">
-        <mat-grid-tile><b>Description</b></mat-grid-tile>
-        <mat-grid-tile>{{data.rei_description | uppercase}}</mat-grid-tile>
-    </mat-grid-list>
-    <hr><br>
-    </div>
+    <mat-form-field>        
+        <input matInput disabled [ngModel]="data.reiId" placeholder="ID" >
+    </mat-form-field>
+
+    <!-- amount -->
+    <mat-form-field *ngIf="editOn">        
+            <input type="number" matInput [(ngModel)]="editedRei.rei_amount" placeholder="Amount"
+                            (ngModelChange)="editedRei.rei_amount=$event"
+                            style="background-color: rgb(78, 225, 225)">
+    </mat-form-field>
+    <mat-form-field *ngIf="!editOn">          
+            <input matInput disabled [ngModel]="data.rei_amount | currency" placeholder="Amount">                                            
+    </mat-form-field>   
+
+    <mat-form-field>
+        <input matInput disabled [ngModel]="data.rei_submitteDate | date:'MM/dd/yy' " placeholder="Submitted On">                                                    
+    </mat-form-field>
+    <br>
+
+    <!-- type -->
+    <mat-form-field *ngIf="editOn" >
+        <mat-label >Type</mat-label >
+        <mat-select name="type" [(ngModel)]="editedRei.reiType" placeholder="Type" 
+                                style="background-color: rgb(78, 225, 225)">       
+            <mat-option *ngFor="let t of typesOfReimbursement" [value]="t">{{t}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="!editOn">
+        <input matInput disabled [ngModel]="data.reiType" placeholder="Type">
+    </mat-form-field>
+    <!-- -------------------------  -->
+
+    <mat-form-field>
+        <input matInput disabled [ngModel]="data.reiStatus" placeholder="Status">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput disabled [ngModel]="data.rei_resolvedDate ? (data.rei_resolvedDate | date:'MM/dd/yy') : 'Unresolved' " placeholder="Resolved On">
+    </mat-form-field>
+    <br>
+    <!-- description -->
+    <mat-form-field *ngIf="editOn">
+        <input matInput [(ngModel)]="editedRei.rei_description" placeholder="Description"                        
+                                style="background-color: rgb(78, 225, 225); width:flex;">
+    </mat-form-field>
+    <mat-form-field *ngIf="!editOn">
+        <input matInput disabled [ngModel]="data.rei_description" placeholder="Description">
+    </mat-form-field>
+    
+    
 
 
   <div *ngIf="responseMessage != '' " style="color:red;">    
@@ -52,9 +69,13 @@
     <div *ngIf="data.reiStatus == 'PENDING'">
         <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
             (click)="cancelReimbursement()">Delete Reimbursement</button>
-        <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
+        <button mat-button class="btn btn-secondary" style="margin-right: 15px;"
             (click)="editReimbursement()">Edit Reimbursement</button>
-    </div>   
+    </div> 
+    <div *ngIf="editOn">
+        <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
+            (click)="saveChanges()">Save</button>
+    </div>  
   </div>
 <!-- </form> -->
 </div>

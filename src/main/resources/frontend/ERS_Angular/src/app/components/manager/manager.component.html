@@ -14,7 +14,7 @@
             <input type="number" placeholder="reimbursement id" name="reiAppId" class="btn "
                 style="margin-right: 10px;"  [(ngModel)]="reimbIdNumberApp" required>
             <input type="submit" value="Approve" [disabled]="appRei.invalid"   class="btn ">
-            <div *ngIf="reimbAppStatusMessage != ''" style="color:blue;" >
+            <div *ngIf="reimbAppStatusMessage != ''" style="color:rgb(8, 96, 96); font-size: 18px;" >
               <br>
               {{reimbAppStatusMessage}}
               <br>
@@ -27,7 +27,7 @@
             <input type="number" placeholder="reimbursement id" name="reiAppId" class="btn "
                 style="margin-right: 10px;"  [(ngModel)]="reimbIdNumberDeny" required>
             <input type="submit" value="Reject" [disabled]="denyRei.invalid"  class="btn ">
-            <div *ngIf="reimbDeniedStatusMessage != ''" style="color:blue;" >
+            <div *ngIf="reimbDeniedStatusMessage != ''" style="color:rgb(8, 96, 96); font-size: 18px;" >
               <br>
               {{reimbDeniedStatusMessage}}
               <br>
@@ -70,7 +70,7 @@
       
       <div [style.visibility]="dataLoading ? 'hidden' : 'visible' ">
         <div class="example-container ">
-          <table mat-table [dataSource]="dataSource" matSort >
+          <table mat-table [dataSource]="dataSource" matSort class="user-table">
             
       <!-- ROW DEFINITIONS START -->
             <ng-container matColumnDef="ID">

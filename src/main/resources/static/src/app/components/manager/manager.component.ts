@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Injectable, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmpReimbursements } from '../../interfaces/emp-reimbursements';
 import { LoginComponent } from '../login/login.component';
@@ -12,6 +12,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ReiDialogComponent } from '../dialog-boxes/rei-dialog/rei-dialog.component';
 import { MngDialogComponent } from '../dialog-boxes/mng-dialog/mng-dialog.component';
 
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
@@ -114,21 +117,28 @@ export class ManagerComponent implements OnInit {
     this.mngService.approveReimbursement(this.reimbIdNumberApp)
       .subscribe((e:any)=>
       {      
-        this.reimbAppStatusMessage = e;       
+        this.reimbAppStatusMessage = e; 
+        
       });      
       this.reimbIdNumberApp = NaN;
+      
       setTimeout(() => {
-        this.reimbAppStatusMessage = ''
-      }, 2000);
+        this.reimbAppStatusMessage = '';
+      }, 3000);
   }
 
   
   public denyReimb(){
-    this.mngService.denyReimbursement(this.reimbIdNumberDeny).subscribe((e:any)=> this.reimbDeniedStatusMessage = e);
+    this.mngService.denyReimbursement(this.reimbIdNumberDeny)
+      .subscribe((e:any)=>
+      {
+        this.reimbDeniedStatusMessage = e;
+        
+      });
     this.reimbIdNumberDeny = NaN;
     setTimeout(() => {
-      this.reimbDeniedStatusMessage = ''
-    }, 2000);
+      this.reimbDeniedStatusMessage = '';
+    }, 3000);
   }
 
   public onSelect(){
@@ -154,7 +164,6 @@ export class ManagerComponent implements OnInit {
   }
 
   public refreshTable(){
-    // window.location.reload();
     this.removeFilter();
     this.ngOnInit();
   }

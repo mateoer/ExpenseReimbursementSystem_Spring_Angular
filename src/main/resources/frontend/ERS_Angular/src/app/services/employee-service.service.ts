@@ -47,6 +47,22 @@ export class EmployeeService {
       , { responseType: 'text' as 'json' } );    
   } 
 
+  public editReimbursement(editedReimbursement:EmpReimbursements): Observable<any> | any {
+    return this.http.post<any>(`${this.urlService.EDIT_REI}`,
+    {
+      "user":{
+        "userId": JSON.parse(sessionStorage.getItem('userId')!)
+      },
+      "reimbursement":{
+        "reiId": editedReimbursement.reiId,
+        "rei_amount": editedReimbursement.rei_amount,
+        "rei_description": editedReimbursement.rei_description,
+        "reiType": editedReimbursement.reiType
+      }
+    }
+    , { responseType: 'text' as 'json' });
+  }
+
   public cancelReimbursement(reimbId: number): Observable<any> | any{     
        
       return this.http.post<any>(`${this.urlService.DEL_REI}`,  

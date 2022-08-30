@@ -14,11 +14,12 @@
                   placeholder="enter last name"  [(ngModel)]="registrationForm.user.lastName" >
                 <label for="userRole">User Role</label>   
                 <select style="margin-right: 10px;" id="filterReis" name="reimbs" [(ngModel)]="selectedRole" 
+                        class="btn "
                             required                   (ngModelChange)="onSelectRole()" >
                 <!-- <option disabled selected></option> -->
-                <option *ngFor="let role of userRole; let i = index " [value]="role">
+                    <option *ngFor="let role of userRole; let i = index " [value]="role">
                     {{role}}
-                </option>          
+                    </option>          
                 </select> 
             </div>
             <br><hr>
@@ -71,8 +72,7 @@
               <br>
               
             <div class="form-group">              
-              <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
-                class="btn btn-primary" class="form-control"          
+              <input type="submit" class="btn btn-primary  form-control"          
                 value="Register" 
                 [disabled]="myLoginGroup.invalid">              
             </div>
@@ -82,8 +82,7 @@
             <br>
           </form>
           <br>
-          <input type="submit" style="background-color:DodgerBlue; color: #fff;"         
-                class="btn btn-primary" class="form-control"          
+          <input type="submit" class="btn btn-primary  form-control"         
                 value="Cancel" 
                 routerLink="/login">
         </div>

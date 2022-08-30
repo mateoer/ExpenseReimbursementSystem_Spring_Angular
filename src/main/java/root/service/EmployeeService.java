@@ -73,4 +73,24 @@ public class EmployeeService implements EmployeeServiceInterface {
 		return reiRepo.findByReiIdAndReiAuthor(reimb.getReiId(), user.getUserId());
 	}
 
+
+	@Override
+	public Reimbursement updateReimbursement(Reimbursement reimb, User user) {
+		Reimbursement reiToUpdate = reiRepo.findByReiId(reimb.getReiId());
+		User reqUser = userRepo.findByUserId(user.getUserId());
+		if (reqUser != null & reiToUpdate != null) {
+			if (reqUser.getUserRole() == UserRole.EMPLOYEE) {
+				if (reiToUpdate != null) {
+					reiToUpdate.setRei_amount(reimb.getRei_amount());
+					reiToUpdate.setRei_description(reimb.getRei_description());
+					reiToUpdate.setReiType(reimb.getReiType());
+					reiRepo.save(reiToUpdate);
+					return reiToUpdate;
+				}				
+			}
+		}
+		
+		return null;
+	}
+
 }

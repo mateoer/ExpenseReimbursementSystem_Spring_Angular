@@ -55,6 +55,7 @@ mat-header-cell, mat-cell {
   width: 100%;  
   max-width: 100%;
   overflow: auto;
+ 
   
 }
 
@@ -95,4 +96,8 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.user-table{
+  min-width: 100%;
 }
