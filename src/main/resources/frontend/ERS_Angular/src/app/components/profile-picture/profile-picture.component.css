@@ -1,6 +1,17 @@
 .pfp {
     position: absolute !important;
     
-    top: 26% !important;
+    top: 30% !important;
     left: 73% !important;
 }
+
+.pfp:hover{
+    cursor: pointer;
+    background-color: rgb(27, 155, 155);
+}
+
+.input-type-file-upload{
+    display:none;
+    visibility:hidden;
+}
+

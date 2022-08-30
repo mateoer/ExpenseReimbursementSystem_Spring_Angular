@@ -27,7 +27,7 @@ export class ProfilePictureComponent implements OnInit {
   selectedFile!: File;
   onFileSelected(event: any){
     this.selectedFile = <File>event.target.files[0];    
-    console.log(event);
+    // console.log(event);
     this.uploadPfp();
   }
 
