@@ -57,6 +57,9 @@ public class SessionController {
 	
 	@PostMapping("/validateUserEmail")
 	public String validateUserWithEmail(@RequestBody User userReq) {
+		
+		System.out.println("\nValidating user for password reset");
+		
 		User userDummy = myUserService.getUserByUsernameAndEmail(userReq);
 		if (userDummy != null) {
 			myUserService.savePasswordResetTokenAndSendEmail(userDummy);
@@ -69,6 +72,7 @@ public class SessionController {
 	@PostMapping("/validateUserPassword")
 	@ResponseBody
 	public String validateUserWithPassword(@RequestBody NewPasswordContextClass newPassReq) {
+		System.out.println("\nValidating user with password");
 		User myUser = newPassReq.getUser();
 		String newPassword = newPassReq.getNewPassword();
 		User userDummy = myUserService.updateUserPassword(myUser,newPassword);

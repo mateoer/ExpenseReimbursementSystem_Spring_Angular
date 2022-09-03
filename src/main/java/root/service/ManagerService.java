@@ -79,7 +79,7 @@ public class ManagerService implements ManagerServiceInterface {
 					
 					System.err.println(e);
 					responseMessage = "Reimbursement was approved successfully, but author could not be notified";
-					
+					System.out.println("\n"+responseMessage);
 				}
 
 				return responseMessage;
@@ -131,7 +131,7 @@ public class ManagerService implements ManagerServiceInterface {
 					
 					System.err.println(e);
 					responseMessage = "Reimbursement was rejected successfully, but author could not be notified";
-					
+					System.out.println("\n"+responseMessage);
 				}
 
 				return responseMessage;

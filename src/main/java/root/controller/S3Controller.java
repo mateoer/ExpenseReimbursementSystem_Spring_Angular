@@ -40,6 +40,8 @@ public class S3Controller {
 	public String updateProfilePicture(@RequestParam(value = "file") MultipartFile file,
 			@RequestParam(value = "userId") int userId) throws IOException {
 
+		System.out.println("/nUploading profile picture. Please, wait...");
+		
 		User myUser = myUserService.getUserByID(userId);
 		
 		//Checks file extension type
@@ -68,6 +70,7 @@ public class S3Controller {
 	@PostMapping("/getPfp")
 	public String getPictureURL(@RequestBody UserResponse reqUser) throws IOException {
 		
+		System.out.println("\nRetrieving profile picture url");
 		User myUser = reqUser.getUser();
 		if (myUser.getProfilePicName() == null || myUser.getProfilePicName() == "") {
 			return "null";

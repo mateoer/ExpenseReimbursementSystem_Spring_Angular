@@ -1,0 +1,33 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { UserCredentials } from '../interfaces/user-credentials';
+import { UsernamePassword } from '../interfaces/username-password';
+import { GeneralRouteService } from './general-route.service';
+
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LoginService {
+
+  constructor(private http: HttpClient, private urlService: GeneralRouteService) {}  
+
+<<<<<<< HEAD
+  API_URL = `http://54.85.200.45:9050`;
+  USER_CREDENTIALS = `${this.API_URL}/getcredentials`;
+=======
+  public greetings(){
+    return this.http.get(`${this.urlService.GREETINGS}`, { responseType: 'text'});
+  }
+>>>>>>> development
+
+    
+  public findUserLogin(usernamePassword: UsernamePassword): Observable<UserCredentials> {
+    let result = this.http.post<UserCredentials>(
+      `${this.urlService.USER_CREDENTIALS}`,
+      usernamePassword
+    );
+    return result;
+  }
+}
