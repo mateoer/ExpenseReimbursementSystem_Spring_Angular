@@ -39,37 +39,48 @@ public class ManagerService implements ManagerServiceInterface {
 	@Override
 	public String approveReimbursement(Reimbursement reimb, User user) {
 
+
 		User dummyUser = userRepo.findByUserId(user.getUserId());
-		Reimbursement mdaReimbursement = reiRepo.findByReiId(reimb.getReiId());
+		Reimbursement myReimbursement = new Reimbursement();
 
 		String responseMessage = "Reimbursement was approved successfully!";
 
 		if (dummyUser != null) {
 			if (dummyUser.getUserRole() == UserRole.MANAGER) {
 
-				mdaReimbursement.setReiStatus(ReiStatus.APPROVED);
-				LocalDateTime lcdt = LocalDateTime.now();
-				mdaReimbursement.setRei_resolvedDate(lcdt);
 
-				// EMAIL NOTIFICATION
-
-				try {
-					String userEmail = userRepo.findByUserId(mdaReimbursement.getReiAuthor()).getEmail();
+				//EMAIL NOTIFICATION		
+				
+				try {	
+					
+					myReimbursement = reiRepo.findByReiId(reimb.getReiId());
+					myReimbursement.setReiStatus(ReiStatus.APPROVED);
+					LocalDateTime lcdt = LocalDateTime.now();
+					myReimbursement.setRei_resolvedDate(lcdt);
+					
+					String userEmail = userRepo.findByUserId(myReimbursement.getReiAuthor()).getEmail();
 					
 					if (emailService.validEmailAddress(userEmail) == false) {
-						throw new Exception("Invalid email format");
+						throw new RuntimeException("Invalid email format");
 					}
 					
-					String subject = "Reimbursement ACCEPTED";
-					String emailContent = "Your reimbursement has been ACCEPTED";
+					String subject = "Reimbursement APPROVED";
+					String emailContent = "Your reimbursement has been APPROVED";
 					emailService.sendSimpleMessage(userEmail, subject, emailContent);
 
+					reiRepo.save(myReimbursement);
+					
+				} catch (NullPointerException e) {
+					
+					System.err.println(e);
+					return null;
+					
 				} catch (Exception e) {
+					
 					System.err.println(e);
 					responseMessage = "Reimbursement was approved successfully, but author could not be notified";
+					
 				}
-
-				reiRepo.save(mdaReimbursement);
 
 				return responseMessage;
 			}
@@ -89,31 +100,39 @@ public class ManagerService implements ManagerServiceInterface {
 		if (dummyUser != null) {
 			if (dummyUser.getUserRole() == UserRole.MANAGER) {
 
-				myReimbursement = reiRepo.findByReiId(reimb.getReiId());
-				myReimbursement.setReiStatus(ReiStatus.DENIED);
-				LocalDateTime lcdt = LocalDateTime.now();
-				myReimbursement.setRei_resolvedDate(lcdt);
 
 				//EMAIL NOTIFICATION		
 				
-				try {			
+				try {	
+					
+					myReimbursement = reiRepo.findByReiId(reimb.getReiId());
+					myReimbursement.setReiStatus(ReiStatus.DENIED);
+					LocalDateTime lcdt = LocalDateTime.now();
+					myReimbursement.setRei_resolvedDate(lcdt);
 					
 					String userEmail = userRepo.findByUserId(myReimbursement.getReiAuthor()).getEmail();
 					
 					if (emailService.validEmailAddress(userEmail) == false) {
-						throw new Exception("Invalid email format");
+						throw new RuntimeException("Invalid email format");
 					}
 					
 					String subject = "Reimbursement REJECTED";
 					String emailContent = "Your reimbursement has been REJECTED";
 					emailService.sendSimpleMessage(userEmail, subject, emailContent);
 
+					reiRepo.save(myReimbursement);
+					
+				} catch (NullPointerException e) {
+					
+					System.err.println(e);
+					return null;
+					
 				} catch (Exception e) {
+					
 					System.err.println(e);
 					responseMessage = "Reimbursement was rejected successfully, but author could not be notified";
+					
 				}
-
-				reiRepo.save(myReimbursement);
 
 				return responseMessage;
 			}

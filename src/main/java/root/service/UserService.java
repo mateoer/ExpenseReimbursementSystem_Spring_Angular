@@ -116,12 +116,10 @@ public class UserService implements UserServiceInterface {
 
 
 	@Override
-	public User createNewUser(User newUserRequest) {
+	public User createNewUser(User newUserRequest) {		
 		
-		User checkUser = userRepo.findByUsername(newUserRequest.getUsername());
-		if (checkUser == null) 
-			checkUser = userRepo.findByEmail(newUserRequest.getEmail());
-		else return null;
+		User checkUser = userRepo
+					.findByUsernameOrEmail(newUserRequest.getUsername(), newUserRequest.getEmail());
 		
 		if (checkUser == null) {			
 			User myNewUser = newUserRequest;

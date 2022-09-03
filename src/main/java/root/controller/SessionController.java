@@ -32,7 +32,7 @@ public class SessionController {
 		
 	@PostMapping("/getcredentials")
 	@ResponseBody
-	public UserResponse getUserCredentials2(@RequestBody User userReq){
+	public UserResponse getUserCredentials(@RequestBody User userReq){
 		if(userReq == null) {
 			return null;
 		}

@@ -38,5 +38,6 @@ public class AWSConfig {
 		public static String getBucketName() {
 			return bucketName;
 		}
+		
 	
 }

@@ -1,6 +1,7 @@
 package root.model;
 
 import lombok.Data;
+import lombok.Getter;
 
 /*
  * This class is used to validate the user at login.
@@ -12,7 +13,8 @@ import lombok.Data;
  */
 
 @Data
+@Getter
 public class UserResponse {
 	private User user;
-	private boolean found = true;
+	private boolean found = true;	
 }

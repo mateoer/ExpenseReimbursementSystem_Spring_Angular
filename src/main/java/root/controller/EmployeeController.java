@@ -73,7 +73,8 @@ public class EmployeeController {
 		else if (reimbExist.getReiStatus() == ReiStatus.APPROVED || reimbExist.getReiStatus() == ReiStatus.DENIED)
 			return "Cannot delete a processed request";
 		else			
-			return employeeService.cancelReimbursement(reimbExist);		
+			return employeeService.cancelReimbursement(reimbExist);	
+		
 	}
 	
 	//editReimbursement

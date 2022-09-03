@@ -23,13 +23,17 @@ public class S3Controller {
 	@Autowired
 	private UserRepository userRepo;
 
+	@Autowired
 	private StorageService storageServ;
+	
+	@Autowired
 	private UserService myUserService;
 
 	@Autowired
-	public S3Controller(UserService myUserService, StorageService storageServ) {
+	public S3Controller(UserService myUserService, StorageService storageServ, UserRepository userRepo) {
 		this.myUserService = myUserService;
 		this.storageServ = storageServ;
+		this.userRepo = userRepo;
 	}
 
 	@PostMapping("/uploadPfp")

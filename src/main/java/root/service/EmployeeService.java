@@ -17,8 +17,9 @@ import root.service.interfaces.EmployeeServiceInterface;
 @Service
 public class EmployeeService implements EmployeeServiceInterface {
 
+	@Autowired
 	private ReimbursementRepository reiRepo;
-	
+	@Autowired
 	private UserRepository userRepo;
 	
 	@Autowired

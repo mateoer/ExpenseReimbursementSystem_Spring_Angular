@@ -20,6 +20,7 @@ import root.service.ManagerService;
 @CrossOrigin
 public class ManagerController {
 
+	
 	private ManagerService mangService;
 
 	@Autowired

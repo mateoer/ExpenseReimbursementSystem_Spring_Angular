@@ -29,21 +29,15 @@ public class EmailService {
         }
     }
     
-    public boolean validEmailAddress(String userEmail) {
+    public boolean validEmailAddress(String userEmail) {    	
     	
-    	String splitStringEmail [] = userEmail.split("\\.");
+    	if (userEmail.matches("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")) {
+    		return true;    	
+    	}
     	
-    	if (!(userEmail.contains("@"))) return false;
-    	if (!(userEmail.matches("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"))) return false;
-    	if (splitStringEmail.length > 2) return false;
-    	
-    	String domain = splitStringEmail[splitStringEmail.length - 1].toLowerCase();
-    	if(!(domain.equals("com") || domain.equals("edu") || domain.equals("gov") || domain.equals("net")))
-    		return false;
-    	
-    	return true;
+    	return false;
     	
     }
 
-	   
 }
+

@@ -24,7 +24,7 @@ public class StorageService {
 	
 	@Autowired
 	public StorageService(AmazonS3 amazonS3) {
-		super();
+//		super();
 		this.amazonS3 = amazonS3;
 	}
 
@@ -40,7 +40,7 @@ public class StorageService {
 		return tempFileName;
 	}
 	
-	
+		
 	public String presignedUrl(String objectKey) throws IOException {
 		
 		// Set the presigned URL to expire after one hour.
@@ -65,7 +65,7 @@ public class StorageService {
 		return ResponseEntity.ok().build();
 	}
 
-	private File convertMultipartFileToFile(MultipartFile file) {
+	public File convertMultipartFileToFile(MultipartFile file) {
 		File convertedFile = new File(file.getOriginalFilename());
 		try (FileOutputStream fos = new FileOutputStream(convertedFile)) {
 			fos.write(file.getBytes());
