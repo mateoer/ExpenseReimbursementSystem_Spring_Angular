@@ -65,7 +65,7 @@ Features:
 
 > git clone https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular.git
 
-#You will need:
+# You will need:
 * An RDS, an S3 bucket, a Gmail account
 
 From RDS save **endpoint**, **port number**, **username**, and **password** <br>
@@ -94,7 +94,7 @@ https://stackoverflow.com/questions/26594097/javamail-exception-javax-mail-authe
 >The, on **src/main/java/ service/mmail/EmailService.java** change the field marked <br>
 >**private static final String NOREPLY_ADDRESS = "your_email_goes_here";**
 
-<SCREENSHOT OF THE EMAIL USERNAME AND PASSWORD GOES HERE>
+
 
 > To enable **profile pictures** you need to set up an S3 bucket from AWS
 The process is a little tedious if you don't know how to set up an S3 bucket. But I left a few good guides on the **S3 AWS** card under **General Information**
