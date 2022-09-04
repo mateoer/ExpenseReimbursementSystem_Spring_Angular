@@ -7,7 +7,9 @@ Expense Reimbursement System (ERS) - Java
 The Expense Reimbursement System (ERS) will manage the process of reimbursing employees for expenses incurred while on company time. All employees in the company can login and submit requests for reimbursement and view their past tickets and pending requests. Finance managers can log in and view all reimbursement requests and past history for all employees in the company. Finance managers are authorized to approve and deny requests for expense reimbursement.
 
 This is a redo of Revature_Project_1_ExpenseReimbursementSystem with Spring-Boot and Angular technologies.
-As an added feature this application was hosted into an EC2 instance and it is continually integrated from codepipeline branch on this repository
+As an added feature this application was hosted into an EC2 instance and it is continually integrated from **codepipeline** branch on this repository
+Additionally, I also included new features like clickable rows, email notifications, password resets, and profile pictures; with the intention of experimenting
+with Angular material tables, Spring Mail, and AWS S3 buckets and the subsequent configuration on Spring Boot for image hosting.
 ## Technologies Used
 
 * Angular
@@ -25,7 +27,6 @@ As an added feature this application was hosted into an EC2 instance and it is c
 
 ## Features
 
-Features:
 * User validation at login
 * Dynamic home page based on login credentials
 * Onload functionalities to retrieve reimbursement tables
@@ -77,17 +78,22 @@ You will need an RDS, an S3 bucket, and a Gmail account
 
 > Follow the list of environment variables to configure into your system in order to run the application
 > 
-> **HOW_TO_SETUP_ENVIRONMENT_VARIABLES.txt**
+> **HOW_TO_SETUP_ENVIRONMENT_VARIABLES.txt** found on the root directory of this project
 > 
 > After the variables are set, close and open your IDE back up
 
 ## Running the application
 
 > Open the terminal
+ 
 > From the project directory run:
+ 
 > **mvn package**
+ 
 > **cd target/**
+
 > **java -jar ERS-0.0.1-SNAPSHOT.jar**
+ 
 > Then open your **localhost:9050/**  
 
 ## License
