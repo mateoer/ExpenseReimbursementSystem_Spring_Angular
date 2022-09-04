@@ -41,6 +41,23 @@ Features:
 * Password hasshing functionality 
 * Register new users 
  
+## Showcase
+
+[LOGIN GOES HERE]
+[REGISTRATION GOES HERE]
+[EMPLOYEE PAGE CREATE REQUEST]
+[EMPLOYE DIALOG PENDING]
+[EMPLOYE DIALOG APP/DENIED]
+[MANAGER PAGE]
+[MANAGER DIALOG]
+[APP/DENY FROM DASHBOARD]
+[UPLOAD PFP]
+[RESET PASSWORD FROM HOME]
+[RESET PASSWORD FROM LOGIN]
+[EMAIL APPROVED/DENIED REI]
+[EMAIL RESET TOKEN]
+[RESET PASSWORD PAGE]
+
 
 
 
@@ -59,6 +76,13 @@ From Gmail account, **username** and **password** <br>
 > Have an IDE capable of running Spring Boot applications, such as Spring STS.
 
 > Once the project is cloned you need to update the maven project. On Eclipse, **Alt+F5** and select the project to update
+
+- On **application.yml** found at **src/main/resources**<br/>
+  Comment out the line **ddl-auto: none** and uncomment **ddl-auto: create** before running the application the first time.<br/>
+  This will create the tables in the database.<br/> 
+  
+  After the tables have been created, comment out **ddl-auto: create** and uncomment **ddl-auto: none**.<br/>
+  This way you avoid having to re-populate the tables every time you restart the application
 
 > To enable **email notifications** as well as password resets, you need to configure a Gamil account <br/>
 >You can follow the step-by-step guide here to configure a Gmail no-reply account to send and receive emails:
@@ -113,74 +137,9 @@ Then create environment variables on the local system and name them as this:
 >    TRAINING_DB_USERNAME -> for username
 >    
 >    TRAINING_DB_PASSWORD -> for password
+ 
 
-Open the DB assigned to **ERS_DB_DBNAME** from your DB application (like DBeaver) but don't run the script **ERS_SA_Script.sql** (found in the root folder) just yet.
-<br/>
-   **Note that the script is in PostgreSQL**  
-<br/><br/>
-
-
-
-
-On VS Code <br/>
-- Open the folder ../ERS_Spring_Angular/src/main/resources/frontend/**ERS_Angular**<br/>
-- Open the terminal and run **npm install** to retrieve node modules<br/>
-- Once it's done run **ng build**<br/>
- By running **ng serve** you can check if the application works. Clicking on the link produced confirms that it is able to load up. However, it is not ready yet. 
-- You can close VS Code now<br/>
-<br />
-
-On Java IDE (in this case Spring STS v3).<br/>
-
-- Go to **File** **->** **Open Project from File System** and select this project
-  **Expense Reimbursement System** wherever it was downloaded in your system
-  
-- Right click on the project name -> Maven -> Update Maven Project
-
-- On **application.yml** found at **src/main/resources**<br/>
-  Comment out the line **ddl-auto: none** and uncomment **ddl-auto: create** before running the application the first time.<br/>
-  This will create the tables in the database.<br/> 
-  
-  After the tables have been created, comment out **ddl-auto: create** and uncomment **ddl-auto: none**.<br/>
-  This way you avoid having to re-populate the tables every time you restart the application
-<br />
-
-Run the application. <br/>
-- Spring STS detects Spring Boot applications after updating the Maven project<br/>
-  Simply select **ERS[9050]** and click the **start** button on the Boot Dashboard panel. It will start the application.<br/>
-  **NOTE: the application runs on port 9050. So, make sure no other application is running on that port at that moment.**<br/><br/>
-- **Now, with the application running run the script **ERS_SA_Script.sql** on your DB application to populate the tables. Remember, it is in PostgreSQL**
-- Before running the application a second time, make sure to uncomment **ddl-auto: none** on **application.yml**
-  
-  <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/boot.PNG" width=40% height=40%>
-  <br /><br/>
-
-
-Now the project is ready to go. Go to localhost:9050//<br/><br/>
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/login.PNG" width=50% height=50%>
-<br />
-- To log in with authorized credentials use:
->                         username     password
->                         
->     Employee             suechan         abc123
->  
->     Finance Manager       admin          abc123
-<br/>
-
-Employee<br/>
-- All reimbursements associated with that user are retrieved on page load<br/>
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/employee.PNG" width=50% height=50%>
-<br />
-
-- You can filter reimbursements by status<br/>
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/filter.PNG" width=50% height=50%>
-<br />
-
-Finance Manager<br/>
-
-- User name is retrieved automatically from the database as well <br/>
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/manager.PNG" width=50% height=50%>
-<br />
+ 
 
 ## License
 
