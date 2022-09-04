@@ -30,17 +30,17 @@ Features:
 * Dynamic home page based on login credentials
 * Onload functionalities to retrieve reimbursement tables
 * Filtering requests
-* Request, Approve and Deny functionalities
 * Employee account has ability to create new requests
+* Ability to cancel/edit reimbursements when the status of the request is still **pending**
 * Manager account has ability to approve/deny requests
 * Clickable table rows 
 * Spring Security 
 * Spring Mail to receive alerts about reimbursement's status 
 * Ability to upload profile pictures 
-* Ability to reset passwords 
+* Ability to reset passwords from user home or through email
 * Password hasshing functionality 
 * Register new users 
-* Ability to cancel/edit reimbursements 
+ 
 
 
 
