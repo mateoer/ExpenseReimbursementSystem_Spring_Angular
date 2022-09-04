@@ -122,24 +122,7 @@ Update the project with **Alt+F5**
   All users will be able to reset their passwords from the login page by inserting their username and email accounts to receive a reset token
   And also all users will be able to upload profile pictures
 
-<br />
-
-
-## Usage
-
-On DBeaver <br/><br/>
-Make sure to save the **endpoint**, **port number**, **username**, and **password**.<br/>
-Then create environment variables on the local system and name them as this:
->    TRAINING_DB_ENDPOINT -> for endpoint and port
->    
->    ERS_DB_DBNAME -> for DB name
->
->    TRAINING_DB_USERNAME -> for username
->    
->    TRAINING_DB_PASSWORD -> for password
- 
-
- 
+<br /> 
 
 ## License
 
