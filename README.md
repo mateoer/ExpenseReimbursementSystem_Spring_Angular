@@ -43,27 +43,59 @@ with Angular material tables, Spring Mail, and AWS S3 buckets and the subsequent
 * Register new users 
  
 ## Showcase
+> Landing page
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/login.PNG" width=50% height=50%> 
 
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/login.PNG" width=50% height=50%>
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/registration.PNG" width=50% height=50%>
+> Registration
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/registration.PNG" width=30% height=50%>
+
+> Reset password from login
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_login.PNG" width=50% height=50%>
+
+> Reset password email
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_email.PNG" width=50% height=50%>
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_email_inside.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_email_inside.PNG" width=50% height=30%>
+
+> Reset password page
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_token.PNG" width=50% height=50%>
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_success.PNG" width=50% height=50%>
+
+> Reset password from user home
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_home.PNG" width=50% height=50%>
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_home_success.PNG" width=50% height=50%>
+
+> Reimbursement Approved and Rejected notifications
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/app_del_notification.PNG" width=50% height=50%>
+
+> Initial user home page
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/blank_pfp.PNG" width=50% height=50%>
+
+>Upload picture menu
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/upload_menu.PNG" width=50% height=50%>
+
+> After image was uploaded
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/pfp_success.PNG" width=50% height=50%>
+
+> Edit/Delete dialog box. This is only available to employee while reimbursement status is 'Pending'
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/edit_cancel_dialog.PNG" width=50% height=50%>
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/deleted_rei.PNG" width=50% height=50%>
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/approved_dialog.PNG" width=50% height=50%>
+
+> After status of reimbursement changes, edit and delete are not available
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/approved_emp_dialog.PNG" width=50% height=50%>
+
+> Notification inside dialog box
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/deleted_rei.PNG" width=50% height=50%>
+
+> New reimbursement request
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/new_req.PNG" width=50% height=50%>
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/new_req_success.PNG" width=50% height=50%>
+
+> Dialog box for manager
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/approved_dialog.PNG" width=50% height=50%>
+
+> Manager can also approve/reject reimbursements from the home page
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/app_den_mang_dash.PNG" width=50% height=50%>
+
+> Both types of user can filter reimbursement by status or type
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/filter_type.PNG" width=50% height=50%>
 <img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/filter_status.PNG" width=50% height=50%>
 
