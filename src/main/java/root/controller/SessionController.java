@@ -32,7 +32,7 @@ public class SessionController {
 		
 	@PostMapping("/getcredentials")
 	@ResponseBody
-	public UserResponse getUserCredentials2(@RequestBody User userReq){
+	public UserResponse getUserCredentials(@RequestBody User userReq){
 		if(userReq == null) {
 			return null;
 		}
@@ -51,11 +51,15 @@ public class SessionController {
 	@GetMapping("/greetings")
 	public String greetings() {
 		System.out.println("\nGreetings\n" );
-		return "¯\\_(ツ)_/¯";
+//		return "¯\\_(ツ)_/¯";
+		return "";
 	}
 	
 	@PostMapping("/validateUserEmail")
 	public String validateUserWithEmail(@RequestBody User userReq) {
+		
+		System.out.println("\nValidating user for password reset");
+		
 		User userDummy = myUserService.getUserByUsernameAndEmail(userReq);
 		if (userDummy != null) {
 			myUserService.savePasswordResetTokenAndSendEmail(userDummy);
@@ -68,6 +72,7 @@ public class SessionController {
 	@PostMapping("/validateUserPassword")
 	@ResponseBody
 	public String validateUserWithPassword(@RequestBody NewPasswordContextClass newPassReq) {
+		System.out.println("\nValidating user with password");
 		User myUser = newPassReq.getUser();
 		String newPassword = newPassReq.getNewPassword();
 		User userDummy = myUserService.updateUserPassword(myUser,newPassword);

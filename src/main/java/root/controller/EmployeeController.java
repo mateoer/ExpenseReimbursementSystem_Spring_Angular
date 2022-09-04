@@ -68,19 +68,22 @@ public class EmployeeController {
 		Reimbursement reimbExist = employeeService
 				.getReiByIdAndAuthor(reimbToCancel, reiCreator);		
 		
+		System.out.println("\nDeleting reimbursement");
 		if (reimbExist == null)
 			return "Could not complete request";
 		else if (reimbExist.getReiStatus() == ReiStatus.APPROVED || reimbExist.getReiStatus() == ReiStatus.DENIED)
 			return "Cannot delete a processed request";
 		else			
-			return employeeService.cancelReimbursement(reimbExist);		
+			return employeeService.cancelReimbursement(reimbExist);	
+		
 	}
 	
+	//editReimbursement
 	@PostMapping("/updateReimbursement")
 	public String editReimbursement(@RequestBody UserReiContext userReiContext) {
 		Reimbursement reimbToUpdate = userReiContext.getReimbursement();
 		User reiCreator = userReiContext.getUser();
-		
+		System.out.println("/nEditing reimbursement");
 		if (reimbToUpdate != null && reiCreator != null) {
 			Reimbursement reiExists = employeeService.updateReimbursement(reimbToUpdate, reiCreator);
 			if (reiExists != null) {

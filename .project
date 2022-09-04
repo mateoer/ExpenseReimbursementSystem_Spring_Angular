@@ -31,6 +31,13 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/test/resources/multipart_file/25231.png</name>
+			<type>1</type>
+			<location>C:/Users/tapioca/Desktop/Pflio/25231.png</location>
+		</link>
+	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1660147451040</id>

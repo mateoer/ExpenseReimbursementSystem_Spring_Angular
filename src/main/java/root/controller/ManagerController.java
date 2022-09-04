@@ -20,6 +20,7 @@ import root.service.ManagerService;
 @CrossOrigin
 public class ManagerController {
 
+	
 	private ManagerService mangService;
 
 	@Autowired
@@ -34,7 +35,7 @@ public class ManagerController {
 		return mangService.getUserName(reqUser);
 	}
 
-	
+	//viewListOfReimbursements
 	@GetMapping("/getlistofreimbursements")
 	public List<Reimbursement> viewListOfReimbursements() {
 		System.out.println("\nList of all Reimbursements retrieved\n");
@@ -52,9 +53,9 @@ public class ManagerController {
 		
 		if (reimbToApprove != null & managerUser != null) {
 			
-			Reimbursement dummyRei = mangService.approveReimbursement(reimbToApprove, managerUser);
-			if (dummyRei != null) {
-				return "Reimbursement was approved!";				
+			String dummyReiResp = mangService.approveReimbursement(reimbToApprove, managerUser);
+			if (dummyReiResp != null) {
+				return dummyReiResp;				
 			}
 		}
 		return "Something went wrong";
@@ -70,9 +71,9 @@ public class ManagerController {
 		User managerUser = userReiContext.getUser();
 		
 		if (reimbToDeny != null & managerUser != null) {
-			Reimbursement dummyRei = mangService.denyReimbursement(reimbToDeny, managerUser);
-			if (dummyRei != null) {
-				return "Reimbursement was rejected succesfully!";
+			String dummyReiResp = mangService.denyReimbursement(reimbToDeny, managerUser);
+			if (dummyReiResp != null) {
+				return dummyReiResp;
 			}
 		}
 		return "Something went wrong";
