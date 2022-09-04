@@ -23,6 +23,7 @@ with Angular material tables, Spring Mail, and AWS S3 buckets and the subsequent
 * TypeScript
 * Java
 * PostgreSQL
+* Trello board https://trello.com/b/HF5k6pi8/ers-spring-angular
 
 
 ## Features
