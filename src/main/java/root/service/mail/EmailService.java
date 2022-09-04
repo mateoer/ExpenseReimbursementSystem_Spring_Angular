@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 
-    private static final String NOREPLY_ADDRESS = "user987456321789@gmail.com";
+    private static final String NOREPLY_ADDRESS = System.getenv("ERS_FULL_GMAIL_ADDRESS");
 
     @Autowired
     private JavaMailSender emailSender;

@@ -21,8 +21,9 @@ public class AWSConfig {
 
 	    @Value("${cloud.aws.region.static}")
 	    private String region;
-
-	    private static String bucketName = "ers-pfps";
+	    
+	    private static String bucketName = System.getenv("AWS_S3_BucketName");
+	    
 
 	    @Primary
 	    @Bean

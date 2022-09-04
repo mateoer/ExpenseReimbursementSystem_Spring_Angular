@@ -35,7 +35,7 @@ class ManagerControllerTest {
 	
 	private User employee1 = new User(1,"suechan", "abc123", "Sue", "Liz", "suechan123@rdssnet", UserRole.EMPLOYEE, null, null, null);
 	private User employee2 = new User(2,"anri", "abc123", "Anri", "Ortiz", "sdads3@revatsdsaure.net", UserRole.EMPLOYEE, null, null, null);
-	private User manager = new User(3, "mateoer", "abc123", "Eric", "Mateo", "eric234@revature.net", UserRole.MANAGER, null, null, null);
+	private User manager = new User(3, "mateoer", "abc123", "Eric", "Mateo", "fdsfdsferic234@revafdfsdfdture.net", UserRole.MANAGER, null, null, null);
 
 	@BeforeEach
 	void setUp() throws Exception {

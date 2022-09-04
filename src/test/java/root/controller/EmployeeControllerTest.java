@@ -34,7 +34,7 @@ class EmployeeControllerTest {
 	@Mock	
 	private EmployeeService empService;		
 
-	private User employee1 = new User(1,"suechan", "abc123", "Sue", "Liz", "suechan123@rdssnet", UserRole.EMPLOYEE, null, null, null);
+	private User employee1 = new User(1,"suechan", "abc123", "Sue", "Liz", "suechagdgfn123@rdssnet", UserRole.EMPLOYEE, null, null, null);
 	private User employee2 = new User(2,"anri", "abc123", "Anri", "Ortiz", "sdads3@revatsdsaure.net", UserRole.EMPLOYEE, null, null, null);
 	
 	@BeforeEach

@@ -41,11 +41,11 @@ class UserServiceTest {
 	private UserService userService;
 	
 	
-	private User emp1 = new User(1, "sue", "abc123", "Sue", "Liz", "mateoer@kean.edu", UserRole.EMPLOYEE, null, null, null);
+	private User emp1 = new User(1, "sue", "abc123", "Sue", "Liz", "matraffefeoer@kfsdfsd.edu", UserRole.EMPLOYEE, null, null, null);
 		
 	private User emp2 = new User(2, "anri", "abc123", "Anri", "Ban", "sdfsagm.com", UserRole.EMPLOYEE, null, null, null);
 	
-	private User manager = new User(3, "eric", "abc123", "Eric", "Smith", "mateoer@kean.edu", UserRole.MANAGER, null, null, null);
+	private User manager = new User(3, "eric", "abc123", "Eric", "Smith", "dsadsafdf@dfsdffga.edu", UserRole.MANAGER, null, null, null);
 	
 	private User emptyUser = new User();	
 	

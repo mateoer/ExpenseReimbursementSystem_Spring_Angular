@@ -54,9 +54,9 @@ class ManagerServiceTest {
 
 	@Test
 	void getUserName() {
-		User myUser1 = new User("sue", "abc123", "Sue", "Liz", "mateoer@kean.edu", UserRole.EMPLOYEE);
+		User myUser1 = new User("sue", "abc123", "Sue", "Liz", "madxASDsdr@kfdafdfdu", UserRole.EMPLOYEE);
 			myUser1.setUserId(1);
-		User myUser2 = new User("mateoer", "abc123", "Eric", "Mateo", "ericmateo5675@gmail.com", UserRole.MANAGER);
+		User myUser2 = new User("mateoer", "abc123", "Eric", "Mateo", "dffdf5@gmfdsfdsf.com", UserRole.MANAGER);
 				
 		when(mangService.getUserName(myUser1)).thenReturn(myUser1);
 		when(mangService.getUserName(myUser2)).thenReturn(null);
@@ -123,7 +123,7 @@ class ManagerServiceTest {
 			
 		Reimbursement rei3 = new Reimbursement();
 		
-		User manager = new User(3, "eric", "abc123", "Eric", "Smith", "mateoer@kean.edu", UserRole.MANAGER, null, null, null);
+		User manager = new User(3, "eric", "abc123", "Eric", "Smith", "cscasc@kedsasadan.edu", UserRole.MANAGER, null, null, null);
 		
 			
 		when(userRepo.findByUserId(manager.getUserId())).thenReturn(manager);
@@ -166,7 +166,7 @@ class ManagerServiceTest {
 	
 	@Test
 	void approveReimbursement() {
-		User employeeWithGoodEmail = new User(1, "suechan", "abc123", "Sue", "Chan", "ericmateo5675@gmail.com", UserRole.EMPLOYEE, null, null, null);
+		User employeeWithGoodEmail = new User(1, "suechan", "abc123", "Sue", "Chan", "efsdfsefeso5675@fdsfdsf.com", UserRole.EMPLOYEE, null, null, null);
 		Reimbursement rei1 = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 			rei1.setReiId(1);
 			rei1.setReiAuthor(employeeWithGoodEmail.getUserId());		
