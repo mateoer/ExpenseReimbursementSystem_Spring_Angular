@@ -51,11 +51,11 @@ Features:
 #You will need:
 * An RDS, an S3 bucket, a Gmail account
 
-From RDS save **endpoint**, **port number**, **username**, and **password**
-From S3 bucket make sure you have **AWSAccessKeyId** and **AWSSecretKey**
-From Gmail account, **username** and **password**
+From RDS save **endpoint**, **port number**, **username**, and **password** <br>
+From S3 bucket make sure you have **AWSAccessKeyId** and **AWSSecretKey** <br>
+From Gmail account, **username** and **password** <br>
 
-<br><br><br><br>
+<br><br><br>
 > Have an IDE capable of running Spring Boot applications, such as Spring STS.
 
 > Once the project is cloned you need to update the maven project. On Eclipse, **Alt+F5** and select the project to update
