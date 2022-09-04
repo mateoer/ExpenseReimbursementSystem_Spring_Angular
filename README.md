@@ -44,22 +44,28 @@ with Angular material tables, Spring Mail, and AWS S3 buckets and the subsequent
  
 ## Showcase
 
-[LOGIN GOES HERE]***
-[REGISTRATION GOES HERE]***
-[EMPLOYEE PAGE CREATE REQUEST]***
-[EMPLOYE DIALOG PENDING]***
-[EMPLOYE DIALOG APP/DENIED]***
-[MANAGER PAGE]***
-[MANAGER DIALOG]***
-[APP/DENY FROM DASHBOARD]***
-[UPLOAD PFP]***
-[RESET PASSWORD FROM HOME]***
-[RESET PASSWORD FROM LOGIN]***
-[EMAIL APPROVED/DENIED REI]***
-[EMAIL RESET TOKEN]***
-[RESET PASSWORD PAGE]****
-
-
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/login.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/registration.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_login.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_email.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_email_inside.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_token.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_success.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_home.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/reset_home_success.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/app_del_notification.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/blank_pfp.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/upload_menu.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/pfp_success.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/edit_cancel_dialog.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/deleted_rei.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/approved_dialog.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/approved_emp_dialog.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/new_req.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/new_req_success.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/app_den_mang_dash.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/filter_type.PNG" width=50% height=50%>
+<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/webapp/filter_status.PNG" width=50% height=50%>
 
 
 ## Getting Started
