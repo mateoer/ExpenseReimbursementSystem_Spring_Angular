@@ -66,7 +66,9 @@ From Gmail account, **username** and **password** <br>
 https://stackoverflow.com/questions/26594097/javamail-exception-javax-mail-authenticationfailedexception-534-5-7-9-applicatio/72592946#72592946
 
 >Copy the username and the password generated. 
->Paste them in the properties.yml file located in **ERS/src/main/resources** -> 
+>Paste them in the **properties.yml** file located in **ERS/src/main/resources** 
+>The, on **src/main/java/ service/mmail/EmailService.java** change the field marked <br>
+>**private static final String NOREPLY_ADDRESS = "your_email_goes_here";**
 
 <SCREENSHOT OF THE EMAIL USERNAME AND PASSWORD GOES HERE>
 
