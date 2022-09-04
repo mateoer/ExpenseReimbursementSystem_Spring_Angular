@@ -35,8 +35,8 @@ class SessionControllerTest {
 	@Mock
 	private SessionController sessionController;
 	
-	private User oldUser = new User(3, "eric", "abc123", "Eric", "Smith", "mateoer@kean.edu", UserRole.MANAGER, null, null, null);
-	private User newUser = new User("lea", "abc123", "Lea", "Ortiz", "asdadas@gm.edu", UserRole.EMPLOYEE);
+	private User oldUser = new User(3, "eric", "abc123", "Eric", "Smith", "dshkjgasda@afdfdfg", UserRole.MANAGER, null, null, null);
+	private User newUser = new User("lea", "abc123", "Lea", "Ortiz", "dshkjfadagasda@afdfdfg.edu", UserRole.EMPLOYEE);
 	private User emptyUser = new User();
 	
 	@BeforeEach
@@ -148,7 +148,7 @@ class SessionControllerTest {
 	
 	@Test
 	void usernameAvailable() {
-		User emp1 = new User(1, "sue", "abc123", "Sue", "Liz", "mateoer@kean.edu", UserRole.EMPLOYEE, null, null, null);		
+		User emp1 = new User(1, "sue", "abc123", "Sue", "Liz", "fdsdfr@kesdafdfsan.edu", UserRole.EMPLOYEE, null, null, null);		
 		User emp2 = new User(2, "anri", "abc123", "Anri", "Ban", "sdfsagm.com", UserRole.EMPLOYEE, null, null, null);
 		
 		List<User> usersList = new ArrayList<>();

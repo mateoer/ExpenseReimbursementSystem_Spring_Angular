@@ -42,11 +42,11 @@ class EmailServiceTest {
 	@Test
 	void validEmailAddress() {
 		
-		boolean otherDomanString = instanceOfEmailService.validEmailAddress("user987456321789@gmail.rus");		
-		boolean comString = instanceOfEmailService.validEmailAddress("ericmateo5675@gmail.com");		
-		boolean eduString = instanceOfEmailService.validEmailAddress("user987456321789@gmail.edu");
-		boolean govString = instanceOfEmailService.validEmailAddress("user987456321789@gmail.gov");
-		boolean netString = instanceOfEmailService.validEmailAddress("user987456321789@gmail.net");
+		boolean otherDomanString = instanceOfEmailService.validEmailAddress("dshkjgasda@afdfdfg.rus");		
+		boolean comString = instanceOfEmailService.validEmailAddress("dshkjgasda@afdfdfg.com");		
+		boolean eduString = instanceOfEmailService.validEmailAddress("dshkjgasda@afdfdfg.edu");
+		boolean govString = instanceOfEmailService.validEmailAddress("dshkjgasda@afdfdfg.gov");
+		boolean netString = instanceOfEmailService.validEmailAddress("dshkjgasda@afdfdfg.net");
 		
 		boolean randomString = instanceOfEmailService.validEmailAddress("asadafdffgfsg");
 		boolean emptyString = instanceOfEmailService.validEmailAddress("");

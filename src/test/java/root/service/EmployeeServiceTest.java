@@ -61,7 +61,7 @@ class EmployeeServiceTest {
 		initialReiList.add(new Reimbursement(60, "hostel", ReiStatus.PENDING, ReiType.LODGING));
 		initialReiList.add(new Reimbursement(20, "ppv fee", ReiStatus.PENDING, ReiType.LODGING));
 		
-		User myUser = new User("mateoer", "abc123", "Eric", "Mateo", "eric234@revature.net", UserRole.EMPLOYEE);
+		User myUser = new User("mateoer", "abc123", "Eric", "Mateo", "dvsdvd@xsaklhkjas", UserRole.EMPLOYEE);
 		userRepo.save(myUser);
 		
 		for (Reimbursement reimbursement : initialReiList) {
@@ -89,8 +89,8 @@ class EmployeeServiceTest {
 		Reimbursement initialRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		Reimbursement expectedRei = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 
-		User myUser1 = new User("suechan", "abc123", "Sue", "Liz", "suechan123@revature.net", UserRole.EMPLOYEE);
-		User myUser2 = new User("mateoer", "abc123", "Eric", "Mateo", "eric234@revature.net", UserRole.MANAGER);
+		User myUser1 = new User("suechan", "abc123", "Sue", "Liz", "scazscsc@czdbfbgb.net", UserRole.EMPLOYEE);
+		User myUser2 = new User("mateoer", "abc123", "Eric", "Mateo", "cscsccs@revcczczature.net", UserRole.MANAGER);
 		userRepo.save(myUser1);
 		userRepo.save(myUser2);
 		
@@ -115,8 +115,8 @@ class EmployeeServiceTest {
 
 	@Test
 	void getUserName() {
-		User myUser1 = new User("sue", "abc123", "Sue", "Liz", "sue@revature.net", UserRole.EMPLOYEE);
-		User myUser2 = new User("mateoer", "abc123", "Eric", "Mateo", "eric234@revature.net", UserRole.MANAGER);
+		User myUser1 = new User("sue", "abc123", "Sue", "Liz", "sue@htdhtdh.net", UserRole.EMPLOYEE);
+		User myUser2 = new User("mateoer", "abc123", "Eric", "Mateo", "gfdgdfg34@hdfhhdf.net", UserRole.MANAGER);
 		userRepo.save(myUser1);
 		
 		User username1 = empService.getUserName(myUser1);
@@ -148,7 +148,7 @@ class EmployeeServiceTest {
 	
 	@Test
 	void getReiByIdAndAuthor() {
-		User myUser1 = new User("sue", "abc123", "Sue", "Liz", "sue@revature.net", UserRole.EMPLOYEE);
+		User myUser1 = new User("sue", "abc123", "Sue", "Liz", "sdzcdcde@revavsvvbture.net", UserRole.EMPLOYEE);
 		myUser1.setUserId(1);
 		Reimbursement rei1 = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		rei1.setReiAuthor(myUser1.getUserId());
@@ -175,7 +175,7 @@ class EmployeeServiceTest {
 	@Test
 	void updateReimbursement() {
 		//EMPLOYEE
-		User myUser1 = new User("sue", "abc123", "Sue", "Liz", "sue@revature.net", UserRole.EMPLOYEE);
+		User myUser1 = new User("sue", "abc123", "Sue", "Liz", "sdgsdgsgue@rgfgfdgge.net", UserRole.EMPLOYEE);
 		myUser1.setUserId(1);
 		Reimbursement rei1 = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		Reimbursement rei1copy = rei1;
@@ -189,7 +189,7 @@ class EmployeeServiceTest {
 		rei1.setReiType(ReiType.GAS);
 		
 		//MANAGER
-		User myUser2 = new User("mateoer", "abc123", "Eric", "Mateo", "eric234@revature.net", UserRole.MANAGER);
+		User myUser2 = new User("mateoer", "abc123", "Eric", "Mateo", "fafdfsdfs4@refdsfsdgvature.net", UserRole.MANAGER);
 		myUser2.setUserId(2);
 		Reimbursement rei2 = new Reimbursement(20, "sandwich", ReiStatus.PENDING, ReiType.FOOD);
 		rei2.setReiAuthor(myUser2.getUserId());

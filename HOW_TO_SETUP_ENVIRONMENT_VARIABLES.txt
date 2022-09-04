@@ -1,0 +1,29 @@
+Environment Variables
+In order to use this project you will need to set up these
+environment variables.
+
+
+Amazon Web Services:
+
+	For RDS (to host the data: users and reimbursements)
+		ERS_DB_DBNAME  -> the RDS database name
+		ERS_DB_ENDPOINT -> the RDS endpoint
+		ERS_DB_PASSWORD -> the RDS password
+		ERS_DB_USERNAME -> the RDS username
+
+	For S3 bucket (to store profile pictures)
+		AWS_S3_BucketName -> the bucket name
+		AWS_Region -> the region
+		AWSAccessKeyId -> the Access Key
+		AWSSecretKey -> the Secret Key
+
+Gmail:
+
+	For Spring Mail (to receive notifications about reimbursements and reset tokens)
+		ERS_FULL_GMAIL_ADDRESS -> the complete email address that will be used
+				to send email notifications from
+		ERS_GMAIL_USERNAME -> only the username, without @gmail.complete
+		ERS_GMAIL_PASSWORD -> the app generated password from Gmail. I left the link
+				to the step-by-step guide on the README.md
+
+
