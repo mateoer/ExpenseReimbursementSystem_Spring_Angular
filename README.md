@@ -69,6 +69,8 @@ You will need an RDS, an S3 bucket, and a Gmail account
 
 > Open project from your IDE, in this example I use Spring STS 4
 
+> Click on *File* and then, *Open projects from file system*
+
 > Update maven project
 
 ## Setting up environment variables
