@@ -48,11 +48,31 @@ Features:
 
 > git clone https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular.git
 
-> Have a RDS and connect to your DB. It must be able to run PostgreSQL scripts, in this example I'm using DBeaver.
-
-> Have VS Code or any other IDE with Node.js installed. We will need **ng** and **npm** commands for the Angular part of the application
+> Have a RDS and connect to your DB.
 
 > Have an IDE capable of running Spring Boot applications, such as Spring STS.
+
+> Once the project is cloned you need to update the maven project. On Eclipse, Alt+F5
+
+> To enable **email notifications** as well as password resets, you need to configure a Gamil account <br/>
+You can follow the step-by-step guide here to configure a Gmail no-reply account to send and receive emails:
+
+https://stackoverflow.com/questions/26594097/javamail-exception-javax-mail-authenticationfailedexception-534-5-7-9-applicatio/72592946#72592946
+
+Copy the username and the password generated. 
+Paste them in the properties.yml file located in **ERS/src/main/resources** -> 
+
+<SCREENSHOT OF THE EMAIL USERNAME AND PASSWORD GOES HERE>
+
+> To enable **profile pictures** you need to set up an S3 bucket from AWS
+The process is a little tedious if you don't know how to set up an S3 bucket. But I left a few good guides on the **S3 AWS** card under **General Information**
+list of my Trello board
+
+https://trello.com/b/HF5k6pi8/ers-spring-angular
+
+If you have one already set up, then just go into the **application.yml** file and update the region to the one where your bucket is located
+Also, replace **AWSAccessKeyId** and **AWSSecretKey** for your AWS Acess Key and Secret Key respectively
+Then, on **src/main/java** **service/amazon** **/AWSConfig.java** replace bucket name with your bucket name
 
 > Make sure your Java IDE has project Lombok installed. On Eclipse-based IDEs: Help -> About.. -> Look for Lombok and version.
 > If Lombok is not installed, you can follow this guide https://projectlombok.org/setup/eclipse
@@ -77,7 +97,10 @@ Then create environment variables on the local system and name them as this:
 Open the DB assigned to **ERS_DB_DBNAME** from your DB application (like DBeaver) but don't run the script **ERS_SA_Script.sql** (found in the root folder) just yet.
 <br/>
    **Note that the script is in PostgreSQL**  
-<br/>
+<br/><br/>
+
+
+
 
 On VS Code <br/>
 - Open the folder ../ERS_Spring_Angular/src/main/resources/frontend/**ERS_Angular**<br/>
