@@ -33,34 +33,40 @@ Features:
 * Request, Approve and Deny functionalities
 * Employee account has ability to create new requests
 * Manager account has ability to approve/deny requests
+* Clickable table rows 
+* Spring Security 
+* Spring Mail to receive alerts about reimbursement's status 
+* Ability to upload profile pictures 
+* Ability to reset passwords 
+* Password hasshing functionality 
+* Register new users 
+* Ability to cancel/edit reimbursements 
 
-* Spring Security (***Done, will update soon)
-* Spring Mail to receive alerts about reimbursement's status (***Done, will update soon)
-* Ability to upload profile pictures (***Done, will update soon)
-* Ability to reset passwords (***Done, will update soon)
-* Password hasshing functionality (***Done, will update soon)
-* Register new users (***Done, will update soon)
-* Ability to cancel/edit reimbursements (***Done, will update soon)
-* Clickable table rows (***Done, will update soon)
 
 
 ## Getting Started
 
 > git clone https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular.git
 
-> Have a RDS and connect to your DB.
+#You will need:
+* An RDS, an S3 bucket, a Gmail account
 
+From RDS save **endpoint**, **port number**, **username**, and **password**
+From S3 bucket make sure you have **AWSAccessKeyId** and **AWSSecretKey**
+From Gmail account, **username** and **password**
+
+<br><br><br><br>
 > Have an IDE capable of running Spring Boot applications, such as Spring STS.
 
-> Once the project is cloned you need to update the maven project. On Eclipse, Alt+F5
+> Once the project is cloned you need to update the maven project. On Eclipse, **Alt+F5** and select the project to update
 
 > To enable **email notifications** as well as password resets, you need to configure a Gamil account <br/>
-You can follow the step-by-step guide here to configure a Gmail no-reply account to send and receive emails:
+>You can follow the step-by-step guide here to configure a Gmail no-reply account to send and receive emails:
 
 https://stackoverflow.com/questions/26594097/javamail-exception-javax-mail-authenticationfailedexception-534-5-7-9-applicatio/72592946#72592946
 
-Copy the username and the password generated. 
-Paste them in the properties.yml file located in **ERS/src/main/resources** -> 
+>Copy the username and the password generated. 
+>Paste them in the properties.yml file located in **ERS/src/main/resources** -> 
 
 <SCREENSHOT OF THE EMAIL USERNAME AND PASSWORD GOES HERE>
 
@@ -73,11 +79,23 @@ https://trello.com/b/HF5k6pi8/ers-spring-angular
 If you have one already set up, then just go into the **application.yml** file and update the region to the one where your bucket is located
 Also, replace **AWSAccessKeyId** and **AWSSecretKey** for your AWS Acess Key and Secret Key respectively
 Then, on **src/main/java** **service/amazon** **/AWSConfig.java** replace bucket name with your bucket name
+Update the project with **Alt+F5**
+  
+> **Ctrl+Alt+T** will open the project terminal. 
+> Run the following command: **mvn package**
+> That will create an executable file you can locate at **ERS/target/** with the name **ERS-0.0.1-SNAPSHOT.jar**
+> Run **cd target/**
+> Run **java -jar ERS-0.0.1-SNAPSHOT.jar** 
+  
+  This will start executing the project. Once the boot is complete, open your **localhost:9050/**
+  
+  You can create an account for manager/employee and start creating/approving/denying reimbursements
+  When reimbursements have a **pending** status employees will be able to cancel or edit some portions of their requests. This feature is disabled when
+  the status changes to **approved/denied**.
+  Additionally, if the email and S3 bucket have been setup properly the employee users will receive notifications when their requests is approved/denied by the manager
+  All users will be able to reset their passwords from the login page by inserting their username and email accounts to receive a reset token
+  And also all users will be able to upload profile pictures
 
-> Make sure your Java IDE has project Lombok installed. On Eclipse-based IDEs: Help -> About.. -> Look for Lombok and version.
-> If Lombok is not installed, you can follow this guide https://projectlombok.org/setup/eclipse
-
-<img src="https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular/blob/main/screenshots/Capture.PNG" width=40% height=40%>
 <br />
 
 
