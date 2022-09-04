@@ -34,7 +34,6 @@ Features:
 * Employee account has ability to create new requests
 * Manager account has ability to approve/deny requests
 
-To-do list:
 * Spring Security (***Done, will update soon)
 * Spring Mail to receive alerts about reimbursement's status (***Done, will update soon)
 * Ability to upload profile pictures (***Done, will update soon)
