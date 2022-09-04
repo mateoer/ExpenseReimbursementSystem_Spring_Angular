@@ -16,7 +16,7 @@ As an added feature this application was hosted into an EC2 instance and it is c
 * AWS RDS, EC2, S3, CodeBuild, CodeDeploy, CodePipeline
 
 * DBeaver
-* Spring STS 3
+* Spring STS 4
 * VS Code
 * TypeScript
 * Java
@@ -65,11 +65,26 @@ Features:
 
 > git clone https://github.com/mateoer/ExpenseReimbursementSystem_Spring_Angular.git
 
-# You will need:
-* An RDS, an S3 bucket, a Gmail account
-* 
+You will need an RDS, an S3 bucket, and a Gmail account
 
+> Open project from your IDE, in this example I use Spring STS 4
 
+> Update maven project
+
+## Setting up environment variables
+
+> Follow the list of environment variables to configure into your system in order to run the application
+> **HOW_TO_SETUP_ENVIRONMENT_VARIABLES.txt**
+> After the variables are set, close and open your IDE back up
+
+## Running the application
+
+> Open the terminal
+> From the project directory run:
+> **mvn package**
+> **cd target/**
+> **java -jar ERS-0.0.1-SNAPSHOT.jar**
+> Then open your **localhost:9050/**  
 
 ## License
 
