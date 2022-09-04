@@ -74,7 +74,9 @@ You will need an RDS, an S3 bucket, and a Gmail account
 ## Setting up environment variables
 
 > Follow the list of environment variables to configure into your system in order to run the application
+> 
 > **HOW_TO_SETUP_ENVIRONMENT_VARIABLES.txt**
+> 
 > After the variables are set, close and open your IDE back up
 
 ## Running the application
