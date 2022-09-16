@@ -5,7 +5,7 @@ export interface UserCredentials {
         password: string,
         firstName: string,
         lastName: string,
-        email: string,
+        email: string ,
         userRole: string,
         profilePicName: string
     },

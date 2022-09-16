@@ -1,5 +1,6 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login-service.service';
 import { RegisterService } from 'src/app/services/register-service.service';
@@ -74,7 +75,10 @@ export class RegisterComponent implements OnInit {
     let mail =  (this.readyEmail == true) && (this.registrationForm.user.email == this.re_email) && (this.re_email != '' || ' ');
     let uRole = this.registrationForm.user.userRole != '';
     let PasW = (this.registrationForm.user.password == this.re_password) && (this.re_password != '' || ' ');
-    if (FName && LName && uRole && uName && mail && PasW) {
+
+    if (FName && LName && uRole && uName && mail && PasW) {  
+      
+
       this.registerService.registerNewUser(this.registrationForm)
         .subscribe(e => 
           {
@@ -82,6 +86,9 @@ export class RegisterComponent implements OnInit {
               this.registrationForm = e;        
               this.newlyCreatedUser = e;
               this.sessionSave();
+
+              console.log(this.registrationForm);
+
               const moveTo = this.registrationForm.user.userRole.toLowerCase();
               this._route.navigate([`/${moveTo}`]);
             }

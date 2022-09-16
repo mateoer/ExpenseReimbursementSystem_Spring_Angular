@@ -42,6 +42,7 @@ export class ManagerComponent implements OnInit {
 
     ///////new table function
     this.loadReimbursements();
+    this.managerGuard();
   }
   
   ////////////NEW TABLE STUFF START HERE////////////////////////////////////////////////
@@ -166,6 +167,12 @@ export class ManagerComponent implements OnInit {
   public refreshTable(){
     this.removeFilter();
     this.ngOnInit();
+  }
+
+  public managerGuard(){
+    if (!(sessionStorage.getItem('userRole') == 'MANAGER')) {
+      this._route.navigate(["/login"]);
+    }
   }
   
 
