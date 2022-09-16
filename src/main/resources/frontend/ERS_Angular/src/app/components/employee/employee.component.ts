@@ -48,6 +48,7 @@ export class EmployeeComponent implements OnInit {
 
         ///////new table function
         this.loadReimbursements();
+        this.employeeGuard();
   } 
   ////////////NEW TABLE STUFF START HERE////////////////////////////////////////////////
   
@@ -163,6 +164,12 @@ export class EmployeeComponent implements OnInit {
   public refreshTable(){    
     this.removeFilter();
     this.ngOnInit();
+  }
+
+  public employeeGuard(){
+    if (!(sessionStorage.getItem('userRole') == 'EMPLOYEE')) {
+      this._route.navigate(["/login"]);
+    }
   }
 
 }
