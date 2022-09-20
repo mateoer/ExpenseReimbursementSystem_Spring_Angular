@@ -36,7 +36,6 @@ with Angular material tables, Spring Mail, and AWS S3 buckets and the subsequent
 * Ability to cancel/edit reimbursements when the status of the request is still **pending**
 * Manager account has ability to approve/deny requests
 * Clickable table rows 
-* Spring Security 
 * Spring Mail to receive alerts about reimbursement's status 
 * Ability to upload profile pictures 
 * Ability to reset passwords from user home or through email
