@@ -146,4 +146,14 @@ public class ManagerService implements ManagerServiceInterface {
 		return reiRepo.findAll();
 	}
 
+	@Override
+	public List<User> listOfReiAuthors() {
+		ManagerService myService = new ManagerService(reiRepo, userRepo, emailService);		
+		List<Reimbursement> listOfReis = myService.listOfAllReimbursements();
+		
+		return null;
+	}
+	
+	
+
 }

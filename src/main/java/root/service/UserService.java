@@ -94,6 +94,7 @@ public class UserService implements UserServiceInterface {
 		User myUser = userRepo.findByPasswordResetToken(resetToken);
 		if (myUser != null) {
 			myUser.setPassword(passwordEncoder.encode(newPassword));
+			myUser.setPasswordResetToken(null);
 			userRepo.save(myUser);
 		}
 		return myUser;

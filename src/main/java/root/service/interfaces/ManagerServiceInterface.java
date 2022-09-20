@@ -9,6 +9,7 @@ public interface ManagerServiceInterface {
 	
 	public User getUserName(User user);	
 	public List<Reimbursement> listOfAllReimbursements ();
+	public List<User> listOfReiAuthors ();
 	public String approveReimbursement (Reimbursement myReimbursement, User user);
 	public String denyReimbursement (Reimbursement myReimbursement, User user);
 	
