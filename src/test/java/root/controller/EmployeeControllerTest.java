@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import root.model.Reimbursement;
 import root.model.User;
-import root.model.UserReiContext;
+import root.model.UserReiRequest;
 import root.model.UserRole;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
@@ -48,11 +48,11 @@ class EmployeeControllerTest {
 		Reimbursement reiToApprove = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		reiToApprove.setReiAuthor(employee1.getUserId());
 		
-		UserReiContext addRequest1 = new UserReiContext();
+		UserReiRequest addRequest1 = new UserReiRequest();
 		addRequest1.setReimbursement(reiToApprove);
 		addRequest1.setUser(employee1);
 		
-		UserReiContext addRequest2 = new UserReiContext();
+		UserReiRequest addRequest2 = new UserReiRequest();
 		
 		when(empService.addReimbursement(reiToApprove, employee1)).thenReturn(reiToApprove);
 		
@@ -113,7 +113,7 @@ class EmployeeControllerTest {
 		Reimbursement reiToDelete = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		reiToDelete.setReiAuthor(employee1.getUserId());
 		
-		UserReiContext delRequest = new UserReiContext();
+		UserReiRequest delRequest = new UserReiRequest();
 		delRequest.setReimbursement(reiToDelete);
 		delRequest.setUser(employee1);	
 		
@@ -135,7 +135,7 @@ class EmployeeControllerTest {
 		Reimbursement reiToEdit = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		reiToEdit.setReiAuthor(employee1.getUserId());
 		
-		UserReiContext editRequest = new UserReiContext();
+		UserReiRequest editRequest = new UserReiRequest();
 		editRequest.setReimbursement(reiToEdit);
 		editRequest.setUser(employee1);	
 		

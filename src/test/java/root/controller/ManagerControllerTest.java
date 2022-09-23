@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import root.model.Reimbursement;
 import root.model.User;
-import root.model.UserReiContext;
+import root.model.UserReiRequest;
 import root.model.UserRole;
 import root.model.enumscontainer.ReiStatus;
 import root.model.enumscontainer.ReiType;
@@ -91,11 +91,11 @@ class ManagerControllerTest {
 		Reimbursement reiToApprove = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		reiToApprove.setReiAuthor(employee1.getUserId());
 		
-		UserReiContext approveRequest1 = new UserReiContext();
+		UserReiRequest approveRequest1 = new UserReiRequest();
 		approveRequest1.setReimbursement(reiToApprove);
 		approveRequest1.setUser(manager);
 		
-		UserReiContext approveRequest2 = new UserReiContext();
+		UserReiRequest approveRequest2 = new UserReiRequest();
 		approveRequest2.setReimbursement(reiToApprove);
 		approveRequest2.setUser(employee1);
 		
@@ -115,11 +115,11 @@ class ManagerControllerTest {
 		Reimbursement reiToDeny = new Reimbursement(20, "ice cream", ReiStatus.PENDING, ReiType.FOOD);
 		reiToDeny.setReiAuthor(employee1.getUserId());
 		
-		UserReiContext denyRequest1 = new UserReiContext();
+		UserReiRequest denyRequest1 = new UserReiRequest();
 		denyRequest1.setReimbursement(reiToDeny);
 		denyRequest1.setUser(manager);
 		
-		UserReiContext denyRequest2 = new UserReiContext();
+		UserReiRequest denyRequest2 = new UserReiRequest();
 		denyRequest2.setReimbursement(reiToDeny);
 		denyRequest2.setUser(employee1);
 		
