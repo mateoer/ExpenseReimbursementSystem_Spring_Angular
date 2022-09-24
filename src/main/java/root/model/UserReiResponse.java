@@ -23,6 +23,6 @@ public class UserReiResponse {
     private Integer rei_resolver;
     private LocalDateTime rei_submitteDate;
     private LocalDateTime rei_resolvedDate; 
-    
+    private String receiptPicName;
 	
 }

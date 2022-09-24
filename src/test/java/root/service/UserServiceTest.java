@@ -212,7 +212,7 @@ class UserServiceTest {
 		String subject = "Password RESET";
 		String emailContent = "Reset token: "+ resetKey
 				+ "\nUse this token to reset your password"
-				+ "\nGo to:  'http://localhost:9050/finalizepasswordreset' ";
+				+ "\nGo to:  http://localhost:9050/finalizepasswordreset/"+resetKey;
 		
 		userService.passwordResetEmailNotification(emp1, resetKey);		
 		verify(emailService)
@@ -224,7 +224,7 @@ class UserServiceTest {
 		resetKey = new String(UUID.randomUUID() + "");
 		emailContent = "Reset token: "+ resetKey
 				+ "\nUse this token to reset your password"
-				+ "\nGo to:  'http://localhost:9050/finalizepasswordreset' ";
+				+ "\nGo to:  http://localhost:9050/finalizepasswordreset/"+resetKey;
 		userService.passwordResetEmailNotification(emp2, resetKey);
 		verify(emailService)
 			.sendSimpleMessage(
@@ -235,7 +235,7 @@ class UserServiceTest {
 		resetKey = new String(UUID.randomUUID() + "");
 		emailContent = "Reset token: "+ resetKey
 				+ "\nUse this token to reset your password"
-				+ "\nGo to:  'http://localhost:9050/finalizepasswordreset' ";
+				+ "\nGo to:  http://localhost:9050/finalizepasswordreset/"+resetKey;
 		userService.passwordResetEmailNotification(manager, resetKey);
 		verify(emailService)
 			.sendSimpleMessage(

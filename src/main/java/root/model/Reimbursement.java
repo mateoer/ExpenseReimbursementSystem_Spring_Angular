@@ -63,7 +63,8 @@ public class Reimbursement {
 	@Column (name = "rei_resolver")
 	private Integer rei_resolver;
 	
-	
+	@Column(name = "receipt_picture_name")
+	private String receiptPicName;
 	
 	@Enumerated (EnumType.STRING)
 	private ReiStatus reiStatus;

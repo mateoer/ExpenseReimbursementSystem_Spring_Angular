@@ -12,6 +12,7 @@ import root.model.Reimbursement;
 import root.model.User;
 import root.model.UserRole;
 import root.model.enumscontainer.ReiStatus;
+import root.service.amazon.StorageService;
 import root.service.interfaces.EmployeeServiceInterface;
 
 @Service
@@ -21,6 +22,8 @@ public class EmployeeService implements EmployeeServiceInterface {
 	private ReimbursementRepository reiRepo;
 	@Autowired
 	private UserRepository userRepo;
+	@Autowired
+	private StorageService storageServ;
 	
 	@Autowired
     public EmployeeService(ReimbursementRepository reiRepo, UserRepository userRepo) {
@@ -65,6 +68,10 @@ public class EmployeeService implements EmployeeServiceInterface {
 		Reimbursement reiToCancel = reiRepo.findByReiId(reimb.getReiId());
 		if(reiToCancel != null) {
 			reiRepo.delete(reiToCancel);
+			if(reiToCancel.getReceiptPicName() != null) {
+				User reiOwner = userRepo.findByUserId(reiToCancel.getReiAuthor());
+				storageServ.deleteReceiptFile(reiToCancel.getReceiptPicName(), reiOwner.getUsername());
+			}
 			return "Reimbursement was deleted";
 		}
 		return "Reimbursement not found";

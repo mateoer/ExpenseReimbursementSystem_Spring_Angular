@@ -189,6 +189,7 @@ public class ManagerService implements ManagerServiceInterface {
 						tempUserRei.setRei_resolver(rei.getRei_resolver());
 						tempUserRei.setRei_submitteDate(rei.getRei_submitteDate());
 						tempUserRei.setRei_resolvedDate(rei.getRei_resolvedDate());
+						tempUserRei.setReceiptPicName(rei.getReceiptPicName());
 						
 						userReiList.add(tempUserRei);
 					}

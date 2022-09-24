@@ -111,7 +111,7 @@ public class UserService implements UserServiceInterface {
 		String subject = "Password RESET";
 		String emailContent = "Reset token: "+ resetKey
 				+ "\nUse this token to reset your password"
-				+ "\nGo to:  'http://localhost:9050/finalizepasswordreset' ";
+				+ "\nGo to:  http://localhost:9050/finalizepasswordreset/"+resetKey;
 		emailService.sendSimpleMessage(userEmail, subject, emailContent);
 	}
 
