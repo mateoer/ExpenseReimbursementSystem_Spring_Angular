@@ -46,4 +46,7 @@ export class GeneralRouteService {
   CHECK_EMAIL = `${this.API_URL}/checkEmail/`;
   NEW_USER = `${this.API_URL}/registerNewUser`;
 
+  //pdf report
+  EMP_REPORT = `${this.API_URL}/generatePdf`;
+
 }
