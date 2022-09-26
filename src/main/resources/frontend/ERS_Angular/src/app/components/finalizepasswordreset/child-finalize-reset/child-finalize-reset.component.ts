@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PasswordResetService } from 'src/app/services/password-reset.service';
 import { ProfilePictureService } from 'src/app/services/profile-picture.service';
 import { FinalizepasswordresetComponent } from '../finalizepasswordreset.component';
@@ -11,12 +11,13 @@ import { FinalizepasswordresetComponent } from '../finalizepasswordreset.compone
 })
 export class ChildFinalizeResetComponent extends FinalizepasswordresetComponent implements OnInit, OnChanges {
 
-  constructor( _route: Router,  pfp: ProfilePictureService, resetService: PasswordResetService) {
-    super(_route,pfp,resetService);
+  constructor( _route: Router,  pfp: ProfilePictureService, resetService: PasswordResetService,
+              actRoute: ActivatedRoute) {
+    super(_route,pfp,resetService,actRoute);
   }
 
   @Input() override message!: string;
-  @Input() override reset_token!: string;
+  
   @Input() override new_password!: string;
   @Input() override re_new_password!: string;
   changelog: string[] = []; 

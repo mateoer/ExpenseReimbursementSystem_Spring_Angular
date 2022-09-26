@@ -34,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { MngDialogComponent } from './components/dialog-boxes/mng-dialog/mng-dialog.component';
+import { PdfReportComponent } from './components/pdf-report/pdf-report.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { MngDialogComponent } from './components/dialog-boxes/mng-dialog/mng-dia
     ProfilePictureComponent, LoginResetComponent, HomeResetComponent, 
     ChildResetComponent, ChildLoginResetComponent, NavbarComponent, 
     FinalizepasswordresetComponent, ChildFinalizeResetComponent, 
-    RegisterComponent, ChildEmailCheckComponent, ChildPasswordCheckComponent, ReiDialogComponent, MngDialogComponent,
+    RegisterComponent, ChildEmailCheckComponent, ChildPasswordCheckComponent, ReiDialogComponent, MngDialogComponent, PdfReportComponent,
     
     
   ],

@@ -18,4 +18,5 @@ public interface ReimbursementRepository extends JpaRepository<Reimbursement, In
 	public Reimbursement findByReiId(int reiId);
 	public List<Reimbursement> findByReiAuthor(Integer reiAuthor);	
 	public Reimbursement findByReiIdAndReiAuthor(int reiId, int reiAuthor);
+	public Reimbursement findByReiAuthorAndReceiptPicName(int reiAuthor, String receiptPicName);
 }

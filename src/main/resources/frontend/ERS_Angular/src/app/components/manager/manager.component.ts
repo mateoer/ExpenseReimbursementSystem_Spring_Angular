@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReiDialogComponent } from '../dialog-boxes/rei-dialog/rei-dialog.component';
 import { MngDialogComponent } from '../dialog-boxes/mng-dialog/mng-dialog.component';
+import { ReiListMap } from 'src/app/interfaces/rei-list-map';
 
 @Injectable({
   providedIn: 'root'
@@ -33,12 +34,7 @@ export class ManagerComponent implements OnInit {
     this.onSelect();
     if (JSON.parse(sessionStorage.getItem('found')!) == false) {
       this._route.navigate(["/login"]);
-    }
-    // this.mngService.viewListOfAllReimbursements().subscribe(copyOfReiList => this.copyOfReiList = copyOfReiList);
-    // this.mngService.viewListOfAllReimbursements().subscribe(reiList => {
-    //   this.reiList = reiList;
-    //   this.reiList.sort((a,b)=> b.reiId - a.reiId);
-    // });
+    }    
 
     ///////new table function
     this.loadReimbursements();
@@ -47,14 +43,15 @@ export class ManagerComponent implements OnInit {
   
   ////////////NEW TABLE STUFF START HERE////////////////////////////////////////////////
   
+  
   displayedColumns: string[] = ['ID','Amount','Description','Status','Type','Submitted','Resolved'];
-  dataSource!: MatTableDataSource<EmpReimbursements>;
+  dataSource!: MatTableDataSource<ReiListMap>;
   dataLoading: boolean = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  public handleReimbursements(reimbursements : EmpReimbursements[]){
+  public handleReimbursements(reimbursements : ReiListMap[]){
     this.dataLoading = false;
     this.dataSource = new MatTableDataSource(reimbursements);
     this.dataSource.paginator = this.paginator;
@@ -63,7 +60,7 @@ export class ManagerComponent implements OnInit {
 
   public loadReimbursements(){
     this.mngService.viewListOfAllReimbursements().subscribe(
-      (reimbursements : EmpReimbursements[]) => 
+      (reimbursements : ReiListMap[]) => 
       {
         reimbursements.sort((a,b)=> b.reiId - a.reiId);
         this.reiList = reimbursements;
@@ -74,7 +71,7 @@ export class ManagerComponent implements OnInit {
   }
  
   //////DIALOG BOX CONFIGURATION////////////////////////////
-  public displayReimbursement(reimbursement: EmpReimbursements){
+  public displayReimbursement(reimbursement: ReiListMap){
     
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
@@ -97,10 +94,9 @@ export class ManagerComponent implements OnInit {
   filterReiType : any[] = [' ','LODGING','GAS','FOOD','OTHER'];
   selected: string = ' ';   
   selectedType: string = ' ';   
-  
-  // reiMapList = new Map<UserList, ListReis[]> ();
-  reiList: EmpReimbursements[] = [];
-  copyOfReiList: EmpReimbursements[] = [];  
+ 
+  reiList: ReiListMap[] = [];
+  copyOfReiList: ReiListMap[] = [];  
 
   //These are required to approve/deny reimburseents
   reimbIdNumberApp!: number;

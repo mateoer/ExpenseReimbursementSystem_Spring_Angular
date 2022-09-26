@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import root.model.Reimbursement;
 import root.model.User;
-import root.model.UserReiContext;
+import root.model.UserReiRequest;
 import root.model.enumscontainer.ReiStatus;
 import root.service.EmployeeService;
 
@@ -30,7 +30,7 @@ public class EmployeeController {
 	//addNewReimbursement
 	@PostMapping("/addreimbursement")
 	@ResponseStatus(HttpStatus.CREATED)
-	public String addReimbursement(@RequestBody UserReiContext userReiContext){		
+	public String addReimbursement(@RequestBody UserReiRequest userReiContext){		
 		Reimbursement newReimbursement = userReiContext.getReimbursement();
 		User user =  userReiContext.getUser();
 		
@@ -61,7 +61,7 @@ public class EmployeeController {
 	
 	//deleteReimbursement
 	@PostMapping("/deleteReimbursement")
-	public String removeReimbursement(@RequestBody UserReiContext userReiContext) {
+	public String removeReimbursement(@RequestBody UserReiRequest userReiContext) {
 		Reimbursement reimbToCancel = userReiContext.getReimbursement();
 		User reiCreator = userReiContext.getUser();
 		
@@ -80,7 +80,7 @@ public class EmployeeController {
 	
 	//editReimbursement
 	@PostMapping("/updateReimbursement")
-	public String editReimbursement(@RequestBody UserReiContext userReiContext) {
+	public String editReimbursement(@RequestBody UserReiRequest userReiContext) {
 		Reimbursement reimbToUpdate = userReiContext.getReimbursement();
 		User reiCreator = userReiContext.getUser();
 		System.out.println("/nEditing reimbursement");

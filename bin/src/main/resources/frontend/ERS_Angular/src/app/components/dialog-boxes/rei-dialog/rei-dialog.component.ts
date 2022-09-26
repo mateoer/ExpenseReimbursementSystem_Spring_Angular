@@ -6,6 +6,7 @@ import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-
 import { EmployeeComponent } from '../../employee/employee.component';
 import { Reimbursement, ReiType, Status } from 'src/app/interfaces/reimbursement';
 import { timeout } from 'rxjs';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-rei-dialog',
@@ -18,7 +19,8 @@ export class ReiDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ReiDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: EmpReimbursements,
     public empService : EmployeeService,
-    public empComponent : EmployeeComponent) 
+    public empComponent : EmployeeComponent,
+    public route: Router) 
     {
       
     }
@@ -35,12 +37,14 @@ export class ReiDialogComponent implements OnInit {
     reiAuthor: this.data.reiAuthor,
     rei_resolver: this.data.rei_resolver,
     rei_submitteDate: this.data.rei_submitteDate,
-    rei_resolvedDate: this.data.rei_resolvedDate
+    rei_resolvedDate: this.data.rei_resolvedDate,
+    receiptPicName: this.data.receiptPicName
   }
 
   @Input() edit_amount: number = 0.00;
   @Input() edit_description: string= '';
   @Input() edit_type: string ='';
+ 
 
   
   responseMessage: any = '';
@@ -59,9 +63,9 @@ export class ReiDialogComponent implements OnInit {
   }
 
   saveChanges(){
-    // this.onNoClick();
-    console.log(this.data);
-    console.log(this.editedRei);
+    // // this.onNoClick();
+    // console.log(this.data);
+    // console.log(this.editedRei);
     if (this.editedRei.rei_amount == null) {
       this.responseMessage = "Invalid input amount. No changes were made."
       return;
@@ -83,7 +87,48 @@ export class ReiDialogComponent implements OnInit {
     }else{
       this.onNoClick();
     }
+  }
 
+  selectedFile!: File;
+  onFileSelected(event: any){
+    this.selectedFile = <File>event.target.files[0];    
+    this.uploadReceipt();
+  }
+
+  uploadReceipt(){
+    let receipt_upload = new FormData();
+    receipt_upload.append("file", this.selectedFile);
+    receipt_upload.append("userId", JSON.parse(sessionStorage.getItem('userId')!));
+    receipt_upload.append("reiId", JSON.stringify(this.editedRei.reiId));
+    this.empService.upload_replace_Receipt(receipt_upload).subscribe(
+      e => {
+        this.data.receiptPicName = e;
+        this.editedRei.receiptPicName = e;
+      }
+    );
+  }
+
+  deleteReceipt(){
+    this.empService.deleteReceipt(this.editedRei).subscribe(
+      e => {
+        this.responseMessage = e;
+        this.editedRei.receiptPicName = '';
+        setTimeout(() => {      
+          this.responseMessage = '';     
+        }, 3000);
+      }
+    );
+  }
+
+  viewReceipt(){
+    let receiptLocation: any;
+    this.empService.reviewReceipt(this.editedRei).subscribe(
+      e => {
+        receiptLocation = e;
+        window.open(`${receiptLocation}`);
+       
+      }
+    );
   }
 
   onNoClick(): void {

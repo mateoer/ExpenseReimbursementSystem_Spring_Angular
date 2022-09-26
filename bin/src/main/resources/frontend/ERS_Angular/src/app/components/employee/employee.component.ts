@@ -36,18 +36,11 @@ export class EmployeeComponent implements OnInit {
       this.onSelect();
       if (JSON.parse(sessionStorage.getItem('found')!) == false) {
         this._route.navigate(["/login"]);
-      }
-      // this.empService.getEmpReimbursements()
-      //     .subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);    
-      // this.empService.getEmpReimbursements().subscribe(reiArray =>
-      //   {
-      //     this.reiArray = reiArray;
-      //     this.reiArray.sort((a,b)=> b.reiId - a.reiId); 
-      //   });
-
+      } 
 
         ///////new table function
         this.loadReimbursements();
+        this.employeeGuard();
   } 
   ////////////NEW TABLE STUFF START HERE////////////////////////////////////////////////
   
@@ -163,6 +156,12 @@ export class EmployeeComponent implements OnInit {
   public refreshTable(){    
     this.removeFilter();
     this.ngOnInit();
+  }
+
+  public employeeGuard(){
+    if (!(sessionStorage.getItem('userRole') == 'EMPLOYEE')) {
+      this._route.navigate(["/login"]);
+    }
   }
 
 }

@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import root.model.Reimbursement;
 import root.model.User;
-import root.model.UserReiContext;
+import root.model.UserReiRequest;
+import root.model.UserReiResponse;
 import root.service.ManagerService;
 
 @RestController
@@ -45,7 +46,7 @@ public class ManagerController {
 	// approveReimbursements
 	@PostMapping("/approvereimbursement")
 	@ResponseStatus(HttpStatus.OK)
-	public String approveReimbursement(@RequestBody UserReiContext userReiContext) {
+	public String approveReimbursement(@RequestBody UserReiRequest userReiContext) {
 		System.out.println("\nApproved\n");
 		
 		Reimbursement reimbToApprove = userReiContext.getReimbursement();
@@ -64,7 +65,7 @@ public class ManagerController {
 	// denyReimbursements
 	@PostMapping("/denyreimbursement")
 	@ResponseStatus(HttpStatus.OK)
-	public String denyReimbursement(@RequestBody UserReiContext userReiContext) {
+	public String denyReimbursement(@RequestBody UserReiRequest userReiContext) {
 		System.out.println("\nDenied\n");
 
 		Reimbursement reimbToDeny = userReiContext.getReimbursement();
@@ -79,5 +80,13 @@ public class ManagerController {
 		return "Something went wrong";
 	}	
 
+	// view Reis and Users
+	@PostMapping("/users_rei_list")
+	public List<UserReiResponse> getUserReiMap (@RequestBody UserReiRequest userReiContext){
+		User managerUser = userReiContext.getUser();
+		System.out.println("\nMap of all users' reimbursements");
+		return mangService.viewReimbursements(managerUser);
+	}
+	
 	
 }

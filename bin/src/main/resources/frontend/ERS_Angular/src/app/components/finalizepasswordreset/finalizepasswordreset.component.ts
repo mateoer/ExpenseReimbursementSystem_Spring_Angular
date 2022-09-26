@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PasswordResetService } from 'src/app/services/password-reset.service';
 import { ProfilePictureService } from 'src/app/services/profile-picture.service';
 
@@ -10,10 +10,14 @@ import { ProfilePictureService } from 'src/app/services/profile-picture.service'
 })
 export class FinalizepasswordresetComponent implements OnInit {
 
-  constructor(public _route: Router, public pfp: ProfilePictureService,public resetService: PasswordResetService) { }
+  constructor(public _route: Router, 
+              public pfp: ProfilePictureService,
+              public resetService: PasswordResetService,
+              public actRoute: ActivatedRoute) { }
 
-  message = '';
-  reset_token= '';
+  resetToken : any;  
+
+  message = '';  
   new_password='';
   re_new_password='';
   userImage:any = null;
@@ -23,6 +27,9 @@ export class FinalizepasswordresetComponent implements OnInit {
     }else{
       this.userImage = "//ssl.gstatic.com/accounts/ui/avatar_2x.png";
     }
+
+    this.resetToken = this.actRoute.snapshot.paramMap.get('resetToken');
+
   }
 
   back(){
@@ -30,11 +37,11 @@ export class FinalizepasswordresetComponent implements OnInit {
     this._route.navigate([`/${moveTo}`]);
   }
   passwordReset(){
-    if ((this.new_password != '' && this.reset_token != '') && (this.new_password === this.re_new_password)){
-      this.resetService.validateResetToken(this.reset_token, this.new_password)
+    if ((this.new_password != '' && this.resetToken != '') && (this.new_password === this.re_new_password)){
+      this.resetService.validateResetToken(this.resetToken, this.new_password)
         .subscribe(e => {
           this.message = e;
-          this.reset_token='';
+          this.resetToken='';
           this.new_password='';
           this.re_new_password='';
       });

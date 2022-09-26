@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmpReimbursements } from '../interfaces/emp-reimbursements';
@@ -75,6 +75,31 @@ export class EmployeeService {
         }
       }
       , { responseType: 'text' as 'json' } );
+  }
+
+
+  ///////RECEIPT FUNCTIONS
+  public reviewReceipt(reimbursement : EmpReimbursements): Observable<string> {
+   
+    const reviewReceipt_formData = new FormData();
+    reviewReceipt_formData.append("username", sessionStorage.getItem('username')!);
+    reviewReceipt_formData.append("receiptPicName", reimbursement.receiptPicName);
+    return this.http.post<string>(`${this.urlService.REVIEW_RECEIPT}`,
+    reviewReceipt_formData
+    , { responseType: 'text' as 'json' });
+  }
+  public deleteReceipt(reimbursement : EmpReimbursements): Observable<string> {
+    const reviewReceipt_formData = new FormData();
+    reviewReceipt_formData.append("username", sessionStorage.getItem('username')!);
+    reviewReceipt_formData.append("receiptPicName", reimbursement.receiptPicName);
+    return this.http.post<string>(`${this.urlService.DELETE_RECEIPT}`,
+    reviewReceipt_formData
+    , { responseType: 'text' as 'json' });
+  }
+  public upload_replace_Receipt(formDataToSend: FormData): Observable<string> {
+    return this.http.post<string>(`${this.urlService.UPLOAD_RECEIPT}`,    
+      formDataToSend    
+    , { responseType: 'text' as 'json' });
   }
   
 }

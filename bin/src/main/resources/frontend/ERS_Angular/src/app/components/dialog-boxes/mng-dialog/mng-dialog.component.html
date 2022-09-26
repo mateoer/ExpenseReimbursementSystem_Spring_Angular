@@ -6,6 +6,15 @@
 
     <div>
     <mat-grid-list cols="3" rowHeight="25px" style="background-color: aliceblue;">
+        <mat-grid-tile><b>First Name</b></mat-grid-tile> 
+        <mat-grid-tile><b>Last Name</b></mat-grid-tile>
+        <mat-grid-tile><b></b></mat-grid-tile>
+        <mat-grid-tile>{{data.firstName}}</mat-grid-tile>
+        <mat-grid-tile>{{data.lastName}}</mat-grid-tile>
+    </mat-grid-list>
+    <hr>    
+    <mat-grid-list cols="3" rowHeight="25px" style="background-color: aliceblue;">
+         
         <mat-grid-tile><b>ID</b></mat-grid-tile> 
         <mat-grid-tile><b>Amount</b></mat-grid-tile>
         <mat-grid-tile><b>Submitted On</b></mat-grid-tile>
@@ -55,7 +64,12 @@
             (click)="approveReimbursement()">Approve Reimbursement</button>
         <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
             (click)="denyReimbursement()">Deny Reimbursement</button>
-    <!-- </div>    -->
+
+    <div *ngIf="data.receiptPicName != null">
+        <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
+            (click)="viewReceipt()">View Receipt</button>
+    </div> 
   </div>
+   
 <!-- </form> -->
 </div>

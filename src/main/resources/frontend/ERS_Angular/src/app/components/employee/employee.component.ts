@@ -36,15 +36,7 @@ export class EmployeeComponent implements OnInit {
       this.onSelect();
       if (JSON.parse(sessionStorage.getItem('found')!) == false) {
         this._route.navigate(["/login"]);
-      }
-      // this.empService.getEmpReimbursements()
-      //     .subscribe(reimbsCopyArray => this.reimbsCopyArray = reimbsCopyArray);    
-      // this.empService.getEmpReimbursements().subscribe(reiArray =>
-      //   {
-      //     this.reiArray = reiArray;
-      //     this.reiArray.sort((a,b)=> b.reiId - a.reiId); 
-      //   });
-
+      } 
 
         ///////new table function
         this.loadReimbursements();

@@ -53,6 +53,7 @@
     </mat-form-field>
     
     
+    
 
 
   <div *ngIf="responseMessage != '' " style="color:red;">    
@@ -68,14 +69,33 @@
     </div>      
     <div *ngIf="data.reiStatus == 'PENDING'">
         <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
-            (click)="cancelReimbursement()">Delete Reimbursement</button>
+            (click)="cancelReimbursement()">Delete</button>
         <button mat-button class="btn btn-secondary" style="margin-right: 15px;"
-            (click)="editReimbursement()">Edit Reimbursement</button>
+            (click)="editReimbursement()">Edit</button>
     </div> 
     <div *ngIf="editOn">
+        <span>
+            <ng-container *ngIf="data.receiptPicName == null ; else elseBlock">
+                <input type="file" #file  (change)="onFileSelected($event)" class="input-type-file-upload" />
+                <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
+                    (click)="file.click()">Upload Receipt</button>
+            </ng-container>
+            <ng-template #elseBlock>
+                <input type="file" #file  (change)="onFileSelected($event)" class="input-type-file-upload" />
+                <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
+                    (click)="file.click()">Replace Receipt</button>
+                <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
+                    (click)="deleteReceipt()">Delete Receipt</button>
+                
+            </ng-template>        
+        </span>
         <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
             (click)="saveChanges()">Save</button>
-    </div>  
+    </div>
+    <span *ngIf="data.receiptPicName != null">
+        <button mat-button class="btn btn-secondary" style="margin-right: 10px;"
+            (click)="viewReceipt()">View Receipt</button>
+    </span>  
   </div>
 <!-- </form> -->
 </div>

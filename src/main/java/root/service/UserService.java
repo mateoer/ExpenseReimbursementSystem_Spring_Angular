@@ -94,6 +94,7 @@ public class UserService implements UserServiceInterface {
 		User myUser = userRepo.findByPasswordResetToken(resetToken);
 		if (myUser != null) {
 			myUser.setPassword(passwordEncoder.encode(newPassword));
+			myUser.setPasswordResetToken(null);
 			userRepo.save(myUser);
 		}
 		return myUser;
@@ -110,7 +111,7 @@ public class UserService implements UserServiceInterface {
 		String subject = "Password RESET";
 		String emailContent = "Reset token: "+ resetKey
 				+ "\nUse this token to reset your password"
-				+ "\nGo to:  'http://localhost:9050/finalizepasswordreset' ";
+				+ "\nGo to:  http://localhost:9050/finalizepasswordreset/"+resetKey;
 		emailService.sendSimpleMessage(userEmail, subject, emailContent);
 	}
 

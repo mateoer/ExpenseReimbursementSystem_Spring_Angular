@@ -14,13 +14,13 @@ import lombok.Data;
 
 @Data
 @Component
-public class UserReiContext {
+public class UserReiRequest {
 	private User user;
 	private Reimbursement reimbursement;
-	public UserReiContext() {
+	public UserReiRequest() {
 		super();
 	}
-	public UserReiContext(User user, Reimbursement reimbursement) {
+	public UserReiRequest(User user, Reimbursement reimbursement) {
 		super();
 		this.user = user;
 		this.reimbursement = reimbursement;

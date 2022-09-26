@@ -1,6 +1,7 @@
 package root.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import root.dao.ReimbursementRepository;
 import root.dao.UserRepository;
 import root.model.Reimbursement;
 import root.model.User;
+import root.model.UserReiResponse;
 import root.model.UserRole;
 import root.model.enumscontainer.ReiStatus;
 import root.service.interfaces.ManagerServiceInterface;
@@ -18,7 +20,9 @@ import root.service.mail.EmailService;
 @Service
 public class ManagerService implements ManagerServiceInterface {
 
+	@Autowired
 	private ReimbursementRepository reiRepo;
+	@Autowired
 	private UserRepository userRepo;
 
 	@Autowired
@@ -145,5 +149,60 @@ public class ManagerService implements ManagerServiceInterface {
 	public List<Reimbursement> listOfAllReimbursements() {
 		return reiRepo.findAll();
 	}
+	
+
+	@Override
+	public List<UserReiResponse> viewReimbursements(User userManager) {
+		
+		User dummyUser = userRepo.findByUserId(userManager.getUserId());
+		if ((dummyUser == null) || (dummyUser.getUserRole() != UserRole.MANAGER)) {
+			return null;
+		}else {
+			
+			System.out.println("\n User not null: "+dummyUser.getFirstName()+" "+dummyUser.getLastName());
+			
+			List<Reimbursement> reiList = new ArrayList<>();
+			reiList = listOfAllReimbursements();
+			
+			List<User> userList = new ArrayList<>();
+			userList = userRepo.findAll();
+			
+			List<UserReiResponse> userReiList = new ArrayList<UserReiResponse>();
+			
+			
+			for (User user : userList) {				
+				
+				for (Reimbursement rei : reiList) {
+					UserReiResponse tempUserRei = new UserReiResponse();
+					if (user.getUserId() == rei.getReiAuthor()) {
+						tempUserRei.setUserId(user.getUserId());
+						tempUserRei.setFirstName(user.getFirstName());
+						tempUserRei.setLastName(user.getLastName());
+						tempUserRei.setUsername(user.getUsername());
+						
+						tempUserRei.setReiId(rei.getReiId());
+						tempUserRei.setRei_amount(rei.getRei_amount());
+						tempUserRei.setRei_description(rei.getRei_description());
+						tempUserRei.setReiStatus(rei.getReiStatus());
+						tempUserRei.setReiType(rei.getReiType());
+						tempUserRei.setReiAuthor(rei.getReiAuthor());
+						tempUserRei.setRei_resolver(rei.getRei_resolver());
+						tempUserRei.setRei_submitteDate(rei.getRei_submitteDate());
+						tempUserRei.setRei_resolvedDate(rei.getRei_resolvedDate());
+						tempUserRei.setReceiptPicName(rei.getReceiptPicName());
+						
+						userReiList.add(tempUserRei);
+					}
+					
+				}		
+				
+			}
+			
+			return userReiList;
+		}
+		
+	}
+	
+	
 
 }

@@ -11,5 +11,5 @@ export interface EmpReimbursements {
     rei_resolver : number;
     rei_submitteDate : Date;
     rei_resolvedDate : Date;
-
+    receiptPicName: string;
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 import { FinalizepasswordresetComponent } from './components/finalizepasswordreset/finalizepasswordreset.component';
 import { HomeResetComponent } from './components/home-reset/home-reset.component';
 import { LoginResetComponent } from './components/login-reset/login-reset.component';
@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'finalizepasswordreset', component: FinalizepasswordresetComponent
+    path: 'finalizepasswordreset/:resetToken', component: FinalizepasswordresetComponent
   },
   {
     path: 'loginreset', component: LoginResetComponent

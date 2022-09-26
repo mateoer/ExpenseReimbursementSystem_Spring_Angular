@@ -19,12 +19,18 @@ export class GeneralRouteService {
   NEW_REI = `${this.API_URL}/addreimbursement`;
   DEL_REI = `${this.API_URL}/deleteReimbursement`;
   EDIT_REI = `${this.API_URL}/updateReimbursement`;
+  UPLOAD_RECEIPT = `${this.API_URL}/uploadReceipt`;
+  DELETE_RECEIPT = `${this.API_URL}/deleteReceipt`;
+  REVIEW_RECEIPT = `${this.API_URL}/getReceipt`;
 
   //manager
   VIEW_USER = `${this.API_URL}/getmngusername`;
   APP_REI = `${this.API_URL}/approvereimbursement`;
   DEN_REI = `${this.API_URL}/denyreimbursement`;
-  LIST_REI = `${this.API_URL}/getlistofreimbursements`;
+  LIST_REI = `${this.API_URL}/users_rei_list`;
+  VIEW_RECEIPT = `${this.API_URL}/getReceipt`;
+  // LIST_REI = `${this.API_URL}/getlistofreimbursements`;
+  // MAP_REI = `${this.API_URL}/users_rei_list`;
 
   //password
   FROM_LOGIN = `${this.API_URL}/validateUserEmail`;

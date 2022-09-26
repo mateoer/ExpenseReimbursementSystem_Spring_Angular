@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmpReimbursements } from '../interfaces/emp-reimbursements';
+import { ReiListMap } from '../interfaces/rei-list-map';
 import { Reimbursement, ReiType, Status } from '../interfaces/reimbursement';
 import { UserId } from '../interfaces/user-id';
 import { UserName } from '../interfaces/user-name';
@@ -24,9 +25,15 @@ export class ManagerService {
 
   constructor(private http: HttpClient, private urlService: GeneralRouteService) { }
 
-  public viewListOfAllReimbursements(): Observable<EmpReimbursements[]>{
-    return this.http.get<EmpReimbursements[]>(`${this.urlService.LIST_REI}`);
+  public viewListOfAllReimbursements(): Observable<ReiListMap[]>{
+    return this.http.post<ReiListMap[]>(`${this.urlService.LIST_REI}`,
+    {
+      "user":{
+        "userId": JSON.parse(sessionStorage.getItem('userId')!)
+      }
+    });
   }
+  
   
   public getUserName(): Observable<UserName> {
     let myUserId = JSON.parse(sessionStorage.getItem('userId')!);
@@ -61,6 +68,16 @@ export class ManagerService {
         }
       }
       , { responseType: 'text' as 'json' } );
+  }
+
+  ///////RECEIPT FUNCTIONS
+  public viewReceipt(username : string, picName: string): Observable<string> {   
+    const reviewReceipt_formData = new FormData();
+    reviewReceipt_formData.append("username", username);
+    reviewReceipt_formData.append("receiptPicName", picName);
+    return this.http.post<string>(`${this.urlService.VIEW_RECEIPT}`,
+    reviewReceipt_formData
+    , { responseType: 'text' as 'json' });
   }
 
 }

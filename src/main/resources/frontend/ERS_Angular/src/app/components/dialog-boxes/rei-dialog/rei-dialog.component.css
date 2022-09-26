@@ -23,4 +23,10 @@
 	color: black;
 }
 
+.input-type-file-upload{
+    display:none;
+    visibility:hidden;
+}
+
+
 

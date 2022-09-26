@@ -52,7 +52,7 @@ class AmazonServiceTest {
 	void uploadAWSFile() throws IOException {		
 		
 		System.out.println("\nUploadAWSFile Test:");
-		String result = s3service.uploadAWSFile(myPNGfile);	
+		String result = s3service.uploadAWSFile(myPNGfile, "");	
 		System.out.println(""+myPNGfile.getOriginalFilename()+"\n");
 		
 		assertAll(				
@@ -66,7 +66,7 @@ class AmazonServiceTest {
 	void presignedUrl() throws IOException {
 		
 		System.out.println("\nPresignedUrl Test:");
-		String result = s3service.presignedUrl(myPNGfile.getOriginalFilename());
+		String result = s3service.presignedUrl(myPNGfile.getOriginalFilename(),"");
 		System.out.println(""+result+"\n");
 		
 		assertAll(				
@@ -84,7 +84,7 @@ class AmazonServiceTest {
 	@Test
 	void deleteAWSFile() {
 		System.out.println("\nDeleteAWSFile Test:");
-		ResponseEntity<String> result = s3service.deleteAWSFile(myTXTfile.getOriginalFilename());		
+		ResponseEntity<String> result = s3service.deleteAWSFile(myTXTfile.getOriginalFilename(),"");		
 		System.out.println("Response after deleting file: "+result+"\n");
 		assertAll(				
 				()->	assertNotNull(result)				
