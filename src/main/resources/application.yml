@@ -18,8 +18,14 @@ logging:
     com:
       amazonaws:
         util:
-          EC2MetadataUtils: error
-        
+          EC2MetadataUtils: error  
+          
+  
+#  file:     
+#    path: ./src/main/resources/log-files
+##    name: ./src/main/resources/log-files/ERS-%d{yyyy-MM-dd-HH-mm-ss}.log
+  
+     
 spring:
   
   servlet:
@@ -60,5 +66,5 @@ spring:
           starttls: 
             enable: true
     protocol: smtp
-    test-connection: false
-      
+    test-connection: false       
+     

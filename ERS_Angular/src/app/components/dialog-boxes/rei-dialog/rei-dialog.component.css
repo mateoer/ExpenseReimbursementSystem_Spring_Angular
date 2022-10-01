@@ -1,0 +1,32 @@
+.cdk-global-scrollblock {
+	position: initial;
+	width: initial;
+	overflow: hidden;
+}
+
+.mat-dialog-content{
+	margin-top: 0px;
+	padding-bottom: 0px;
+	overflow: visible;
+	min-width: 600px;
+}
+.closeX {
+	position:relative;
+	margin-left: 86%;
+}
+
+.closeX:hover {
+	cursor: pointer;
+}
+
+.input-fields {
+	color: black;
+}
+
+.input-type-file-upload{
+    display:none;
+    visibility:hidden;
+}
+
+
+

@@ -1,0 +1,14 @@
+<div *ngIf="emailMessage != '' ">
+    <a>{{emailMessage}}</a>
+</div>
+<div *ngIf="re_email == '' ">
+    <br>
+</div> 
+<div *ngIf="(re_email != '' && registrationForm.user.email != '') && re_email != registrationForm.user.email">
+    <a>emails don't match</a>
+</div> 
+<div *ngIf="(re_email != '' && registrationForm.user.email != '') && re_email == registrationForm.user.email">
+    <a>emails match</a>
+    <!-- <br> -->
+</div> 
+
