@@ -19,7 +19,7 @@ import root.service.UserService;
 import root.service.amazon.StorageService;
 
 @RestController
-@CrossOrigin()
+@CrossOrigin("*")
 public class S3Controller {
 
 	@Autowired

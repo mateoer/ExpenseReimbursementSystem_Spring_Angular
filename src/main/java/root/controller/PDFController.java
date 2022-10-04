@@ -25,7 +25,7 @@ import root.model.User;
 import root.service.pdf.PDFGenerator;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("*")
 public class PDFController {
 
 	private PDFGenerator pdfGenerator;

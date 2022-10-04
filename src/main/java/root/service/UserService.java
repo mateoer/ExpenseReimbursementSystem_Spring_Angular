@@ -15,9 +15,12 @@ import root.service.mail.EmailService;
 
 @Service
 public class UserService implements UserServiceInterface {
-
+	
+	@Autowired
 	private UserRepository userRepo;
+	@Autowired
 	private EmailService emailService;
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
@@ -45,9 +48,12 @@ public class UserService implements UserServiceInterface {
 		
 		User myUser = userRepo.findByUsername(user.getUsername());
 		if (myUser == null) return null;
-		if (passwordEncoder.matches(user.getPassword(), myUser.getPassword()))
+		if (user.getPassword().equals(myUser.getPassword())) {
+			boolean passwordsMatch = (user.getPassword().equals(myUser.getPassword()));
+			System.out.println("\n\nIn the service that call session: passwords match? => "+passwordsMatch);
 			return myUser;
-		else {
+		
+		}else {
 			return null;
 		}		
 	}

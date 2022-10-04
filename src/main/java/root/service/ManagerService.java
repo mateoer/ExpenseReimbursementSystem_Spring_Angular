@@ -68,9 +68,9 @@ public class ManagerService implements ManagerServiceInterface {
 						throw new RuntimeException("Invalid email format");
 					}
 					
-					String subject = "Reimbursement APPROVED";
-					String emailContent = "Your reimbursement has been APPROVED";
-					emailService.sendSimpleMessage(userEmail, subject, emailContent);
+//					String subject = "Reimbursement APPROVED";
+//					String emailContent = "Your reimbursement has been APPROVED";
+//					emailService.sendSimpleMessage(userEmail, subject, emailContent);
 
 					reiRepo.save(myReimbursement);
 					
@@ -120,9 +120,9 @@ public class ManagerService implements ManagerServiceInterface {
 						throw new RuntimeException("Invalid email format");
 					}
 					
-					String subject = "Reimbursement REJECTED";
-					String emailContent = "Your reimbursement has been REJECTED";
-					emailService.sendSimpleMessage(userEmail, subject, emailContent);
+//					String subject = "Reimbursement REJECTED";
+//					String emailContent = "Your reimbursement has been REJECTED";
+//					emailService.sendSimpleMessage(userEmail, subject, emailContent);
 
 					reiRepo.save(myReimbursement);
 					

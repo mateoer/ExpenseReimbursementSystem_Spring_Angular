@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { UserCredentials } from '../interfaces/user-credentials';
@@ -19,9 +19,15 @@ export class LoginService {
 
     
   public findUserLogin(usernamePassword: UsernamePassword): Observable<UserCredentials> {
+    const userCredentials = new FormData();
+    // var access_control_CORS = new HttpHeaders();
+    //     access_control_CORS.append('Access-Control-Allow-Origin', 'http://localhost:9050/');
+    // , { headers : access_control_CORS}
+    userCredentials.append("username", usernamePassword.username);
+    userCredentials.append("password", usernamePassword.password);
     let result = this.http.post<UserCredentials>(
       `${this.urlService.USER_CREDENTIALS}`,
-      usernamePassword
+      userCredentials
     );
     return result;
   }

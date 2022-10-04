@@ -8,6 +8,7 @@ export class GeneralRouteService {
   constructor() { }
 
   API_URL = `http://localhost:9050`;
+  // API_URL = `http://54.85.200.45:9050`;
 
   //login
   USER_CREDENTIALS = `${this.API_URL}/getcredentials`;

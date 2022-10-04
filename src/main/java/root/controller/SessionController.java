@@ -18,24 +18,23 @@ import root.model.UserResponse;
 import root.service.UserService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("*")
 public class SessionController {
 	
 	private UserService myUserService;
 	
-	
+		
 	@Autowired
 	public SessionController(UserService myUserService) {
 		this.myUserService = myUserService;		
 	}
 	
+	public SessionController() {}	
 		
-	@PostMapping("/getcredentials")
+	@PostMapping("/login/getcredentials")
 	@ResponseBody
-	public UserResponse getUserCredentials(@RequestBody User userReq){
-		if(userReq == null) {
-			return null;
-		}
+	public UserResponse getUserCredentials(@RequestBody User userReq){		
+		
 		User userDummy = myUserService.getUserByUsernameAndPassword(userReq);
 		UserResponse userResp = new UserResponse();
 		
@@ -44,6 +43,7 @@ public class SessionController {
 		}		
 		userResp.setUser(userDummy);
 		System.out.println("\nGetting credentials\n" );
+		
 		return userResp;
 	}
 	
@@ -51,8 +51,8 @@ public class SessionController {
 	@GetMapping("/greetings")
 	public String greetings() {
 		System.out.println("\nGreetings\n" );
-//		return "¯\\_(ツ)_/¯";
-		return "";
+		return "¯\\_(ツ)_/¯";
+//		return "";
 	}
 	
 	@PostMapping("/validateUserEmail")
@@ -124,7 +124,7 @@ public class SessionController {
 		return "";		
 	}
 	
-	@PostMapping("/registerNewUser")
+	@PostMapping("/login/registerNewUser")
 	public UserResponse createNewUser(@RequestBody UserResponse newUserRequest ) {
 		User newUserToCreate = newUserRequest.getUser();
 		User newlyCreatedUser = myUserService.createNewUser(newUserToCreate);
