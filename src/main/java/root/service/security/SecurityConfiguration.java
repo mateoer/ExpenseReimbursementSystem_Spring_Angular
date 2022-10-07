@@ -29,6 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserRepository userRepo;
+	
 
 	@Autowired
 	@Bean
@@ -39,16 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Bean
 	public AuthenticationSuccessHandler customSuccessHandler() {
 		return new CustomSuccessHandler();
-	}
-//	@Bean
-//	public AuthenticationSuccessHandler customRegistrationHandler() {
-//		return new CustomRegistrationHandler();
-//	}
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	}	
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -60,36 +52,35 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.cors()
 			.and()
-			.csrf().disable()
+			.csrf()
+			.disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
 			.and()
 				.authorizeRequests()
-					.antMatchers("/getcredentials", "/", "/checkUsername/**", "/login/**",
-								 "/checkEmail/**", "/registerNewUser","/validateUserEmail",
+					.antMatchers("/login/getcredentials", "/", "/checkUsername/**", "/login",
+						"/checkEmail/**",
+						"/validateUserEmail", "/login/registerNewUser", 
 								 "/validateResetToken")
 						.permitAll()
 					.antMatchers("/greetings").hasRole("EMPLOYEE")
-					.anyRequest().authenticated()
 					.and()
 				.formLogin().permitAll()
-					.loginPage("/")
+					.loginPage("/login")
 					.loginProcessingUrl("/login/getcredentials").permitAll()
 					.usernameParameter("username")
 					.passwordParameter("password")
 					.failureUrl("/error").permitAll()
 					.successHandler(customSuccessHandler())
-					.successForwardUrl("/**")
-//				.and()
-//				.formLogin().permitAll()
-//					.loginPage("/register")
-//					.loginProcessingUrl("/registerNewUser")
-//					.usernameParameter("username")
-//					.passwordParameter("password")
-//					.failureUrl("/error").permitAll()
-//					.successHandler(customRegistrationHandler())
-			;
+				.and()
+				.httpBasic()
+			;		
 	}
 
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +44,7 @@ public class ManagerController {
 	}
 
 	// approveReimbursements
-	@PreAuthorize("hasRole('MANAGER')")
+//	@PreAuthorize("hasRole('MANAGER')")
 	@PostMapping("/approvereimbursement")
 	@ResponseStatus(HttpStatus.OK)
 	public String approveReimbursement(@RequestBody UserReiRequest userReiContext) {
@@ -65,7 +64,7 @@ public class ManagerController {
 	}
 
 	// denyReimbursements
-	@PreAuthorize("hasRole('MANAGER')")
+//	@PreAuthorize("hasRole('MANAGER')")
 	@PostMapping("/denyreimbursement")
 	@ResponseStatus(HttpStatus.OK)
 	public String denyReimbursement(@RequestBody UserReiRequest userReiContext) {
@@ -84,7 +83,7 @@ public class ManagerController {
 	}	
 
 //	 view Reis and Users
-	@PreAuthorize("hasRole('MANAGER')")
+//	@PreAuthorize("hasRole('MANAGER')")
 	@PostMapping("/users_rei_list")
 	public List<UserReiResponse> getUserReiMap (@RequestBody UserReiRequest userReiContext){
 		User managerUser = userReiContext.getUser();

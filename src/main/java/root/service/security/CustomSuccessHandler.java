@@ -52,6 +52,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 		
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
+//		response.addHeader("Set-Cookie", "SameSite=None");
 		out.write(new ObjectMapper().writeValueAsString(userResp));
 		out.flush();
 		

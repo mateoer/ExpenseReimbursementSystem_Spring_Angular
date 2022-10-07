@@ -1,6 +1,9 @@
 server:
   port: 9050
-
+  servlet:
+    session:
+      cookie:
+        same-site: strict
 
 cloud:
 

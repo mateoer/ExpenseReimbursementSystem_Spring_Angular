@@ -1,9 +1,16 @@
 package root.controller;
 
-
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,69 +27,68 @@ import root.service.UserService;
 @RestController
 @CrossOrigin("*")
 public class SessionController {
-	
+
 	private UserService myUserService;
-	
-		
+
 	@Autowired
 	public SessionController(UserService myUserService) {
-		this.myUserService = myUserService;		
+		this.myUserService = myUserService;
 	}
-	
-	public SessionController() {}	
-		
+
+	public SessionController() {
+	}
+
 	@PostMapping("/login/getcredentials")
 	@ResponseBody
-	public UserResponse getUserCredentials(@RequestBody User userReq){		
-		
+	public UserResponse getUserCredentials(@RequestBody User userReq) {
+
 		User userDummy = myUserService.getUserByUsernameAndPassword(userReq);
 		UserResponse userResp = new UserResponse();
-		
+
 		if (userDummy == null) {
 			userResp.setFound(false);
-		}		
+		}
 		userResp.setUser(userDummy);
-		System.out.println("\nGetting credentials\n" );
-		
+		System.out.println("\nGetting credentials\n");
+
 		return userResp;
 	}
-	
-	
+
 	@GetMapping("/greetings")
 	public String greetings() {
-		System.out.println("\nGreetings\n" );
+		System.out.println("\nGreetings\n");
 		return "¯\\_(ツ)_/¯";
 //		return "";
 	}
-	
+
 	@PostMapping("/validateUserEmail")
 	public String validateUserWithEmail(@RequestBody User userReq) {
-		
+
 		System.out.println("\nValidating user for password reset");
-		
+
 		User userDummy = myUserService.getUserByUsernameAndEmail(userReq);
 		if (userDummy != null) {
 			myUserService.savePasswordResetTokenAndSendEmail(userDummy);
-			return "An email has been sent to "+ userDummy.getEmail();
-		}else {
+			return "An email has been sent to " + userDummy.getEmail();
+		} else {
 			return "No user found";
 		}
 	}
-	
+
 	@PostMapping("/validateUserPassword")
 	@ResponseBody
 	public String validateUserWithPassword(@RequestBody NewPasswordContextClass newPassReq) {
 		System.out.println("\nValidating user with password");
 		User myUser = newPassReq.getUser();
 		String newPassword = newPassReq.getNewPassword();
-		User userDummy = myUserService.updateUserPassword(myUser,newPassword);
+		User userDummy = myUserService.updateUserPassword(myUser, newPassword);
 		if (userDummy != null) {
 			return "Password has been reset";
-		}else {
+		} else {
 			return "Error";
 		}
 	}
-	
+
 	@PostMapping("/validateResetToken")
 	public String validateResetToken(@RequestBody NewPasswordContextClass newPassReq) {
 		User myUser = newPassReq.getUser();
@@ -90,59 +96,84 @@ public class SessionController {
 		User userDummy = myUserService.getUserByResetToken(newPassword, myUser.getPasswordResetToken());
 		if (userDummy != null) {
 			return "Password has been reset";
-		}else {
+		} else {
 			return "Error";
 		}
-	}	
+	}
 
-	
 	@GetMapping("/checkUsername/{username}")
-	public String usernameAvailable(@PathVariable ("username") String usernameToCheck) {	
-		
-		List<User> takenUsernames = myUserService.getAllUsernames();	
-		
+	public String usernameAvailable(@PathVariable("username") String usernameToCheck) {
+
+		List<User> takenUsernames = myUserService.getAllUsernames();
+
 		for (User user : takenUsernames) {
 			if (user.getUsername().equals(usernameToCheck)) {
 				return "Username is not available";
 			}
 		}
-		
-		return "Username is available";		
+
+		return "Username is available";
 	}
-	
+
 	@GetMapping("/checkEmail/{email}")
-	public String emailAvailable(@PathVariable ("email") String emailToCheck) {	
-		
-		List<User> takenUsernames = myUserService.getAllUsernames();	
-		
+	public String emailAvailable(@PathVariable("email") String emailToCheck) {
+
+		List<User> takenUsernames = myUserService.getAllUsernames();
+
 		for (User user : takenUsernames) {
 			if (user.getEmail().equals(emailToCheck)) {
 				return "Email is not available";
 			}
 		}
-		
-		return "";		
+
+		return "";
 	}
+
+	 
+	 @Autowired
+	 UserDetailsService userDetailsService;
 	
 	@PostMapping("/login/registerNewUser")
-	public UserResponse createNewUser(@RequestBody UserResponse newUserRequest ) {
+	public UserResponse createNewUser(@RequestBody UserResponse newUserRequest, HttpServletRequest request,
+			HttpServletResponse response
+			) throws Exception{
+		
 		User newUserToCreate = newUserRequest.getUser();
+		String username = newUserToCreate.getUsername();
+
+		System.out.println(newUserToCreate.getUsername()+" "+newUserToCreate.getPassword());
+		System.out.println(newUserToCreate);
+		System.out.println();
+		System.out.println(newUserRequest.toString());
+		
 		User newlyCreatedUser = myUserService.createNewUser(newUserToCreate);
 		if (newlyCreatedUser == null) {
 			return null;
 		}
 		
-		
-		UserResponse userResp = new UserResponse();	
-						
+			UserDetails userDetails = userDetailsService.loadUserByUsername (username);
+			Authentication auth = new UsernamePasswordAuthenticationToken (userDetails.getUsername (),userDetails.getPassword (),userDetails.getAuthorities ());
+			SecurityContextHolder.getContext().setAuthentication(auth);
+//			request.getSession().setAttribute("username", newlyCreatedUser.getUsername());
+//			request.getSession().setAttribute("password", newlyCreatedUser.getPassword());
+//			request.getSession().setAttribute("role", "ROLE_"+newlyCreatedUser.getUserRole());
+//			request.login(username, password);
+			System.out.println();
+			System.out.println("CREDENTIALS: "+ auth.getCredentials());
+			System.out.println("PRINCIPAL: " + auth.getPrincipal());
+			System.out.println("AUTHORITIES: "+ auth.getAuthorities());
+			
+
+//			auth.setAuthenticated(true);
+		UserResponse userResp = new UserResponse();
 		userResp.setUser(newlyCreatedUser);
-		System.out.println("\nNew user registered\n" );
+
+
+		System.out.println("\nNew user registered\n");
+		
 		
 		return userResp;
-		
 
 	}
-	
-	
-	
+
 }

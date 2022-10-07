@@ -28,17 +28,24 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		
+		
 		User user = userRepo.getUserByUsername(username);
         
         if (user == null) {
             throw new UsernameNotFoundException("Could not find user");
         }
         
+        MyUserDetails myUser = new MyUserDetails(user); 
+        
         System.out.println("\n\n In the loadUserByUsername method:");
         System.out.println(user.getUsername()+" "+user.getUserId()+" "+user.getFirstName()+" "+user.getUserRole()+"\n");
+        System.out.println("CREDENTIALS = Password: "+ myUser.getPassword());
+		System.out.println("PRINCIPAL = Username: " + myUser.getUsername());
+		System.out.println("AUTHORITIES: "+ myUser.getAuthorities());
+		System.out.println("-----------------------------------------------");
         
         
-        return new MyUserDetails(user);
+        return myUser;
 	}
 	
 	

@@ -131,6 +131,7 @@ public class UserService implements UserServiceInterface {
 		if (checkUser == null) {			
 			User myNewUser = newUserRequest;
 			myNewUser.setPassword(passwordEncoder.encode(newUserRequest.getPassword()));
+//			myNewUser.setPassword(newUserRequest.getPassword());
 			myNewUser.setProfilePicName(null);
 			userRepo.save(myNewUser);
 			return myNewUser;			
