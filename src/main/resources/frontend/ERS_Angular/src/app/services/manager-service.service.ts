@@ -31,7 +31,9 @@ export class ManagerService {
       "user":{
         "userId": JSON.parse(sessionStorage.getItem('userId')!)
       }
-    });
+    }
+    , {withCredentials: true}
+    );
   }
   
   
@@ -53,7 +55,7 @@ export class ManagerService {
         "reiId": reimbId
       }
     }
-    , { responseType: 'text' as 'json' } );
+    , { responseType: 'text' as 'json'} );
       
   }
 

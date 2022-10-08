@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +35,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { MngDialogComponent } from './components/dialog-boxes/mng-dialog/mng-dialog.component';
 import { PdfReportComponent } from './components/pdf-report/pdf-report.component';
+import { HttpInterceptorService } from './services/interceptor/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,13 @@ import { PdfReportComponent } from './components/pdf-report/pdf-report.component
     
     
   ],
-  providers: [AppComponent, PreventLoggedInAccessService],
+  //, HttpInterceptorService
+  providers: [AppComponent, PreventLoggedInAccessService,  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpInterceptorService,
+    multi: true
+
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,7 +20,10 @@ export class EmployeeService {
       const user: UserId = {
         userId: myUserId
       };
-    return this.http.post<EmpReimbursements[]>(`${this.urlService.GET_REI}`, user);
+    return this.http.post<EmpReimbursements[]>(`${
+      this.urlService.GET_REI}`
+      , user
+      , { withCredentials: true});
   }
 
   public getUserName(): Observable<UserName> {
@@ -44,7 +47,7 @@ export class EmployeeService {
           "reiType": newReimbursement.reiType
         }
       }
-      , { responseType: 'text' as 'json' } );    
+      , { responseType: 'text' as 'json'} );    
   } 
 
   public editReimbursement(editedReimbursement:EmpReimbursements): Observable<any> | any {
@@ -60,7 +63,7 @@ export class EmployeeService {
         "reiType": editedReimbursement.reiType
       }
     }
-    , { responseType: 'text' as 'json' });
+    , { responseType: 'text' as 'json'});
   }
 
   public cancelReimbursement(reimbId: number): Observable<any> | any{     
@@ -74,7 +77,7 @@ export class EmployeeService {
           "reiId": reimbId
         }
       }
-      , { responseType: 'text' as 'json' } );
+      , { responseType: 'text' as 'json'} );
   }
 
 
@@ -86,7 +89,7 @@ export class EmployeeService {
     reviewReceipt_formData.append("receiptPicName", reimbursement.receiptPicName);
     return this.http.post<string>(`${this.urlService.REVIEW_RECEIPT}`,
     reviewReceipt_formData
-    , { responseType: 'text' as 'json' });
+    , { responseType: 'text' as 'json'});
   }
   public deleteReceipt(reimbursement : EmpReimbursements): Observable<string> {
     const reviewReceipt_formData = new FormData();
@@ -94,7 +97,7 @@ export class EmployeeService {
     reviewReceipt_formData.append("receiptPicName", reimbursement.receiptPicName);
     return this.http.post<string>(`${this.urlService.DELETE_RECEIPT}`,
     reviewReceipt_formData
-    , { responseType: 'text' as 'json' });
+    , { responseType: 'text' as 'json'});
   }
   public upload_replace_Receipt(formDataToSend: FormData): Observable<string> {
     return this.http.post<string>(`${this.urlService.UPLOAD_RECEIPT}`,    

@@ -17,7 +17,6 @@ export class PdfReportComponent implements OnInit {
   generate_pdf_report(){
     this.pdfReport.get_employee_report().subscribe((data: HttpResponse<Blob>) => {
       let filename = data.headers.get('content-disposition')!.split(';')[1].split('=')[1].replace(/\"/g, '')
-      // console.log(filename);
       this.downloadFile(data.body, filename);
     });
   }

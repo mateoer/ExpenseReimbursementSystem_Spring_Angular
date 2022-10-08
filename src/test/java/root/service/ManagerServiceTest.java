@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -107,7 +108,7 @@ class ManagerServiceTest {
 		
 	}
 	
-	
+	@Disabled
 	@Test
 	void denyReimbursement() {
 		User employeeWithGoodEmail = new User(1, "suechan", "abc123", "Sue", "Chan", "ericmateo5675@gmail.com", UserRole.EMPLOYEE, null, null, null);
@@ -163,7 +164,7 @@ class ManagerServiceTest {
 		
 	}
 
-	
+	@Disabled
 	@Test
 	void approveReimbursement() {
 		User employeeWithGoodEmail = new User(1, "suechan", "abc123", "Sue", "Chan", "efsdfsefeso5675@fdsfdsf.com", UserRole.EMPLOYEE, null, null, null);

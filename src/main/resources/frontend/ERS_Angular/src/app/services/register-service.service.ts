@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserCredentials } from '../interfaces/user-credentials';
@@ -21,6 +21,10 @@ export class RegisterService {
   }
 
   registerNewUser(newUser: UserCredentials): Observable<UserCredentials>{
-    return this.http.post<UserCredentials>(`${this.urlService.NEW_USER}`, newUser);
+    const httpBasicOption = new HttpHeaders();
+    let authorizationData = 'Basic ' + btoa(newUser.user.username + ':' + newUser.user.password);
+    httpBasicOption.append('Authorization', authorizationData);
+  
+    return this.http.post<UserCredentials>(`${this.urlService.NEW_USER}`, newUser, { headers: httpBasicOption });
   }
 }

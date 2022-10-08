@@ -1,4 +1,5 @@
 import { LocationStrategy } from '@angular/common';
+import { HttpResponse } from '@angular/common/http';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserCredentials } from '../../interfaces/user-credentials';
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit{
   noUserFoundMessage: string = '';
 
   ngOnInit() {
-    this.loginService.greetings().subscribe(e => this.greetingMessage = e);
+    // this.loginService.greetings().subscribe(e => this.greetingMessage = e);
     sessionStorage.clear();
     localStorage.clear();
   }
@@ -72,10 +73,9 @@ export class LoginComponent implements OnInit{
   
     
   loginUser(){
-    this.loginService.findUserLogin(this.loginForm).subscribe();
     this.loginService.findUserLogin(this.loginForm).subscribe(e =>{
-      if (e.found == true) { 
-        this.userCredentials = e;        
+      if (e.body?.found == true) { 
+        this.userCredentials = e.body;
         this.sessionSave();
         const moveTo = this.userCredentials.user.userRole.toLowerCase();
         this._route.navigate([`/${moveTo}`]);

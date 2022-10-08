@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -22,6 +25,8 @@ import root.model.UserResponse;
 
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 	
+	@Autowired
+	JwtUtils jwtUtils;
 	
 	@Autowired
 	private UserRepository userRepo;	
@@ -49,10 +54,15 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 		System.out.println("\n\nOn Authentication Handler => "+authorities);
 		System.out.println("\n\nOn Authentication Handler => "+userResp);
 		
+
+		    SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
+		    ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userReq);
 		
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
-//		response.addHeader("Set-Cookie", "SameSite=None");
+		response.setHeader(HttpHeaders.SET_COOKIE, jwtCookie.toString());
 		out.write(new ObjectMapper().writeValueAsString(userResp));
 		out.flush();
 		

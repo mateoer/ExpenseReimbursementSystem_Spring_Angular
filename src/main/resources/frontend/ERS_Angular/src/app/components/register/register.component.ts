@@ -2,6 +2,7 @@ import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsernamePassword } from 'src/app/interfaces/username-password';
 import { LoginService } from 'src/app/services/login-service.service';
 import { RegisterService } from 'src/app/services/register-service.service';
 import { UserCredentials } from '../../interfaces/user-credentials';
@@ -20,7 +21,10 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+    sessionStorage.clear();
+    localStorage.clear();
+  }
 
   userRole : any[] = ['','MANAGER','EMPLOYEE'];
   selectedRole: string = ' ';
@@ -67,6 +71,12 @@ export class RegisterComponent implements OnInit {
 
   errorCreatingUser: any = '';
 
+  loginForm: UsernamePassword = {
+    username: this.registrationForm.user.username,
+    password: this.registrationForm.user.password
+  };
+
+
   register(){
     
     let FName = this.registrationForm.user.firstName != '';
@@ -76,27 +86,34 @@ export class RegisterComponent implements OnInit {
     let uRole = this.registrationForm.user.userRole != '';
     let PasW = (this.registrationForm.user.password == this.re_password) && (this.re_password != '' || ' ');
 
-    if (FName && LName && uRole && uName && mail && PasW) {  
+    if (FName && LName && uRole && uName && mail && PasW) {        
       
-
       this.registerService.registerNewUser(this.registrationForm)
-        .subscribe(e => 
-          {
-            if (e.found == true) { 
-              this.registrationForm = e;        
-              this.newlyCreatedUser = e;
-              this.sessionSave();
-
-              console.log(this.registrationForm);
-
-              const moveTo = this.registrationForm.user.userRole.toLowerCase();
-              this._route.navigate([`/${moveTo}`]);
-            }
-          });          
-    }else {
-      this.errorCreatingUser = "Something went wrong";
-    }
+      .subscribe(e => {
+        if (e.found == true) { 
+          this.newlyCreatedUser = e;        
+          this.sessionSave();
+          const moveTo = this.newlyCreatedUser.user.userRole.toLowerCase();
+          this._route.navigate([`/${moveTo}`]);
+        }
+      });
+  }else {
+    this.errorCreatingUser = "Something went wrong";
   }
+  }
+
+  reloginUser(){
+    let authorizationData = 'Basic ' + btoa(this.registrationForm.user.username + ':' + this.registrationForm.user.password);
+    this.loginService.re_login_user(this.loginForm, authorizationData).subscribe(e =>{
+      if (e.found == true) { 
+        this.newlyCreatedUser = e;        
+        this.sessionSave();
+        console.log(sessionStorage);
+        const moveTo = this.newlyCreatedUser.user.userRole.toLowerCase();
+        this._route.navigate([`/${moveTo}`]);
+      }
+    });  
+  } 
 
   public sessionSave(){
     sessionStorage.setItem('userId', JSON.stringify(this.newlyCreatedUser.user.userId));

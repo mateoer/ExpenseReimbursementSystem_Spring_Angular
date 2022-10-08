@@ -11,7 +11,7 @@ export class GeneralRouteService {
   // API_URL = `http://54.85.200.45:9050`;
 
   //login
-  USER_CREDENTIALS = `${this.API_URL}/getcredentials`;
+  USER_CREDENTIALS = `${this.API_URL}/login/getcredentials`;
   GREETINGS = `${this.API_URL}/greetings`;
 
   //employee
@@ -45,7 +45,7 @@ export class GeneralRouteService {
   //registration service
   CHECK_USERNAME = `${this.API_URL}/checkUsername/`;
   CHECK_EMAIL = `${this.API_URL}/checkEmail/`;
-  NEW_USER = `${this.API_URL}/registerNewUser`;
+  NEW_USER = `${this.API_URL}/login/registerNewUser`;
 
   //pdf report
   EMP_REPORT = `${this.API_URL}/generatePdf`;

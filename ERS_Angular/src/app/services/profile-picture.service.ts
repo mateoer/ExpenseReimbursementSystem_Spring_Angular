@@ -25,7 +25,8 @@ export class ProfilePictureService {
         },
         found: JSON.parse(sessionStorage.getItem('found')!)
       }     
-    return this.http.post<string>(`${this.urlService.GET_PFP}`, myUser, { responseType: 'text' as 'json' });    
+    return this.http.post<string>(`${this.urlService.GET_PFP}`, myUser,
+     { responseType: 'text' as 'json', withCredentials: true });    
   }
 
   uploadProfilePicture(formDataToSend: FormData){    

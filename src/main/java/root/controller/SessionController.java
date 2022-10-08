@@ -6,6 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,12 +28,23 @@ import root.model.NewPasswordContextClass;
 import root.model.User;
 import root.model.UserResponse;
 import root.service.UserService;
+import root.service.security.JwtUtils;
 
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin("*")
+@CrossOrigin("http//localhost:4200")
 public class SessionController {
 
 	private UserService myUserService;
+	
+	@Autowired
+	  AuthenticationManager authenticationManager;
+
+
+
+
+	  @Autowired
+	  JwtUtils jwtUtils;
 
 	@Autowired
 	public SessionController(UserService myUserService) {
@@ -40,7 +56,7 @@ public class SessionController {
 
 	@PostMapping("/login/getcredentials")
 	@ResponseBody
-	public UserResponse getUserCredentials(@RequestBody User userReq) {
+	public /*UserResponse*/ ResponseEntity<?> getUserCredentials(@RequestBody User userReq) {
 
 		User userDummy = myUserService.getUserByUsernameAndPassword(userReq);
 		UserResponse userResp = new UserResponse();
@@ -50,11 +66,26 @@ public class SessionController {
 		}
 		userResp.setUser(userDummy);
 		System.out.println("\nGetting credentials\n");
+		
+		UserDetails userDetails = userDetailsService.loadUserByUsername (userDummy.getUsername());
+		Authentication authentication = authenticationManager
+		        .authenticate(new UsernamePasswordAuthenticationToken(userDetails.getUsername (),userDetails.getPassword (),userDetails.getAuthorities ()));
 
-		return userResp;
+		    SecurityContextHolder.getContext().setAuthentication(authentication);
+
+//		    MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+
+		    ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+
+		 return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+//				 .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.SET_COOKIE)
+//				 .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.COOKIE)
+			        .body(userResp);
+//		return userResp;
 	}
 
 	@GetMapping("/greetings")
+	@PreAuthorize("hasRole('MANAGER')")
 	public String greetings() {
 		System.out.println("\nGreetings\n");
 		return "¯\\_(ツ)_/¯";
@@ -134,7 +165,7 @@ public class SessionController {
 	 UserDetailsService userDetailsService;
 	
 	@PostMapping("/login/registerNewUser")
-	public UserResponse createNewUser(@RequestBody UserResponse newUserRequest, HttpServletRequest request,
+	public /*UserResponse*/ ResponseEntity<?> createNewUser(@RequestBody UserResponse newUserRequest, HttpServletRequest request,
 			HttpServletResponse response
 			) throws Exception{
 		
@@ -171,8 +202,13 @@ public class SessionController {
 
 		System.out.println("\nNew user registered\n");
 		
-		
-		return userResp;
+		ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+
+		 return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+//				 .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.SET_COOKIE)
+//				 .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.COOKIE)
+			        .body(userResp);
+//		return userResp;
 
 	}
 
