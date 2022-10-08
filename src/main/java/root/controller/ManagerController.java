@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,8 @@ import root.model.UserReiResponse;
 import root.service.ManagerService;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin("*")
+@CrossOrigin("http://localhost:4200")
 public class ManagerController {
 
 	
@@ -31,6 +33,7 @@ public class ManagerController {
 
 	// getUserName
 	@PostMapping("/getmngusername")
+	@PreAuthorize("hasRole('MANAGER')")
 	public User getUserName(@RequestBody User reqUser) {
 		System.out.println("\nUser name retrieved\n");
 		return mangService.getUserName(reqUser);
@@ -38,12 +41,14 @@ public class ManagerController {
 
 	//viewListOfReimbursements
 	@GetMapping("/getlistofreimbursements")
+	@PreAuthorize("hasRole('MANAGER')")
 	public List<Reimbursement> viewListOfReimbursements() {
 		System.out.println("\nList of all Reimbursements retrieved\n");
 		return mangService.listOfAllReimbursements();
 	}
 
 	// approveReimbursements
+	@PreAuthorize("hasRole('MANAGER')")
 	@PostMapping("/approvereimbursement")
 	@ResponseStatus(HttpStatus.OK)
 	public String approveReimbursement(@RequestBody UserReiRequest userReiContext) {
@@ -63,6 +68,7 @@ public class ManagerController {
 	}
 
 	// denyReimbursements
+	@PreAuthorize("hasRole('MANAGER')")
 	@PostMapping("/denyreimbursement")
 	@ResponseStatus(HttpStatus.OK)
 	public String denyReimbursement(@RequestBody UserReiRequest userReiContext) {
@@ -80,7 +86,8 @@ public class ManagerController {
 		return "Something went wrong";
 	}	
 
-	// view Reis and Users
+//	 view Reis and Users
+	@PreAuthorize("hasRole('MANAGER')")
 	@PostMapping("/users_rei_list")
 	public List<UserReiResponse> getUserReiMap (@RequestBody UserReiRequest userReiContext){
 		User managerUser = userReiContext.getUser();

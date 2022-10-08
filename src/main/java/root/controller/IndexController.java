@@ -1,13 +1,13 @@
 package root.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
-@CrossOrigin
+@Controller
+@CrossOrigin("http://localhost:4200")
 public class IndexController implements ErrorController {
     
     private static final String PATH = "/error";
@@ -19,5 +19,14 @@ public class IndexController implements ErrorController {
 
     public String getErrorPath() {
         return PATH;
+    }
+    
+    @RequestMapping("/login")
+    public ModelAndView saveLeadQuery2() {
+    	return new ModelAndView("forward:/");
+    }
+    @RequestMapping("/register")
+    public ModelAndView saveLeadQuery3() {
+    	return new ModelAndView("forward:/");
     }
 }

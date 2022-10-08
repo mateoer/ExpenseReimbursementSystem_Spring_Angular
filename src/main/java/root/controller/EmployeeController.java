@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,8 @@ import root.model.enumscontainer.ReiStatus;
 import root.service.EmployeeService;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin("*")
+@CrossOrigin("http://localhost:4200")
 public class EmployeeController {
 
 	private EmployeeService employeeService;
@@ -28,6 +30,7 @@ public class EmployeeController {
 	}
 	
 	//addNewReimbursement
+	@PreAuthorize("hasRole('EMPLOYEE')")
 	@PostMapping("/addreimbursement")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String addReimbursement(@RequestBody UserReiRequest userReiContext){		
@@ -45,6 +48,7 @@ public class EmployeeController {
 	}
 	
 	//getAllReimbursements
+	@PreAuthorize("hasRole('EMPLOYEE')")
 	@PostMapping("/getreimbursements")
 	public List<Reimbursement>  getAllReimbursements (@RequestBody User user){		
 		System.out.println("\nReimbursement list retrieved\n");
@@ -53,6 +57,7 @@ public class EmployeeController {
 	
 	//getUserName
 	@PostMapping("/getusername")
+	@PreAuthorize("hasRole('EMPLOYEE')")
 	public User getUserName(@RequestBody User reqUser) {
 		System.out.println("\nUser name retrieved\n");
 		return employeeService.getUserName(reqUser);
@@ -60,6 +65,7 @@ public class EmployeeController {
 	}
 	
 	//deleteReimbursement
+	@PreAuthorize("hasRole('EMPLOYEE')")
 	@PostMapping("/deleteReimbursement")
 	public String removeReimbursement(@RequestBody UserReiRequest userReiContext) {
 		Reimbursement reimbToCancel = userReiContext.getReimbursement();
@@ -79,6 +85,7 @@ public class EmployeeController {
 	}
 	
 	//editReimbursement
+	@PreAuthorize("hasRole('EMPLOYEE')")
 	@PostMapping("/updateReimbursement")
 	public String editReimbursement(@RequestBody UserReiRequest userReiContext) {
 		Reimbursement reimbToUpdate = userReiContext.getReimbursement();

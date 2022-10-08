@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">		
+			<FileNamePattern>./src/main/resources/log-files/ERS_ERRORS.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+      	</filter>
+		<encoder>
+			<pattern>[%-5level] => %msg%n AT %logger{35}  --- PID: %-4relative	thread: [%thread]	DATE/TIME: %d{yyyy-MM-dd HH:mm:ss}</pattern>
+		</encoder>
+	</appender>
+	 
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	<withJansi>false</withJansi>		
+		<encoder>
+		<!-- %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %green(%-4relative)-->			
+			<pattern>
+                 [%highlight(%-5level)] ---- %cyan(%logger{36}%n) =>  %msg%n 
+            </pattern>
+		</encoder>>		
+	</appender>
+	
+	<root level="INFO">
+		<appender-ref ref="STDOUT"/> 
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>
