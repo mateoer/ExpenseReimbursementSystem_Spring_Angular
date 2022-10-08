@@ -42,8 +42,18 @@ with Angular material tables, Spring Mail, and AWS S3 buckets and the subsequent
 * Spring Mail to receive alerts about reimbursement's status 
 * Ability to upload profile pictures 
 * Ability to reset passwords from user home or through email
-* Password hasshing functionality 
+* Password encoding functionality 
 * Register new users 
+
+* PDF statements for employees
+* CRUD operations for reibursement receipts
+* Spring Security for authentication/authorization
+* Role-based method security
+* Form-login authentication
+* JWT-based authorization
+* Error logging with Logback
+* QoL: password-reset-token is retrieved by the application when the reset link is accessed
+* QoL: managers can see employee's names in the reimbursement dialog box
  
 ## Showcase
 > Landing page
