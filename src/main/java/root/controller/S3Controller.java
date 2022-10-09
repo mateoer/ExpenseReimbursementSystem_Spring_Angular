@@ -20,7 +20,8 @@ import root.service.amazon.StorageService;
 
 @RestController
 //@CrossOrigin("*")
-@CrossOrigin("http//localhost:4200")
+//@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://localhost:4200")
 public class S3Controller {
 
 	@Autowired

@@ -19,7 +19,8 @@ import root.service.EmployeeService;
 
 @RestController
 //@CrossOrigin("*")
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://localhost:4200")
 public class EmployeeController {
 
 	private EmployeeService employeeService;
