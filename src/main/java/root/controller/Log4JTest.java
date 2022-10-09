@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("*")
+//@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://localhost:4200")
 public class Log4JTest {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(Log4JTest.class);

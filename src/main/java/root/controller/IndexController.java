@@ -4,10 +4,13 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("*")
+//@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://localhost:4200")
 public class IndexController implements ErrorController {
     
     private static final String PATH = "/error";

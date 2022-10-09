@@ -26,7 +26,8 @@ import root.service.pdf.PDFGenerator;
 
 @RestController
 //@CrossOrigin("*")
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
+@CrossOrigin("https://localhost:4200")
 public class PDFController {
 
 	private PDFGenerator pdfGenerator;
