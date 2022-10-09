@@ -32,7 +32,7 @@ export class ManagerService {
         "userId": JSON.parse(sessionStorage.getItem('userId')!)
       }
     }
-    , {withCredentials: true}
+   
     );
   }
   

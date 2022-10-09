@@ -32,7 +32,7 @@ import root.service.security.JwtUtils;
 
 @RestController
 //@CrossOrigin("*")
-@CrossOrigin("http//localhost:4200")
+@CrossOrigin("http://localhost:4200")
 public class SessionController {
 
 	private UserService myUserService;

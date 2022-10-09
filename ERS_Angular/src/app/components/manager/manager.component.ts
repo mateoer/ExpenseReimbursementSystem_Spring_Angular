@@ -30,6 +30,7 @@ export class ManagerComponent implements OnInit {
               public loginComponent: LoginComponent,
               public _route: Router, public dialog: MatDialog) { }
 
+  
   ngOnInit() {
     this.onSelect();
     if (JSON.parse(sessionStorage.getItem('found')!) == false) {
