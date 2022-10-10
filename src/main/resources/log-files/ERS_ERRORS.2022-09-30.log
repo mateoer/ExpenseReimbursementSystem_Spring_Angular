@@ -1,6 +1,0 @@
-[ERROR] => doStuff encountered an error with value - null
- AT root.controller.Log4JTest  --- PID: 11570	thread: [http-nio-9050-exec-2]	DATE/TIME: 2022-09-30 22:59:18[ERROR] => doStuff encountered an error with value - null
- AT root.controller.Log4JTest  --- PID: 12580	thread: [http-nio-9050-exec-3]	DATE/TIME: 2022-09-30 22:59:19[ERROR] => doStuff encountered an error with value - null
- AT root.controller.Log4JTest  --- PID: 51797	thread: [http-nio-9050-exec-4]	DATE/TIME: 2022-09-30 22:59:59[ERROR] => doStuff encountered an error with value - null
- AT root.controller.Log4JTest  --- PID: 53226	thread: [http-nio-9050-exec-5]	DATE/TIME: 2022-09-30 23:00:00[ERROR] => doStuff encountered an error with value - null
- AT root.controller.Log4JTest  --- PID: 54131	thread: [http-nio-9050-exec-6]	DATE/TIME: 2022-09-30 23:00:01

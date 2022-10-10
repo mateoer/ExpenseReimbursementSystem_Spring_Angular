@@ -8,11 +8,11 @@ server:
         same-site: lax
 #        secure: false
 
-  ssl:
-    key-alias: ers137-alias
-    key-store-type: PKCS12
-    key-store-password: password
-    key-store: classpath:securitykeystore.p12       
+#  ssl:
+#    key-alias: ers137-alias
+#    key-store-type: PKCS12
+#    key-store-password: password
+#    key-store: classpath:securitykeystore.p12       
 
 cloud:
 
