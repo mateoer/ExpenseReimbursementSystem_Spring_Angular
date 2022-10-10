@@ -70,13 +70,13 @@ public class SecurityConfiguration {
 		.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and()
-			.authorizeRequests()
-				.antMatchers("/login/getcredentials", "/", "/checkUsername/**", "/login",
-					"/checkEmail/**",
-					"/validateUserEmail", "/login/registerNewUser", 
-							 "/validateResetToken")
-					.permitAll()
-				.anyRequest().authenticated()
+		.authorizeRequests()
+			.antMatchers("/login/getcredentials", "/", "/**", "/checkUsername/**", "/login",
+				"/checkEmail/**", "/error", "/register", "/login/**",
+				"/validateUserEmail", "/login/registerNewUser", 
+						 "/validateResetToken")
+				.permitAll()
+		.anyRequest().authenticated()
 		.and()
 		.formLogin().permitAll()
 				.loginPage("/login")
