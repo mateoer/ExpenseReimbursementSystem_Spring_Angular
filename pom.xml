@@ -13,7 +13,7 @@
 	<name>ERS</name>
 	<description>Redo of Project 1 with Angular and Spring Boot</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 
